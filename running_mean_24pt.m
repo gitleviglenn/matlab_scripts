@@ -1,7 +1,8 @@
 %---------------------------------------------------------------------------------
-% running_mean_30yr.m
+% running_mean_24yr.m
 %---------------------------------------------------------------------------------
-% smooths an incoming time series with a 30 point running mean
+% smooths an incoming time series with a 24 point (12 on each side of t=0) 
+% running mean
 %
 % usage example: 
 % 
@@ -10,18 +11,16 @@
 %  running_mean_30yr;
 %  toa_cre_sm=idiotbox;
 %
-% levi silvers                                                           june 2017
+% levi silvers                                                           oct 2019
 %---------------------------------------------------------------------------------
 
-%primary_ts=sw_cre_am4_mn;
-%
-%tendindex=nyears;
 rough_ts=incoming_ts;
+halftime=12;
+fulltime=2*halftime+1;
 clear ts_smooth;
 clear idiotbox;
-for ti=16:tendindex-15
-  ts_smooth(ti-15)=(rough_ts(ti-15)+rough_ts(ti-14)+...
-                    rough_ts(ti-13)+rough_ts(ti-12)+...
+for ti=halftime+1:tendindex-halftime
+  ts_smooth(ti-halftime)=(rough_ts(ti-12)+...
 		    rough_ts(ti-11)+rough_ts(ti-10)+...
 		    rough_ts(ti-9)+rough_ts(ti-8)+...
 		    rough_ts(ti-7)+rough_ts(ti-6)+...
@@ -33,10 +32,9 @@ for ti=16:tendindex-15
 		    rough_ts(ti+5)+rough_ts(ti+6)+...
 		    rough_ts(ti+7)+rough_ts(ti+8)+...
 		    rough_ts(ti+9)+rough_ts(ti+10)+...
-		    rough_ts(ti+11)+rough_ts(ti+12)+...
-		    rough_ts(ti+13)+rough_ts(ti+14)+...
-		    rough_ts(ti+15))/31.;
+		    rough_ts(ti+11)+rough_ts(ti+12))/fulltime;
 end
 idiotbox=ts_smooth;
 
 'one more idiotbox computed'
+
