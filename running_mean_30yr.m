@@ -1,8 +1,14 @@
 %---------------------------------------------------------------------------------
 % yearlym_30runm_ts.m
 %---------------------------------------------------------------------------------
-%
 % smooths an incoming time series with a 30 point running mean
+%
+% usage example: 
+% 
+%  tendindex=26281;
+%  incoming_ts=toa_cre;
+%  running_mean_30yr;
+%  toa_cre_sm=idiotbox;
 %
 % levi silvers                                                           june 2017
 %---------------------------------------------------------------------------------
