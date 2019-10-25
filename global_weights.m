@@ -12,4 +12,6 @@ end
 %glblatweight_am4=glblatweight;
 glblatweight_gen=glblatweight;
 
+glblatweight_new=glblatweight';
+
 dims_of_glbweights=size(glblatweight_gen)

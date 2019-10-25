@@ -36,7 +36,7 @@ rsdt    =ncread(s_var5,var5);
 
 toa_R     = rsdt-rsut-rlut;
 toa_clr   = rsdt-rsutcs-rlutcs;
-toa_cre   = toa_clr_R-toa_R;
+toa_cre   = toa_clr-toa_R;
 toa_lwcre = rlutcs - rlut;
 toa_swcre = rsutcs - rsut;
 
