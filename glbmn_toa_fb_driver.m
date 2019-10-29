@@ -1,5 +1,9 @@
 model_generation='CAM6';
 
+ts_length=26257;
+equilt   =2400; % 50 days for hourly output
+cess_eq=zeros(4,ts_length-equilt);
+
 source_mod=strcat(source,model_generation,'_GCM_RCE/');
 exp_string=strcat(model_generation,'_GCM_RCE_large295_0D_'); 
 glbmn_toa_fb
@@ -14,10 +18,14 @@ glbmn_toa_fb
 rad_305_array=rad_ts_array;
 
 % compute a Cess-style sensitivity
-cess_a=zeros(5,2625);
-cess_b=zeros(5,2625);
+cess_a=zeros(5,ts_length);
+cess_b=zeros(5,ts_length);
 cess_a=-(3.7*5)./(rad_300_array-rad_295_array);
 cess_b=-(3.7*5)./(rad_305_array-rad_300_array);
+
+% comppute the mean equilibrated(neglect 50 days) Cess sensitivity 
+cess_eq(3,:)=cess_a(1,equilt+1:ts_length);
+cess_eq(4,:)=cess_b(1,equilt+1:ts_length);
 
 figure
 subplot(3,1,1)
@@ -66,10 +74,16 @@ glbmn_toa_fb
 rad_305_array=rad_ts_array;
 
 % compute a Cess-style sensitivity
-cess_a=zeros(5,2625);
-cess_b=zeros(5,2625);
+cess_a=zeros(5,ts_length);
+cess_b=zeros(5,ts_length);
 cess_a=-(3.7*5)./(rad_300_array-rad_295_array);
 cess_b=-(3.7*5)./(rad_305_array-rad_300_array);
+
+% comppute the mean equilibrated(neglect 50 days) Cess sensitivity 
+cess_eq(1,:)=cess_a(1,equilt+1:ts_length);
+cess_eq(2,:)=cess_b(1,equilt+1:ts_length);
+
+mean_cess=mean(cess_eq,2);
 
 figure
 subplot(3,1,1)
