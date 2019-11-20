@@ -1,5 +1,7 @@
 model_generation='CAM6';
 
+source='/Users/silvers/data/CAM/';
+
 ts_length=26257;
 equilt   =2400; % 50 days for hourly output
 cess_eq=zeros(4,ts_length-equilt);
@@ -114,4 +116,6 @@ title('Cess Sensitivity CAM5')
 %hold on
 %plot(cess_b(1,1:2400),'k')
 %title('Cess Sensitivity CAM5 over first 100 days')
+
+mean_cess
 
