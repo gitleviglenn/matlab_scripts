@@ -1,3 +1,15 @@
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% script for the computation of the cloud radiative effect
+% used by the glbmn_toa_cfmip_fb_driver script
+%
+% opens file and reads the radiative fluxes at toa
+% computes time series of global mean toa radiative fluxes 
+%
+% output array: rad_ts_array
+%
+% levi silvers                                          November 2019
+%-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
 source='/Users/silvers/data/cfmip_toafluxes/';
 
 %exp_name='amip-m4K';
@@ -7,7 +19,7 @@ source='/Users/silvers/data/cfmip_toafluxes/';
 
 if amip_control 
   testboolean='stop messing around you fool'
-  timeend=72; % for 5 year chunks
+  timeend=72; % for 6 year chunks
   %exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_197901-198412');
   %exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_198501-199012');
   %exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_199101-199612');
@@ -17,6 +29,11 @@ if amip_control
 else
   timeend=432; % for 36 year simulations
   exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_197901-201412');
+end
+
+if aqua_control
+  timeend=120; % for 10 year simulation
+  exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_198001-198912');
 end
 
 %exp_string=strcat('_Amon_GFDL-CM4_',exp_name,'_r1i1p1f1_gr1_197901-201412');
@@ -29,7 +46,7 @@ var3='rsut';
 var4='rsutcs';
 var5='rsdt';
 
-rad_ts_array=zeros(5,timelength); % if the running mean is run.
+rad_ts_array=zeros(7,timelength); % if the running mean is run.
 
 s_var1=strcat(source,var1,exp_string,'.nc');
 s_var2=strcat(source,var2,exp_string,'.nc');
@@ -93,14 +110,19 @@ toa_cre   =zeros(1,timelength); % if the running mean is run.
 toa_lwcre =zeros(1,timelength); % if the running mean is run.
 toa_swcre =zeros(1,timelength); % if the running mean is run.
 
+% implies positive in the downward direction...
 toa_R     = rsdt_gmn_ts-rsut_gmn_ts-rlut_gmn_ts;
 toa_clr   = rsdt_gmn_ts-rsutcs_gmn_ts-rlutcs_gmn_ts;
 toa_cre   = toa_clr-toa_R;
 toa_lwcre = rlutcs_gmn_ts - rlut_gmn_ts;
 toa_swcre = rsutcs_gmn_ts - rsut_gmn_ts;
+toa_lwcs  = rlutcs_gmn_ts;
+toa_swcs  = rsutcs_gmn_ts;
 
  rad_ts_array(1,:)=toa_R;
  rad_ts_array(2,:)=toa_clr; 
  rad_ts_array(3,:)=toa_cre;
  rad_ts_array(4,:)=toa_lwcre;
  rad_ts_array(5,:)=toa_swcre;
+ rad_ts_array(6,:)=toa_lwcs;
+ rad_ts_array(7,:)=toa_swcs;
