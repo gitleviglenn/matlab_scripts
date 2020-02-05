@@ -18,11 +18,19 @@
 % compute the change in surface air temperature for the Cess-like experiments
 glbmn_tas_cfmip
 
+% compute the actual change in surface temperture which is 
+% not exactly 4K.
 delT_amip_p4K=amip_p4K_mts-amip_mts
 delT_amip_m4K=amip_mts-amip_m4K_mts
 delT_amip_fut=amip_F4K_mts-amip_mts
 delT_amip_8K=amip_p4K_mts-amip_m4K_mts
 delT_aqua=aqua_p4K_mts-aqua_mts
+
+%delT_amip_p4K=4.
+%delT_amip_m4K=4.
+%delT_amip_fut=4.
+%delT_amip_8K=4.
+%delT_aqua=4.
 
 % define an array to hold the mean feedback values for each experiment
 rad_fb_array=zeros(7,5); % if the running mean is run.
@@ -166,13 +174,13 @@ del_swcre_future4K =(mean(rad_ts_array_future4K(5,:))-mean(rad_ts_array_amip(5,:
 del_lwcs_future4K  =(mean(rad_ts_array_future4K(6,:))-mean(rad_ts_array_amip(6,:)))/delT_amip_fut;
 del_swcs_future4K  =(mean(rad_ts_array_future4K(7,:))-mean(rad_ts_array_amip(7,:)))/delT_amip_fut;
 
-rad_fb_array(1,5)=delR_future4K
-rad_fb_array(2,5)=del_clr_future4K
-rad_fb_array(3,5)=del_cre_future4K
-rad_fb_array(4,5)=del_lwcre_future4K
-rad_fb_array(5,5)=del_swcre_future4K
-rad_fb_array(6,5)=del_lwcs_future4K
-rad_fb_array(7,5)=del_swcs_future4K
+rad_fb_array(1,5)=delR_future4K;
+rad_fb_array(2,5)=del_clr_future4K;
+rad_fb_array(3,5)=del_cre_future4K;
+rad_fb_array(4,5)=del_lwcre_future4K;
+rad_fb_array(5,5)=del_swcre_future4K;
+rad_fb_array(6,5)=del_lwcs_future4K;
+rad_fb_array(7,5)=del_swcs_future4K;
 
 rad_fb_array_str='aqua_p4K;amip_m4K;amip_p4K;amip_p8K;amip_future4K'
 
@@ -183,4 +191,3 @@ rad_ts_array_4xCO2=rad_ts_array;
 
 delR_4xCO2=(mean(rad_ts_array_4xCO2(1,:))-mean(rad_ts_array_amip(1,:)))/1;
 
-%;
