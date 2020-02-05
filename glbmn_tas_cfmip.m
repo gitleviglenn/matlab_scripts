@@ -33,9 +33,15 @@ amip_m4K_tas   = ncread(s_var_amip_m4K_tas,var_tas);
 aqua_c_tas     = ncread(s_var_aqua_c_tas,var_tas);
 aqua_p4K_tas   = ncread(s_var_aqua_p4K_tas,var_tas);
 
+% these variables are needed to run global weights, which defines 
+%glblatweight_new
+vlon=ncread(s_var_amip_tas,'lon');
+vlat=ncread(s_var_amip_tas,'lat');
+
+global_weights
 
 for ti=1:420;
-  fullfield=squeeze(amip_tas(:,:,ti));
+  fullfield=squeeze(amip_amip_tas(:,:,ti));
   glblatweight_gen=glblatweight_new; % this switches the dimensions used in m2009
   global_wmean_quick;
   amip_gmn_tas(ti)=wgt_mean;
