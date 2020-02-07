@@ -568,6 +568,51 @@ plot(tdt_heat_prof_1(1,10:33),zzfull(10:33),'-o','Color',colgrn)
 
 tdt_total_cloud=tdtconv_25km_ztmn+tdtls_25km_ztmn;
 
+% for personal clarity, make a figure for the one experiment (initially 25km) and 
+% the tdt for lw radiation, for sw radiation, for the convective parameterization, 
+% and from the large-scale cloud scheme.  
+% What is the net effect?
+% what does this indicate about the affect
+% of the lwcre?  was i correct that the low-level clouds are a source of atmospheric
+% cooling and that turning off the lwcre removes this source of cooling?  
+
+%rad_heating_25=tdtlw_25_ztmn+tdtsw_25_ztmn; % radiative heating is needed in compTheta
+rad_heat_lw_25=mean(tdtlw_25_ztmn,1);
+rad_heat_sw_25=mean(tdtsw_25_ztmn,1);
+
+total_rad_25_prof=rad_heat_lw_25+rad_heat_sw_25;
+total_condensation_25_prof=tdtconv_25km_prof+tdtls_25km_prof;
+total_heating_prof=total_rad_25_prof+total_condensation_25_prof;
+
+figure_profiles=figure
+axes2 = axes('Parent',figure_profiles,'BoxStyle','full','YMinorTick','on',...
+    'YTickLabel',{'100','200','300','400','500','600','700','800','900','1000'},...
+    'YScale','log',...
+    'YTick',[10000 20000 30000 40000 50000 60000 70000 80000 90000 100000],...
+    'XTick',[-5 -4 -3 -2 -1 0 1 2 3 4 5],...
+    'Layer','top',...
+    'YDir','reverse',...
+    'FontWeight','bold',...
+    'FontSize',14);%,...
+ylim(axes2,[10000 100000]);
+box(axes2,'on');
+hold(axes2,'on');
+plot(rad_heat_lw_25,pfull_2km,'Color','r','LineWidth',1);
+set(gca,'Ydir','reverse')
+title('Heating: K/day: LWCRE ')
+hold on
+plot(rad_heat_sw_25,pfull_2km,'Color','b','LineWidth',1);
+plot(tdtconv_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2);
+plot(tdtls_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1);
+plot(total_rad_25_prof,pfull_2km,'--k','LineWidth',1);
+plot(total_condensation_25_prof,pfull_2km,'--','Color',colyel,'LineWidth',1);
+plot(total_heating_prof,pfull_2km,'k','LineWidth',2);
+
+
+
+
+
+
 %---------------------------------------------------------------
 % % FIGURES ----------------------------------------------
 % 
