@@ -14,8 +14,12 @@ source='/Users/silvers/data/CAM/';
 
 mean_array=zeros(3,4);
 
-model_generation='CAM6';
+model_generation='CAM5';
 source_mod=strcat(source,model_generation,'_GCM_RCE/');
+
+% path to data from the first round of compset experiments.
+source_mod_new=strcat(source,model_generation,'_GCM_RCE/');
+%source_mod_new=strcat(source,'/RCEMIPtest/',model_generation,'_GCM_RCE/');
 
 var1='pr_avg';          
 var2='prw_avg';
@@ -35,21 +39,23 @@ s_var4=strcat(source_mod,exp_string_2D,var4,'.nc')
 pr_295      =ncread(s_var1,var1);
 prw_295     =ncread(s_var2,var2);
 rlut_295    =ncread(s_var3,var3);
-omega_295   =ncread(s_var4,var4);
+%omega_295   =ncread(s_var4,var4);
+
 SSTst="300";
 exp_string=strcat(model_generation,'_GCM_RCE_large',SSTst,'_0D_');
-exp_string_2D=strcat(model_generation,'_GCM_RCE_large',SSTst,'_2D_');
-s_var1=strcat(source_mod,exp_string,var1,'.nc') 
-s_var2=strcat(source_mod,exp_string,var2,'.nc') 
-s_var3=strcat(source_mod,exp_string,var3,'.nc') 
-s_var4=strcat(source_mod,exp_string_2D,var4,'.nc') 
+%exp_string_2D=strcat(model_generation,'_GCM_RCE_large',SSTst,'_2D_');
+s_var1=strcat(source_mod_new,exp_string,var1,'.nc') 
+s_var2=strcat(source_mod_new,exp_string,var2,'.nc') 
+s_var3=strcat(source_mod_new,exp_string,var3,'.nc') 
+s_var4=strcat(source_mod_new,exp_string_2D,var4,'.nc') 
 pr_300      =ncread(s_var1,var1);
 prw_300     =ncread(s_var2,var2);
 rlut_300    =ncread(s_var3,var3);
-omega_300   =ncread(s_var4,var4);
+%omega_300   =ncread(s_var4,var4);
+
 SSTst="305";
 exp_string=strcat(model_generation,'_GCM_RCE_large',SSTst,'_0D_');
-exp_string_2D=strcat(model_generation,'_GCM_RCE_large',SSTst,'_2D_');
+%exp_string_2D=strcat(model_generation,'_GCM_RCE_large',SSTst,'_2D_');
 s_var1=strcat(source_mod,exp_string,var1,'.nc') 
 s_var2=strcat(source_mod,exp_string,var2,'.nc') 
 s_var3=strcat(source_mod,exp_string,var3,'.nc') 
@@ -57,7 +63,7 @@ s_var4=strcat(source_mod,exp_string_2D,var4,'.nc')
 pr_305      =ncread(s_var1,var1);
 prw_305     =ncread(s_var2,var2);
 rlut_305    =ncread(s_var3,var3);
-omega_305   =ncread(s_var4,var4);
+%omega_305   =ncread(s_var4,var4);
 
 % scale precip to mm/day
 p295=86400*mean(pr_295)
@@ -87,44 +93,46 @@ mean_array(3,4)=olr305;
 % compute subsidence fraction at 500 hPa
 % fraction of grid points with subsiding air (positive omega)
 
-tiend=size(omega_305,3);
-sub_frac_295=zeros(1,tiend);
-sub_frac_300=zeros(1,tiend);
-sub_frac_305=zeros(1,tiend);
-
-for ti=1:tiend;
-  omega_temp=squeeze(omega_295(:,:,ti));
-  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
-  sub_omega(omega_temp>=0.0)=1.0;
-  sub_frac_295(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
-  clear omega_temp
-  %
-  omega_temp=squeeze(omega_300(:,:,ti));
-  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
-  sub_omega(omega_temp>=0.0)=1.0;
-  sub_frac_300(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
-  clear omega_temp
-  %
-  omega_temp=squeeze(omega_305(:,:,ti));
-  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
-  sub_omega(omega_temp>=0.0)=1.0;
-  sub_frac_305(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
-  clear omega_temp
-end
-
-tendindex=tiend;
-
-incoming_ts=sub_frac_295;
-running_mean_30yr
-sub_frac_295_sm=idiotbox;
-
-incoming_ts=sub_frac_300;
-running_mean_30yr
-sub_frac_300_sm=idiotbox;
-
-incoming_ts=sub_frac_305;
-running_mean_30yr
-sub_frac_305_sm=idiotbox;
+%stop
+%
+%tiend=size(omega_305,3);
+%sub_frac_295=zeros(1,tiend);
+%sub_frac_300=zeros(1,tiend);
+%sub_frac_305=zeros(1,tiend);
+%
+%for ti=1:tiend;
+%  omega_temp=squeeze(omega_295(:,:,ti));
+%  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
+%  sub_omega(omega_temp>=0.0)=1.0;
+%  sub_frac_295(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
+%  clear omega_temp
+%  %
+%  omega_temp=squeeze(omega_300(:,:,ti));
+%  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
+%  sub_omega(omega_temp>=0.0)=1.0;
+%  sub_frac_300(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
+%  clear omega_temp
+%  %
+%  omega_temp=squeeze(omega_305(:,:,ti));
+%  sub_omega=zeros(size(omega_temp,1),size(omega_temp,2));
+%  sub_omega(omega_temp>=0.0)=1.0;
+%  sub_frac_305(ti)=sum(sum(sub_omega))/(size(omega_temp,1)*size(omega_temp,2));
+%  clear omega_temp
+%end
+%
+%tendindex=tiend;
+%
+%incoming_ts=sub_frac_295;
+%running_mean_30yr
+%sub_frac_295_sm=idiotbox;
+%
+%incoming_ts=sub_frac_300;
+%running_mean_30yr
+%sub_frac_300_sm=idiotbox;
+%
+%incoming_ts=sub_frac_305;
+%running_mean_30yr
+%sub_frac_305_sm=idiotbox;
 
 
 

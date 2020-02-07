@@ -12,6 +12,9 @@ source='/Users/silvers/data/CAM/';
 source_cam6=strcat(source,'CAM6_GCM_RCE/');
 source_cam5=strcat(source,'CAM5_GCM_RCE/');
 
+source_cam5_test=strcat(source,'RCEMIPtest/CAM5_GCM_RCE/');
+source_cam6_test=strcat(source,'RCEMIPtest/CAM6_GCM_RCE/');
+
 varname='hur_avg'
 
 source_cam6_295_hur=strcat(source_cam6,'CAM6_GCM_RCE_large295_1D_',varname,'.nc');
@@ -94,13 +97,13 @@ cldf_cam6_305_tmn=mean(cldf_c6_305,2);
 figure
 plot(hur_cam5_295_tmn(:),plev_c5(:),'r','LineWidth',1)
 hold on
-plot(hur_cam5_300_tmn(:),plev_c5(:),'r','LineWidth',1.5)
+plot(hur_cam5_300_tmn(:),plev_c5(:),'--r','LineWidth',1.5)
 plot(hur_cam5_305_tmn(:),plev_c5(:),'r','LineWidth',2)
 set(gca,'Ydir','reverse')
 plot(hur_cam6_295_tmn(:),plev(:),'k','LineWidth',1)
-plot(hur_cam6_300_tmn(:),plev(:),'k','LineWidth',1.5)
+plot(hur_cam6_300_tmn(:),plev(:),'--k','LineWidth',1.5)
 plot(hur_cam6_305_tmn(:),plev(:),'k','LineWidth',2)
-title('CAM5(red) & CAM6(black')
+title('CAM5(red) & CAM6(black)')
 xlim([0 100])
 xlabel('RH [%]')
 ylabel('[hPa]')
@@ -108,13 +111,13 @@ ylabel('[hPa]')
 figure
 plot(cldf_cam5_295_tmn(:),plev_c5(:),'r','LineWidth',1)
 hold on
-plot(cldf_cam5_300_tmn(:),plev_c5(:),'r','LineWidth',1.5)
+plot(cldf_cam5_300_tmn(:),plev_c5(:),'--r','LineWidth',1.5)
 plot(cldf_cam5_305_tmn(:),plev_c5(:),'r','LineWidth',2)
 set(gca,'Ydir','reverse')
 plot(cldf_cam6_295_tmn(:),plev(:),'k','LineWidth',1)
-plot(cldf_cam6_300_tmn(:),plev(:),'k','LineWidth',1.5)
+plot(cldf_cam6_300_tmn(:),plev(:),'--k','LineWidth',1.5)
 plot(cldf_cam6_305_tmn(:),plev(:),'k','LineWidth',2)
-title('CAM5(red) & CAM6(black')
+title('CAM5(red) & CAM6(black)')
 xlim([0 1])
 xlabel('Cldfrac')
 ylabel('[hPa]')
