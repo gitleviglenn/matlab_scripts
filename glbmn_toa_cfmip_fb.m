@@ -110,7 +110,8 @@ toa_cre   =zeros(1,timelength); % if the running mean is run.
 toa_lwcre =zeros(1,timelength); % if the running mean is run.
 toa_swcre =zeros(1,timelength); % if the running mean is run.
 
-% implies positive in the downward direction...
+% implies R is positive in the downward direction...
+% the output from the model is generally positive wether it be up or down
 toa_R     = rsdt_gmn_ts-rsut_gmn_ts-rlut_gmn_ts;
 toa_clr   = rsdt_gmn_ts-rsutcs_gmn_ts-rlutcs_gmn_ts;
 toa_cre   = toa_clr-toa_R;
@@ -119,10 +120,12 @@ toa_swcre = rsutcs_gmn_ts - rsut_gmn_ts;
 toa_lwcs  = rlutcs_gmn_ts;
 toa_swcs  = rsutcs_gmn_ts;
 
- rad_ts_array(1,:)=toa_R;
- rad_ts_array(2,:)=toa_clr; 
- rad_ts_array(3,:)=toa_cre;
- rad_ts_array(4,:)=toa_lwcre;
- rad_ts_array(5,:)=toa_swcre;
- rad_ts_array(6,:)=toa_lwcs;
- rad_ts_array(7,:)=toa_swcs;
+rad_ts_array(1,:)=toa_R;
+rad_ts_array(2,:)=toa_clr; 
+rad_ts_array(3,:)=toa_cre;
+rad_ts_array(4,:)=toa_lwcre;
+rad_ts_array(5,:)=toa_swcre;
+rad_ts_array(6,:)=toa_lwcs;
+rad_ts_array(7,:)=toa_swcs;
+
+

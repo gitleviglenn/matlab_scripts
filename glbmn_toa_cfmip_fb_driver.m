@@ -4,6 +4,9 @@
 %
 % computes feedbacks for the amip p4K, amip m4K, amip future 4K
 %
+% the amip_control switch is needed because the length of chunks are 
+% different in amip
+%
 % feedbacks also need to be computed for the aqua p4K, abrupt 4xCO2, and
 % the 1%CO2
 %
@@ -96,8 +99,8 @@ rad_fb_array(2,1)=del_Rclr_aq_p4K;
 rad_fb_array(3,1)=del_cre_aq_p4K;
 rad_fb_array(4,1)=del_lwcre_aq_p4K;
 rad_fb_array(5,1)=del_swcre_aq_p4K;
-rad_fb_array(6,1)=del_lwcs_aq_p4K;
-rad_fb_array(7,1)=del_swcs_aq_p4K;
+rad_fb_array(6,1)=-del_lwcs_aq_p4K;
+rad_fb_array(7,1)=-del_swcs_aq_p4K;
 
 aqua_control=false
 
@@ -119,8 +122,8 @@ rad_fb_array(2,2)=del_clr_m4K;
 rad_fb_array(3,2)=del_cre_m4K;
 rad_fb_array(4,2)=del_lwcre_m4K;
 rad_fb_array(5,2)=del_swcre_m4K;
-rad_fb_array(6,2)=del_lwcs_m4K;
-rad_fb_array(7,2)=del_swcs_m4K;
+rad_fb_array(6,2)=-del_lwcs_m4K;
+rad_fb_array(7,2)=-del_swcs_m4K;
 
 %-=-=-=-=
 exp_name='amip-p4K';
@@ -140,10 +143,11 @@ rad_fb_array(2,3)=del_clr_p4K;
 rad_fb_array(3,3)=del_cre_p4K;
 rad_fb_array(4,3)=del_lwcre_p4K;
 rad_fb_array(5,3)=del_swcre_p4K;
-rad_fb_array(6,3)=del_lwcs_p4K;
-rad_fb_array(7,3)=del_swcs_p4K;
+rad_fb_array(6,3)=-del_lwcs_p4K;
+rad_fb_array(7,3)=-del_swcs_p4K;
 
-%delR_p8K      =(mean(rad_ts_array_p4K(1,:))-mean(rad_ts_array_m4K(1,:)))/delT_amip_8K;
+%-=-=-=-=
+
 delR_p8K       =(mean(rad_ts_array_p4K(1,:))-mean(rad_ts_array_m4K(1,:)))/delT_amip_8K;
 del_clr_p8K    =(mean(rad_ts_array_p4K(2,:))-mean(rad_ts_array_m4K(2,:)))/delT_amip_8K;
 del_cre_p8K    =(mean(rad_ts_array_p4K(3,:))-mean(rad_ts_array_m4K(3,:)))/delT_amip_8K;
@@ -157,8 +161,8 @@ rad_fb_array(2,4)=del_clr_p8K;
 rad_fb_array(3,4)=del_cre_p8K;
 rad_fb_array(4,4)=del_lwcre_p8K;
 rad_fb_array(5,4)=del_swcre_p8K;
-rad_fb_array(6,4)=del_lwcs_p8K;
-rad_fb_array(7,4)=del_swcs_p8K;
+rad_fb_array(6,4)=-del_lwcs_p8K;
+rad_fb_array(7,4)=-del_swcs_p8K;
 
 %-=-=-=-=
 exp_name='amip-future4K';
@@ -166,7 +170,7 @@ glbmn_toa_cfmip_fb
 rad_ts_array_future4K=rad_ts_array;
 
 delR_future4K      =(mean(rad_ts_array_future4K(1,:))-mean(rad_ts_array_amip(1,:)))/delT_amip_fut;
-;delR_future4K      =(mean(rad_ts_array_future4K(1,:)-rad_ts_array_amip(1,:)))/4;
+%delR_future4K      =(mean(rad_ts_array_future4K(1,:)-rad_ts_array_amip(1,:)))/4;
 del_clr_future4K   =(mean(rad_ts_array_future4K(2,:))-mean(rad_ts_array_amip(2,:)))/delT_amip_fut;
 del_cre_future4K   =(mean(rad_ts_array_future4K(3,:))-mean(rad_ts_array_amip(3,:)))/delT_amip_fut;
 del_lwcre_future4K =(mean(rad_ts_array_future4K(4,:))-mean(rad_ts_array_amip(4,:)))/delT_amip_fut;
@@ -179,9 +183,10 @@ rad_fb_array(2,5)=del_clr_future4K;
 rad_fb_array(3,5)=del_cre_future4K;
 rad_fb_array(4,5)=del_lwcre_future4K;
 rad_fb_array(5,5)=del_swcre_future4K;
-rad_fb_array(6,5)=del_lwcs_future4K;
-rad_fb_array(7,5)=del_swcs_future4K;
+rad_fb_array(6,5)=-del_lwcs_future4K;
+rad_fb_array(7,5)=-del_swcs_future4K;
 
+%-=-=-=-=
 rad_fb_array_str='aqua_p4K;amip_m4K;amip_p4K;amip_p8K;amip_future4K'
 
 %-=-=-=-=
