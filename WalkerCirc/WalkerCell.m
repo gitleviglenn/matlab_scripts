@@ -17,17 +17,17 @@ phys_constants
 
 % default values for the first time WalkerCell is run:
 experi=3 % experi=3 uses the ent0p9 experiment
-exptype=0 % 0 is the default experimental configuration (lwcre is on)
+exptype=2 % 0 is the default experimental configuration (lwcre is on)
 % 2 corresponds to lwoff
 
 if exptype==2
   ind=2;
 end
 
-%lwstring='4K_lwoff/';
-lwstring='4K/';
+lwstring='4K_lwoff/';
+%lwstring='4K/';
 
-lwcreonoff=' with LWCRE on';
+lwcreonoff=' with LWCRE off';
 
 %estr2='ent0p5_p4K'plot(tdt_heat_prof_25(1,10:33),zzfull(10:33),'-o','Color',colyel) 
 
@@ -150,9 +150,9 @@ path_100km_small_dly_lwoff  =strcat(path_n,'c8x40L33_am4p0_100km_wlkr_ent0p9_lwo
 %-------------------------------------------------------------------------------------------------
 
 %%% this should be the default definition of the path
-ConvParam=0;% convective parameterization is on when ConvParam=1
-ConvExp=1;  % explicit convection, meaning convective parameterization is off
-ConvExpLwoff=0;
+ConvParam=1;% convective parameterization is on when ConvParam=1
+ConvExp=0;  % explicit convection, meaning convective parameterization is off
+ConvExpLwoff=1;
 
 if exptype==2;
   ind=2;
