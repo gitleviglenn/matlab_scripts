@@ -29,8 +29,11 @@ dx_gen=2000.; % grid cell size in meters
 x_ngp_gen=2000; % width of domain in grid points
 tit_id=' 2 km'
 
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_2km=psi_gen;
+mmax2=max(max(psi_gen_2km))
+mmin2=min(min(psi_gen_2km))
 
 % constant added to the streamfunction
 %con_stream=-3000.;
@@ -43,8 +46,11 @@ dx_gen=1000.; % grid cell size in meters
 x_ngp_gen=4000; % width of domain in grid points
 tit_id=' 1 km'
 
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_1km=psi_gen;
+mmax1=max(max(psi_gen_1km))
+mmin1=min(min(psi_gen_1km))
 
 figure
 subplot(1,2,1)
@@ -77,7 +83,8 @@ x_ngp_gen=160; % width of domain in grid points
 %tit_id=' 25 km 0p5';
 tit_id=' E25 ';
 tit_id_0p5=tit_id;
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_0p5=psi_gen;
 mmax=max(max(psi_gen_0p5))
 mmin=min(min(psi_gen_0p5))
@@ -103,7 +110,8 @@ x_ngp_gen=160; % width of domain in grid points
 %tit_id=' 25 km 0p7';
 tit_id=' P25 LWCRE off';
 tit_id_0p7=tit_id;
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_0p7=psi_gen;
 mmax=max(max(psi_gen_0p7))
 mmin=min(min(psi_gen_0p7))
@@ -120,11 +128,14 @@ x_ngp_gen=160; % width of domain in grid points
 %tit_id=' 25 km 0p9';
 tit_id=' P25 ';
 tit_id_0p9=tit_id;
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_0p9=psi_gen;
 mmax=max(max(psi_gen_0p9))
 mmin=min(min(psi_gen_0p9))
 offset3=(mmax-mmin)/2.;
+
+%stop
 
 %con_stream=0.; % how should this be deterimined?
 con_stream=con_stream_arr(6);
@@ -136,7 +147,8 @@ dx_gen=25000.; % grid cell size in meters
 x_ngp_gen=160; % width of domain in grid points
 tit_id=' E25 LWCRE off';
 tit_id_1p1=tit_id;
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_1p1=psi_gen;
 mmax=max(max(psi_gen_1p1))
 mmin=min(min(psi_gen_1p1))
@@ -152,7 +164,8 @@ dx_gen=25000.; % grid cell size in meters
 x_ngp_gen=160; % width of domain in grid points
 tit_id=' 25 km 1p3';
 tit_id_1p3=tit_id;
-StreamFunNew
+%StreamFunNew
+StreamFunNewNew
 psi_gen_1p3=psi_gen;
 mmax=max(max(psi_gen_1p3))
 mmin=min(min(psi_gen_1p3))
