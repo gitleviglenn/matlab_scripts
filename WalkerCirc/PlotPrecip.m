@@ -10,64 +10,64 @@ colgrn=[0.4660,0.6740,0.1880];  % 1 km runs
 
 path_new='/Users/silvers/data/WalkerCell/testing_20181203';
 
-%path_2km_1=strcat(path,'am4p0_50x2000_4K/','19790101');
-path_2km_1=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790101');
-path_2km_2=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790201');
-path_2km_3=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790301');
-path_2km_4=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790401');
-path_2km_5=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790501');
-path_2km_6=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790601');
-source_2km_1=strcat(path_2km_1,'.atmos_daily.nc');
-source_2km_2=strcat(path_2km_2,'.atmos_daily.nc');
-source_2km_3=strcat(path_2km_3,'.atmos_daily.nc');
-source_2km_4=strcat(path_2km_4,'.atmos_daily.nc');
-source_2km_5=strcat(path_2km_5,'.atmos_daily.nc');
-source_2km_6=strcat(path_2km_6,'.atmos_daily.nc');
-
-precip_2km=ncread(source_2km_1,'precip');
-precip_2km_b=ncread(source_2km_2,'precip');
-precip_2km_c=ncread(source_2km_3,'precip');
-precip_2km_d=ncread(source_2km_4,'precip');
-precip_2km_e=ncread(source_2km_5,'precip');
-precip_2km_f=ncread(source_2km_6,'precip');
-
-precip_2km_a_znm=mean(precip_2km,2);
-precip_2km_b_znm=mean(precip_2km_b,2);
-precip_2km_c_znm=mean(precip_2km_c,2);
-precip_2km_d_znm=mean(precip_2km_d,2);
-precip_2km_e_znm=mean(precip_2km_e,2);
-precip_2km_f_znm=mean(precip_2km_f,2);
-
-p_2km_a_znm=scale.*(squeeze(precip_2km_a_znm));
-p_2km_b_znm=scale.*(squeeze(precip_2km_b_znm));
-p_2km_c_znm=scale.*(squeeze(precip_2km_c_znm));
-p_2km_d_znm=scale.*(squeeze(precip_2km_d_znm));
-p_2km_e_znm=scale.*(squeeze(precip_2km_e_znm));
-p_2km_f_znm=scale.*(squeeze(precip_2km_f_znm));
-
-precip_mn_dly_2km_m1=squeeze(mean(p_2km_a_znm,1));
-precip_mn_dly_2km_m2=squeeze(mean(p_2km_b_znm,1));
-precip_mn_dly_2km_m3=squeeze(mean(p_2km_c_znm,1));
-precip_mn_dly_2km_m4=squeeze(mean(p_2km_d_znm,1));
-precip_mn_dly_2km_m5=squeeze(mean(p_2km_e_znm,1));
-precip_mn_dly_2km_m6=squeeze(mean(p_2km_f_znm,1));
-
-boohiss=cat(2,precip_mn_dly_2km_m1,precip_mn_dly_2km_m2,precip_mn_dly_2km_m3,...
-            precip_mn_dly_2km_m4,precip_mn_dly_2km_m5,precip_mn_dly_2km_m6);
-tendindex=180;
-incoming_ts=boohiss;
-running_mean;
-boohiss_sm=output_ts;
-
-tendindex=172;
-incoming_ts=boohiss_sm;
-running_mean;
-precip_2km_smts_b=output_ts;
-
-tendindex=164;
-incoming_ts=precip_2km_smts_b;
-running_mean;
-precip_2km_smts=output_ts;
+%%path_2km_1=strcat(path,'am4p0_50x2000_4K/','19790101');
+%path_2km_1=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790101');
+%path_2km_2=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790201');
+%path_2km_3=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790301');
+%path_2km_4=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790401');
+%path_2km_5=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790501');
+%path_2km_6=strcat(path,'c96L33_am4p0_50x2000_nh_2km_wlkr_4K/','19790601');
+%source_2km_1=strcat(path_2km_1,'.atmos_daily.nc');
+%source_2km_2=strcat(path_2km_2,'.atmos_daily.nc');
+%source_2km_3=strcat(path_2km_3,'.atmos_daily.nc');
+%source_2km_4=strcat(path_2km_4,'.atmos_daily.nc');
+%source_2km_5=strcat(path_2km_5,'.atmos_daily.nc');
+%source_2km_6=strcat(path_2km_6,'.atmos_daily.nc');
+%
+%precip_2km=ncread(source_2km_1,'precip');
+%precip_2km_b=ncread(source_2km_2,'precip');
+%precip_2km_c=ncread(source_2km_3,'precip');
+%precip_2km_d=ncread(source_2km_4,'precip');
+%precip_2km_e=ncread(source_2km_5,'precip');
+%precip_2km_f=ncread(source_2km_6,'precip');
+%
+%precip_2km_a_znm=mean(precip_2km,2);
+%precip_2km_b_znm=mean(precip_2km_b,2);
+%precip_2km_c_znm=mean(precip_2km_c,2);
+%precip_2km_d_znm=mean(precip_2km_d,2);
+%precip_2km_e_znm=mean(precip_2km_e,2);
+%precip_2km_f_znm=mean(precip_2km_f,2);
+%
+%p_2km_a_znm=scale.*(squeeze(precip_2km_a_znm));
+%p_2km_b_znm=scale.*(squeeze(precip_2km_b_znm));
+%p_2km_c_znm=scale.*(squeeze(precip_2km_c_znm));
+%p_2km_d_znm=scale.*(squeeze(precip_2km_d_znm));
+%p_2km_e_znm=scale.*(squeeze(precip_2km_e_znm));
+%p_2km_f_znm=scale.*(squeeze(precip_2km_f_znm));
+%
+%precip_mn_dly_2km_m1=squeeze(mean(p_2km_a_znm,1));
+%precip_mn_dly_2km_m2=squeeze(mean(p_2km_b_znm,1));
+%precip_mn_dly_2km_m3=squeeze(mean(p_2km_c_znm,1));
+%precip_mn_dly_2km_m4=squeeze(mean(p_2km_d_znm,1));
+%precip_mn_dly_2km_m5=squeeze(mean(p_2km_e_znm,1));
+%precip_mn_dly_2km_m6=squeeze(mean(p_2km_f_znm,1));
+%
+%boohiss=cat(2,precip_mn_dly_2km_m1,precip_mn_dly_2km_m2,precip_mn_dly_2km_m3,...
+%            precip_mn_dly_2km_m4,precip_mn_dly_2km_m5,precip_mn_dly_2km_m6);
+%tendindex=180;
+%incoming_ts=boohiss;
+%running_mean;
+%boohiss_sm=output_ts;
+%
+%tendindex=172;
+%incoming_ts=boohiss_sm;
+%running_mean;
+%precip_2km_smts_b=output_ts;
+%
+%tendindex=164;
+%incoming_ts=precip_2km_smts_b;
+%running_mean;
+%precip_2km_smts=output_ts;
 
 % read in newer data from the 1km and 2km simululations
 %path_new='/Users/silvers/data/WalkerCell/testing_20181203'
@@ -211,7 +211,7 @@ plot(ls_100km_lwo,'b','LineWidth',1);
 plot(cv_100km_lwo,'k','LineWidth',1);
 title('small domain: 100km')
 %title('conv (black) and ls (blue)')
-suptitle('Large-Scale vs Convective Precipitation')
+sgtitle('Large-Scale vs Convective Precipitation')
 %----------------
 
 figure
@@ -237,7 +237,7 @@ xlim([0 640])
 hold on
 plot(ls_25km_l,'b');
 title('conv (black) and ls (blue)')
-suptitle(tit_25)
+sgtitle(tit_25)
 
 figure
 subplot(2,2,1)
@@ -262,7 +262,7 @@ xlim([0 160])
 hold on
 plot(ls_100km_l,'b');
 title('conv (black) and ls (blue)')
-suptitle(tit_100)
+sgtitle(tit_100)
 
 %stop
 
@@ -304,35 +304,35 @@ tendindex=365;
 incoming_ts=precip_mean_daily_25km;
 running_mean;
 
-figure
-subplot(1,3,1)
-plot(output_ts)
-title('first application of running mean')
-hold on
-plot(boohiss_sm);
-
-incoming_ts=output_ts;
-tendindex=357;
-running_mean;
-precip_dmn_smooth=output_ts;
-
-subplot(1,3,2)
-plot(precip_dmn_smooth)
-title('second application of running mean')
-hold on
-plot(precip_2km_smts_b)
-
-
-incoming_ts=precip_dmn_smooth;
-tendindex=349;
-running_mean;
-precip_dmn_smooth_3=output_ts;
-
-subplot(1,3,3)
-plot(precip_dmn_smooth_3)
-title('third application of running mean')
-hold on
-plot(precip_2km_smts)
+%figure
+%subplot(1,3,1)
+%plot(output_ts)
+%title('first application of running mean')
+%hold on
+%plot(boohiss_sm);
+%
+%incoming_ts=output_ts;
+%tendindex=357;
+%running_mean;
+%precip_dmn_smooth=output_ts;
+%
+%subplot(1,3,2)
+%plot(precip_dmn_smooth)
+%title('second application of running mean')
+%hold on
+%plot(precip_2km_smts_b)
+%
+%
+%incoming_ts=precip_dmn_smooth;
+%tendindex=349;
+%running_mean;
+%precip_dmn_smooth_3=output_ts;
+%
+%subplot(1,3,3)
+%plot(precip_dmn_smooth_3)
+%title('third application of running mean')
+%hold on
+%plot(precip_2km_smts)
 
 
 % compute and plot the fraction of precip that is large-scale, as well as
@@ -580,23 +580,33 @@ incoming_ts=output_ts;
 running_mean
 precip_100km_lwoff_rm2=output_ts;
 
+tendindex=1826;
+incoming_ts=precip_daily_100km;
+running_mean_30pt;
+pre_100_rm30pt=output_ts;
+
 figure
 plot(scale*prec_2km_ctl_sm,'Color',colblu,'LineWidth',2)
 hold on
-plot(scale*prec_2km_lwoff_sm,'Color',colblu,'LineWidth',1)
+plot(scale*prec_2km_lwoff_sm,'--','Color',colblu,'LineWidth',1)
 plot(scale*prec_1km_ctl_sm,'Color',colgrn,'LineWidth',2)
-plot(scale*prec_1km_lwoff_sm,'Color',colgrn,'LineWidth',1)
+plot(scale*prec_1km_lwoff_sm,'--','Color',colgrn,'LineWidth',1)
 %plot(precip_ctl_rm2(1:344),'Color',colyel,'LineWidth',2)
 plot(precip_ctl_rm2(1:1200),'Color',colyel,'LineWidth',2)
 %plot(precip_25km_noconv(1:164),'--','Color',colyel,'LineWidth',2)
-plot(precip_25km_lwoff(1:344),'Color',colyel,'LineWidth',1)
+plot(precip_25km_lwoff(1:1200),'--','Color',colyel,'LineWidth',1)
 %plot(precip_100km_ctl_rm2(1:344),'r','LineWidth',2);
 plot(precip_100km_ctl_rm2(1:1200),'r','LineWidth',2);
-plot(precip_100km_lwoff_rm2,'r','LineWidth',1);
+plot(pre_100_rm30pt(1:1200),'b','LineWidth',2);
+plot(precip_100km_lwoff_rm2(1:1200),'--r','LineWidth',1);
+scatter(700,5,500,'.','r')
+%plot(1000,5,'.','r')
 %ytitle('mm/day')
 %xtitle('days')
 xlabel('days')
-xlim([0 1200])
+%xlim([0 1200])
+xlim([0 730])
+ylim([1 6])
 ylabel('mm/day')
 title('Domain Mean Precipitation')
 mn_100km_ctl=mean(precip_100km_ctl_rm2)
