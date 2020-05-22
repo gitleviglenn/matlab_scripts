@@ -7,6 +7,8 @@
 % computes: 
 %  rad_heating_25=tdtlw_25_ztmn+tdtsw_25_ztmn; heating rate
 %
+% in april, I commented out the code that is used to calulate stst
+%
 % run this within WalkerCell.m
 %-----------------------------------------------------------------
 
@@ -250,24 +252,25 @@ MeanRadPrec=[MeanRadH_1km MeanRadH_2km MeanRadH_25km MeanRadH_100km; precip_1km_
 %MeanPrecip_25km=mean(p_25km_tmean,1)
 %MeanPrecip_2km=mean(p_2km_tmean,1)
 
-%compTheta
-
-stst=zeros(160,33);
-app_R=zeros(160,33);
-
-for j=2:32
-    for i=1:160
-%        stst(i,j)=(.102/rho_25km(i,j)).*(temp_25km_ztmn(i,j)/theta_znm(i,j).*((theta_znm(i,j+1)-theta_znm(i,j-1))/(zfull_25km_ztmn(i,j+1)-zfull_25km_ztmn(i,j-1))));
-        stst(i,j)=(.102/rho_25km(i,j)).*(temp_25km_ztmn(i,j)/theta_gcm(i,j).*((theta_gcm(i,j+1)-theta_gcm(i,j-1))/(zfull_25km_ztmn(i,j+1)-zfull_25km_ztmn(i,j-1))));
-    end 
-end
-
-for i=1:160
-    %stst(i,1)=-(.1/rho_25km(i,j)).*(temp_znm(i,1)/theta_znm(i,1).*((theta_znm(i,2)-theta_znm(i,1))/(pfull_25km(2)-pfull_25km(1))));
-    %stst(i,33)=-(.1/rho_25km(i,j)).*(temp_znm(i,33)/theta_znm(i,33).*((theta_znm(i,33)-theta_znm(i,32))/(pfull_25km(33)-pfull_25km(32))));
-    stst(i,1)=(.102/rho_25km(i,1)).*(temp_25km_ztmn(i,1)/theta_gcm(i,1).*((theta_gcm(i,2)-theta_gcm(i,1))/(zfull_25km_ztmn(i,2)-zfull_25km_ztmn(i,1))));
-    stst(i,33)=(.102/rho_25km(i,33)).*(temp_25km_ztmn(i,33)/theta_gcm(i,33).*((theta_gcm(i,33)-theta_gcm(i,32))/(zfull_25km_ztmn(i,33)-zfull_25km_ztmn(i,32))));
-end 
+%
+% April, 2020: Commenting out the calculation of stst (static stability).  it does
+% not appear that it is being used and it is creating overlap issues with the order
+% of calling compTheta.  
+% 
+%stst=zeros(160,33);
+%app_R=zeros(160,33);
+%
+%for j=2:32
+%    for i=1:160
+%%        stst(i,j)=(.102/rho_25km(i,j)).*(temp_25km_ztmn(i,j)/theta_znm(i,j).*((theta_znm(i,j+1)-theta_znm(i,j-1))/(zfull_25km_ztmn(i,j+1)-zfull_25km_ztmn(i,j-1))));
+%        stst(i,j)=(.102/rho_25km(i,j)).*(temp_25km_ztmn(i,j)/theta_gcm(i,j).*((theta_gcm(i,j+1)-theta_gcm(i,j-1))/(zfull_25km_ztmn(i,j+1)-zfull_25km_ztmn(i,j-1))));
+%    end 
+%end
+%
+%for i=1:160
+%    stst(i,1)=(.102/rho_25km(i,1)).*(temp_25km_ztmn(i,1)/theta_gcm(i,1).*((theta_gcm(i,2)-theta_gcm(i,1))/(zfull_25km_ztmn(i,2)-zfull_25km_ztmn(i,1))));
+%    stst(i,33)=(.102/rho_25km(i,33)).*(temp_25km_ztmn(i,33)/theta_gcm(i,33).*((theta_gcm(i,33)-theta_gcm(i,32))/(zfull_25km_ztmn(i,33)-zfull_25km_ztmn(i,32))));
+%end 
 
 %% define colors
 colyel=[0.9290,0.6940,0.1250];  % 25km 
@@ -691,7 +694,8 @@ title('CRM: lw heating K/d')
 set(gca,'Ydir','reverse')
 
 tit_en=strcat('Energetics: ',tit_st);
-suptitle(tit_en)
+sgtitle(tit_en)
+%suptitle(tit_en)
 %
 %
 figure
@@ -775,7 +779,8 @@ title('CRM: lw heating K/d')
 set(gca,'Ydir','reverse')
 
 tit_en=strcat('Energetics: ',tit_st);
-suptitle(tit_en)
+%suptitle(tit_en)
+sgtitle(tit_en)
 
 figure
 subplot(2,1,1)
@@ -798,7 +803,7 @@ title('2km: tdt due to rad and cond K/d')
 set(gca,'Ydir','reverse')
 
 tit_en=strcat('Energetics: ',tit_st);
-suptitle(tit_en)
+sgtitle(tit_en)
 
 
 % %------------------------
@@ -843,4 +848,4 @@ suptitle(tit_en)
 % colorbar
 % 
 % tit_en=strcat('Energetics: ',tit_st);
-% suptitle(tit_en)
+% sgtitle(tit_en)
