@@ -590,8 +590,13 @@ nlon=8;
 pfull_gen=pfull_25km;
 %temp_gen=temp_25km;
 
-compTheta % compute the potential temperature
+% WalkerEnergetics depends on theta_gcm...
 WalkerEnergetics % compute several of the radiative flux fields
+%
+% compTheta depends on vvel_d_25km
+compTheta % compute the potential temperature
+
+%WalkerEnergetics % compute several of the radiative flux fields
 %compTheta % compute the potential temperature
 
 % compute the diabatic divergence
@@ -767,7 +772,7 @@ title(tit_b)
 set(gca,'YLim',[10000 100000]);
 set(gca,'YScale','log')
 set(gca,'Ydir','reverse')
-suptitle(tit_st)
+sgtitle(tit_st)
 
 % plot time mean precip
 figure
@@ -874,7 +879,7 @@ title(tit_b);
 set(gca,'Ydir','reverse')
 %colorbar
 tit_liq=strcat('liq: ',tit_st);
-suptitle(tit_liq)
+sgtitle(tit_liq)
 
 figure
 rh_contours=[5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85];
@@ -901,7 +906,7 @@ title(tit_b);
 set(gca,'Ydir','reverse')
 colorbar
 tit_rh=strcat('RH: ',tit_st);
-suptitle(tit_rh)
+sgtitle(tit_rh)
 
 % the code below only works if all fize ensemble members have been run...
 % and stored in the matrices cl_mat and rh_mat
