@@ -5,7 +5,7 @@
 %
 % cess_eq -> stores the mean of the cess time series
 % cess_eq -> 1,2 are the sensitivities for CAM5
-% cess_eq -> 3,4 are the sensitivities for CAM6
+% cess_eq -> 3,4 are the sensitivities for CAM6 (3 is for 300-295;4 is for 305-300)
 %
 % levi silvers                                           jan 2020
 %-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

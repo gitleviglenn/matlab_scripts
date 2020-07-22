@@ -44,23 +44,23 @@ toa_swcre = rsutcs - rsut;
 tendindex=26281;
 incoming_ts=toa_R;
 running_mean_24pt
-toa_R_sm=idiotbox; % 26257
+toa_R_sm=output_ts; % 26257
 
 incoming_ts=toa_clr;
 running_mean_24pt
-toa_clr_sm=idiotbox; % 26257
+toa_clr_sm=output_ts; % 26257
 
 incoming_ts=toa_cre;
 running_mean_24pt
-toa_cre_sm=idiotbox; % 26257
+toa_cre_sm=output_ts; % 26257
 
 incoming_ts=toa_lwcre;
 running_mean_24pt
-toa_lwcre_sm=idiotbox; % 26257
+toa_lwcre_sm=output_ts; % 26257
 
 incoming_ts=toa_swcre;
 running_mean_24pt
-toa_swcre_sm=idiotbox; % 26257
+toa_swcre_sm=output_ts; % 26257
 
 
 rad_ts_array(1,:)=toa_R_sm;
