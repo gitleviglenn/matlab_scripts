@@ -28,7 +28,7 @@ xcrm_2to1=0:2:3998;
 xaxis_gcm2crm=0:25:3975;
 
 % figure with lwcre
-lwoff = true;
+lwoff = false;
 
 % for the lwoff switch to work the model needs to be run with the lwoff path names
 % which are set in the WalkerCell script.  Then the resulting data needs to be 
@@ -136,64 +136,66 @@ lwoff = true;
 thin=0.5;
 thick=2;
 
-  figure
-  subplot(2,2,1)
-  plot(xcrm_2to1,s_enth_2km,'Color',colblu,'LineWidth',thick)
-  hold on
-  plot(xcrm_2to1,s_enth_2km_lwoff,'Color',colblu,'LineWidth',thin)
-  plot(s_enth_1km,'Color',colgrn,'LineWidth',thick)
-  plot(s_enth_1km_lwoff,'Color',colgrn,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,s_enth_25km,'Color',colyel,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,s_enth_25km_lwoff,'--','Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,s_enth_25km_noconvlwoff,'--','Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,s_enth_25km_noconv,'Color',colyel,'LineWidth',thick)
-  ylabel('W/m2')
-  xlabel('km')
-  title('Surface Enthalpy Flux')
-  
-  subplot(2,2,2)
-  plot(xcrm_2to1,theta_e_crm2(:,33),'Color',colblu,'LineWidth',thick)
-  hold on
-  plot(xcrm_2to1,theta_e_crm2_lwoff(:,33),'--','Color',colblu,'LineWidth',thin)
-  plot(theta_e_crm1(:,33),'Color',colgrn,'LineWidth',thick)
-  plot(theta_e_crm1_lwoff(:,33),'--','Color',colgrn,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,theta_e_gcm(:,33),'Color',colyel,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,theta_e_gcm_lwoff(:,33),'--','Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,theta_e_gcm_noconvlwoff(:,33),'--','Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,theta_e_gcm_noconv(:,33),'Color',colyel,'LineWidth',thick)
-  ylabel('K')
-  xlabel('km')
-  title('equivalent theta')
-  
-  subplot(2,2,3)
-  plot(u_1km_ztmn(:,33),'Color',colgrn,'LineWidth',thick)
-  hold on
-  plot(u_1km_dmn_lwoff(:,33),'Color',colgrn,'LineWidth',thin)
-  title('u wind at 33, lowest atm level')
-  plot(xcrm_2to1,u_2km_ztmn(:,33),'Color',colblu,'LineWidth',thick)
-  plot(xcrm_2to1,u_2km_dmn_lwoff(:,33),'Color',colblu,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,u_25km_ztmn(:,33),'Color',colyel,'LineWidth',thin)
-%  plot(xaxis_gcm2crm,u_25km_ztmn_lwoff(:,33),'Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,u_25km_ztmn_noconvlwoff(:,33),'--','Color',colyel,'LineWidth',thin)
-  plot(xaxis_gcm2crm,u_25km_ztmn_noconv(:,33),'Color',colyel,'LineWidth',thick)
-  xlabel('km')
-  ylabel('m/s')
-  
-  subplot(2,2,4)
-  plot(u_1km_dmn(10:33),zzfull(10:33),'Color',colgrn,'LineWidth',thick)
-  hold on
-  plot(u_1km_dmn_lwoff(10:33),zzfull(10:33),'Color',colgrn,'LineWidth',thin)
-  plot(u_2km_dmn(10:33),zzfull(10:33),'Color',colblu,'LineWidth',thick)
-  plot(u_2km_dmn_lwoff(10:33),zzfull(10:33),'Color',colblu,'LineWidth',thin)
-%  plot(u_25km_dmn(10:33),zzfull(10:33),'Color',colyel,'LineWidth',thin)
-%  plot(u_25km_dmn_lwoff(10:33),zzfull(10:33),'--','Color',colyel,'LineWidth',thin)
-  plot(u_25km_dmn_noconvlwoff(10:33),zzfull(10:33),'--','Color',colyel,'LineWidth',thin)
-  plot(u_25km_dmn_noconv(10:33),zzfull(10:33),'Color',colyel,'LineWidth',thick)
-  xlabel('m/s')
-  ylabel('height (m)')
-  ylim([0 16000])
-
-  %  end of 4 panel figure for low-level variables
+% execute the script WalkerFigs_lowlevel.m  to generate a figure
+% with the low level enthalpy flux...
+%  figure
+%  subplot(2,2,1)
+%  plot(xcrm_2to1,s_enth_2km,'Color',colblu,'LineWidth',thick)
+%  hold on
+%  plot(xcrm_2to1,s_enth_2km_lwoff,'Color',colblu,'LineWidth',thin)
+%  plot(s_enth_1km,'Color',colgrn,'LineWidth',thick)
+%  plot(s_enth_1km_lwoff,'Color',colgrn,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,s_enth_25km,'Color',colyel,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,s_enth_25km_lwoff,'--','Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,s_enth_25km_noconvlwoff,'--','Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,s_enth_25km_noconv,'Color',colyel,'LineWidth',thick)
+%  ylabel('W/m2')
+%  xlabel('km')
+%  title('Surface Enthalpy Flux')
+%  
+%  subplot(2,2,2)
+%  plot(xcrm_2to1,theta_e_crm2(:,33),'Color',colblu,'LineWidth',thick)
+%  hold on
+%  plot(xcrm_2to1,theta_e_crm2_lwoff(:,33),'--','Color',colblu,'LineWidth',thin)
+%  plot(theta_e_crm1(:,33),'Color',colgrn,'LineWidth',thick)
+%  plot(theta_e_crm1_lwoff(:,33),'--','Color',colgrn,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,theta_e_gcm(:,33),'Color',colyel,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,theta_e_gcm_lwoff(:,33),'--','Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,theta_e_gcm_noconvlwoff(:,33),'--','Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,theta_e_gcm_noconv(:,33),'Color',colyel,'LineWidth',thick)
+%  ylabel('K')
+%  xlabel('km')
+%  title('equivalent theta')
+%  
+%  subplot(2,2,3)
+%  plot(u_1km_ztmn(:,33),'Color',colgrn,'LineWidth',thick)
+%  hold on
+%  plot(u_1km_dmn_lwoff(:,33),'Color',colgrn,'LineWidth',thin)
+%  title('u wind at 33, lowest atm level')
+%  plot(xcrm_2to1,u_2km_ztmn(:,33),'Color',colblu,'LineWidth',thick)
+%  plot(xcrm_2to1,u_2km_dmn_lwoff(:,33),'Color',colblu,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,u_25km_ztmn(:,33),'Color',colyel,'LineWidth',thin)
+%%  plot(xaxis_gcm2crm,u_25km_ztmn_lwoff(:,33),'Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,u_25km_ztmn_noconvlwoff(:,33),'--','Color',colyel,'LineWidth',thin)
+%  plot(xaxis_gcm2crm,u_25km_ztmn_noconv(:,33),'Color',colyel,'LineWidth',thick)
+%  xlabel('km')
+%  ylabel('m/s')
+%  
+%  subplot(2,2,4)
+%  plot(u_1km_dmn(10:33),zzfull(10:33),'Color',colgrn,'LineWidth',thick)
+%  hold on
+%  plot(u_1km_dmn_lwoff(10:33),zzfull(10:33),'Color',colgrn,'LineWidth',thin)
+%  plot(u_2km_dmn(10:33),zzfull(10:33),'Color',colblu,'LineWidth',thick)
+%  plot(u_2km_dmn_lwoff(10:33),zzfull(10:33),'Color',colblu,'LineWidth',thin)
+%%  plot(u_25km_dmn(10:33),zzfull(10:33),'Color',colyel,'LineWidth',thin)
+%%  plot(u_25km_dmn_lwoff(10:33),zzfull(10:33),'--','Color',colyel,'LineWidth',thin)
+%  plot(u_25km_dmn_noconvlwoff(10:33),zzfull(10:33),'--','Color',colyel,'LineWidth',thin)
+%  plot(u_25km_dmn_noconv(10:33),zzfull(10:33),'Color',colyel,'LineWidth',thick)
+%  xlabel('m/s')
+%  ylabel('height (m)')
+%  ylim([0 16000])
+%
+%  %  end of 4 panel figure for low-level variables
 %-------------------------------------(*&()*&(*&)(*&)(*&
 
 
