@@ -3,6 +3,11 @@
 % 
 % variables with the _avg suffix indicate a domain mean has been taken         
 %
+% the total length of the experiment is 26281 time steps, hourly, this
+% comes out to be about 3 years.
+%
+% one year is 8760 hours
+%
 % it looks like I still haven't downloaded the data for 295K pr in CAM5
 % an example of where the data is on glade: 
 % /glade/p/univ/ufsu0014/RCEMIP_CAM/CAM5_GCM/RCE_large295/0D/
@@ -14,8 +19,12 @@ source='/Users/silvers/data/CAM/';
 
 mean_array=zeros(3,4);
 
-model_generation='CAM5';
+model_generation='CAM6';
 source_mod=strcat(source,model_generation,'_GCM_RCE/');
+
+lasttime=26280;
+timelength=8760;
+firsttime=lasttime-timelength;
 
 % path to data from the first round of compset experiments.
 source_mod_new=strcat(source,model_generation,'_GCM_RCE/');
@@ -66,16 +75,17 @@ rlut_305    =ncread(s_var3,var3);
 %omega_305   =ncread(s_var4,var4);
 
 % scale precip to mm/day
-p295=86400*mean(pr_295)
-p300=86400*mean(pr_300)
-p305=86400*mean(pr_305)
+p295=86400*mean(pr_295(firsttime:lasttime))
+p300=86400*mean(pr_300(firsttime:lasttime))
+p305=86400*mean(pr_305(firsttime:lasttime))
 
-pw295=mean(prw_295);
-pw300=mean(prw_300);
-pw305=mean(prw_305);
-olr295=mean(rlut_295);
-olr300=mean(rlut_300);
-olr305=mean(rlut_305);
+pw295=mean(prw_295(firsttime:lasttime));
+pw300=mean(prw_300(firsttime:lasttime));
+pw305=mean(prw_305(firsttime:lasttime));
+
+olr295=mean(rlut_295(firsttime:lasttime));
+olr300=mean(rlut_300(firsttime:lasttime));
+olr305=mean(rlut_305(firsttime:lasttime));
 
 mean_array(1,1)=295;
 mean_array(2,1)=300;
