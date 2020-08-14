@@ -33,7 +33,7 @@ source_mod_new=strcat(source,model_generation,'_GCM_RCE/');
 var1='pr_avg';          
 var2='prw_avg';
 var3='rlut_avg';
-var4='wap500';
+%var4='wap500';
 
 % create string          
 SSTst="295";
@@ -42,7 +42,7 @@ exp_string_2D=strcat(model_generation,'_GCM_RCE_large',SSTst,'_2D_');
 s_var1=strcat(source_mod,exp_string,var1,'.nc') 
 s_var2=strcat(source_mod,exp_string,var2,'.nc') 
 s_var3=strcat(source_mod,exp_string,var3,'.nc') 
-s_var4=strcat(source_mod,exp_string_2D,var4,'.nc') 
+%s_var4=strcat(source_mod,exp_string_2D,var4,'.nc') 
 
 % read data
 pr_295      =ncread(s_var1,var1);
