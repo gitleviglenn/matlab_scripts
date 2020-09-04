@@ -1,11 +1,15 @@
 %-------------------------------------------------------------------------------
 % PlotPrecipTS_WalkerCirc.m
 %
-% levi silvers                                   may 2020
+% this scripts produces figure 3 of the Walker Circulation paper without
+% the legend.  The legend was added in the property inspector GUI.  
+%
+% levi silvers                                   sep 2020
 %-------------------------------------------------------------------------------
 
 path_new='/Users/silvers/data/WalkerCell/testing_20181203';
 
+scale=86400.;
 
 % read in newer data from the 1km and 2km simululations
 
@@ -127,18 +131,18 @@ plot(precip_25km_ctl_rm(1:730),'Color',colyel,'LineWidth',2)
 plot(precip_25km_lwoff_rm(1:730),'--','Color',colyel,'LineWidth',2)
 plot(precip_100km_ctl_rm(1:730),'r','LineWidth',2);
 plot(precip_100km_lwoff_rm(1:730),'--r','LineWidth',2);
-scatter(745,mn_1km_lwoff,100,'MarkerEdgeColor',[0.4660 0.6740 0.1880])
-scatter(745,mn_1km_ctl,100,'MarkerEdgeColor',[0.4660 0.6740 0.1880],'MarkerFaceColor',[0.4660 0.6740 0.1880])
-scatter(745,mn_2km_lwoff,100,'MarkerEdgeColor',[0.3010 0.7450 0.9330])
-scatter(745,mn_2km_ctl,100,'MarkerEdgeColor',[0.3010 0.7450 0.9330],'MarkerFaceColor',[0.3010 0.7450 0.9330])
-scatter(745,mn_25km_ctl,100,'MarkerEdgeColor',[0.9290 0.6940,0.1250],'MarkerFaceColor',[0.9290 0.6940,0.1250])
-scatter(745,mn_25km_lwoff,100,'MarkerEdgeColor',[0.9290 0.6940 0.1250])
-scatter(745,mn_100km_ctl,100,'MarkerFaceColor','r','MarkerEdgeColor','r')
-scatter(745,mn_100km_lwoff,100,'MarkerEdgeColor','r')
+scatter(724,mn_1km_lwoff,100,'d','MarkerFaceColor',[0.4660 0.6740 0.1880],'MarkerEdgeColor',[0.4660 0.6740 0.1880])
+scatter(724,mn_1km_ctl,100,'MarkerEdgeColor',[0.4660 0.6740 0.1880],'MarkerFaceColor',[0.4660 0.6740 0.1880])
+scatter(736,mn_2km_lwoff,100,'d','MarkerFaceColor',[0.3010 0.7450 0.9330],'MarkerEdgeColor',[0.3010 0.7450 0.9330])
+scatter(736,mn_2km_ctl,100,'MarkerEdgeColor',[0.3010 0.7450 0.9330],'MarkerFaceColor',[0.3010 0.7450 0.9330])
+scatter(748,mn_25km_ctl,100,'MarkerEdgeColor',[0.9290 0.6940,0.1250],'MarkerFaceColor',[0.9290 0.6940,0.1250])
+scatter(748,mn_25km_lwoff,100,'d','MarkerFaceColor',[0.9290 0.6940 0.1250],'MarkerEdgeColor',[0.9290 0.6940 0.1250])
+scatter(760,mn_100km_ctl,100,'MarkerFaceColor','r','MarkerEdgeColor','r')
+scatter(760,mn_100km_lwoff,100,'d','MarkerFaceColor','r','MarkerEdgeColor','r')
 %ytitle('mm/day')
 %xtitle('days')
 xlabel('days')
-xlim([0 760])
+xlim([0 770])
 ylim([1 6])
 ylabel('mm/day')
 title('Domain Mean Precipitation')
