@@ -57,31 +57,25 @@ clt_lwoff_100km_sub_prof=clt_100km_sub_prof;
 
 
 
-%figure
 figure_clftdt_prof=figure
-%axes2 = axes('Parent',figure_clftdt_prof,'BoxStyle','full','YMinorTick','on',...
-%axes2 = axes('BoxStyle','full','YMinorTick','on',...
-%    'YTickLabel',{'100','200','300','400','500','600','700','800','900','1000'},...
-%    'YScale','log',...
-%    'YTick',[10000 20000 30000 40000 50000 60000 70000 80000 90000 100000],...
-%    'Layer','top',...
-%    'YDir','reverse',...
-%    'FontWeight','bold',...
-%    'FontSize',14);%,...
-%
 subplot(2,2,2)
 ax2=gca
 plot(tdtlw_ctl_1km_sub_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
 set(ax2,'YScale','Log')
 set(ax2,'Ydir','reverse')
 ylim(ax2,[10000 100000]);
+ax2.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+%ax2.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax2.YTickLabels = [" " " " " " " " " " " " " " " " " " " "]
+ax2.FontSize = 14;
 hold on
 plot(tdtlw_ctl_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
 plot(tdtlw_ctl_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
 plot(tdtlw_ctl_E25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
 plot(tdtlw_ctl_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
-ax2.XLim=[-15 0];
+ax2.XLim=[-10 0];
 %title('tdtlw in Subsiding region with LWCRE')
+xlabel('K/day')
 tit_tdtlw=strcat('LW Radiative Heating');
 title(tit_tdtlw)
 
@@ -92,13 +86,37 @@ set(ax1,'YScale','Log')
 set(ax1,'Ydir','reverse')
 ylim(ax1,[10000 100000]);
 ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
 hold on
 plot(clt_ctl_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
 plot(clt_ctl_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
 plot(clt_ctl_E25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
 plot(clt_ctl_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
 ax1.XLim=[0 30];
-ax1.FontSize=12;
+xlabel('%')
+ylabel('hPa')
+tit_clt=strcat('Cloud Fraction');
+title(tit_clt)
+
+subplot(2,2,3)
+ax3=gca;
+plot(clt_lwoff_1km_sub_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
+set(ax3,'YScale','Log')
+set(ax3,'Ydir','reverse')
+ylim(ax3,[10000 100000]);
+ax3.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax3.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+%ax3.YTickLabels = [" " " " " " " " " " " " " " " " " " " "]
+ax3.FontSize = 14;
+ax3.XLim=[0 20];
+hold on
+plot(clt_lwoff_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
+plot(clt_lwoff_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_lwoff_E25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(clt_lwoff_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
+xlabel('%')
+ylabel('hPa')
 tit_clt=strcat('Cloud Fraction');
 title(tit_clt)
 
@@ -108,27 +126,18 @@ ax4=gca;
 set(ax4,'YScale','Log')
 set(ax4,'Ydir','reverse')
 ylim(ax4,[10000 100000]);
-ax4.XLim=[-15 0];
+ax4.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+%ax4.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax4.YTickLabels = [" " " " " " " " " " " " " " " " " " " "]
+ax4.FontSize = 14;
+ax4.XLim=[-10 0];
 hold on
 plot(tdtlw_lwoff_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
 plot(tdtlw_lwoff_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
 plot(tdtlw_lwoff_E25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
 plot(tdtlw_lwoff_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
 tit_tdtlw=strcat('LW Radiative Heating');
+xlabel('K/day')
 title(tit_tdtlw)
 
-subplot(2,2,3)
-ax3=gca;
-plot(clt_lwoff_1km_sub_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
-set(ax3,'YScale','Log')
-set(ax3,'Ydir','reverse')
-ylim(ax3,[10000 100000]);
-ax3.XLim=[0 30];
-hold on
-plot(clt_lwoff_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
-plot(clt_lwoff_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
-plot(clt_lwoff_E25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
-plot(clt_lwoff_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
-tit_clt=strcat('Cloud Fraction');
-title(tit_clt)
 
