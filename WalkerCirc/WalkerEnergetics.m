@@ -276,6 +276,7 @@ MeanRadPrec=[MeanRadH_1km MeanRadH_2km MeanRadH_25km MeanRadH_100km; precip_1km_
 colyel=[0.9290,0.6940,0.1250];  % 25km 
 colblu=[0.3010,0.7450,0.9330];  % 2km
 colgrn=[0.4660,0.6740,0.1880];  % 1km
+colpur=[0.50,0.39,0.94]; % used for E25km
 
 
 %stst_conv=stst*conv;
@@ -337,10 +338,24 @@ plot(clt_1km_sub_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
 set(gca,'Ydir','reverse')
 hold on
 plot(clt_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
-plot(clt_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+%plot(clt_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_25km_sub_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
 plot(clt_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
 xlim([0 15])
 tit_clt=strcat('Cloud Fraction in Subsiding region ',lwcreonoff);
+%title('Cloud Fraction in Subsiding region with LWCRE')
+title(tit_clt)
+
+figure
+plot(clt_1km_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
+set(gca,'Ydir','reverse')
+hold on
+plot(clt_2km_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
+%plot(clt_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(clt_100km_prof,pfull_2km,'r','LineWidth',1.5)
+xlim([0 30])
+tit_clt=strcat('Domain Mean Cloud Fraction ',lwcreonoff);
 %title('Cloud Fraction in Subsiding region with LWCRE')
 title(tit_clt)
 
