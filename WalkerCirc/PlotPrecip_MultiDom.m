@@ -204,7 +204,8 @@ hold on
 grid on
 plot(gauss_1km,'k','LineWidth',2)
 title('1km ')
-suptitle(superTit)
+%suptitle(superTit)
+sgtitle(superTit)
 %
 figure
 subplot(2,2,1)
@@ -238,7 +239,8 @@ plot(gauss_100l,'k','LineWidth',2)
 %xlim([60,100])
 title('100km large')
 
-suptitle(superPHistTit)
+%suptitle(superPHistTit)
+sgtitle(superPHistTit)
 
 figure
 subplot(2,2,1)
@@ -269,7 +271,8 @@ hold on
 grid on
 plot(gauss_25s_nc_nlw,'k','LineWidth',2)
 title('25km noconv lwcre off')
-suptitle('small domain (4000 km)')
+%suptitle('small domain (4000 km)')
+sgtitle('small domain (4000 km)')
 
 %--------------------------------------------------------------
 
