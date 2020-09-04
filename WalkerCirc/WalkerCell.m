@@ -17,17 +17,17 @@ phys_constants
 
 % default values for the first time WalkerCell is run:
 experi=3 % experi=3 uses the ent0p9 experiment
-exptype=2 % 0 is the default experimental configuration (lwcre is on)
+exptype=0 % 0 is the default experimental configuration (lwcre is on)
 % 2 corresponds to lwoff
 
 if exptype==2
   ind=2;
 end
 
-lwstring='4K_lwoff/';
-%lwstring='4K/';
+%lwstring='4K_lwoff/';
+lwstring='4K/';
 
-lwcreonoff=' with LWCRE off';
+lwcreonoff=' with LWCRE on';
 
 %estr2='ent0p5_p4K'plot(tdt_heat_prof_25(1,10:33),zzfull(10:33),'-o','Color',colyel) 
 
@@ -521,6 +521,11 @@ clt_1km_sub_prof_a=mean(clt_1km_sub_a,1);
 clt_1km_sub_b=clt_1km_znm_eq_tmn(bc_b_1km:bc_c_1km,:);
 clt_1km_sub_prof_b=mean(clt_1km_sub_b,1);
 clt_1km_sub_prof=(clt_1km_sub_prof_a+clt_1km_sub_prof_b)/2;
+
+clt_1km_prof=mean(clt_1km_znm_eq_tmn,1);
+clt_2km_prof=mean(clt_2km_znm_eq_tmn,1);
+clt_25km_prof=mean(clt_25km_znm_tmn,1);
+clt_100km_prof=mean(clt_100km_sm_znm_tmn,1);
 
 clt_2km_sub_a=clt_2km_znm_eq_tmn(1:bc_a_2km,:);
 clt_2km_sub_prof_a=mean(clt_2km_sub_a,1);
