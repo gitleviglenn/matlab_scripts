@@ -3,6 +3,9 @@
 %
 % to be used in coordination with WalkerCell.m
 %
+% calculations in this script are made with monthly and yearly means
+% the vertical velocity is used, not the pressure velocity
+%
 % wether the experiments are the control experiments or LWCRE-off
 % is determined in WalkerCell.m with the exception of E25, for 
 % which both control and LWCRE-off paths are explicitly set here.
