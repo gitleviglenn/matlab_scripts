@@ -15,12 +15,19 @@
 conv=60*60*24; % convert to Kelvin per day
 
 %source_100km_month=strcat(path_100km,yearstr,'.atmos_month_tmn.nc');
+% for the E25 experiment
+source_gcm_month_noconv='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9_noconv/1980th1983.atmos_month_tmn.nc';
+
 
 % kg/m2 s
 %evap_25km_ztmn=read_1var_ztmn(source_gcm_month,'evap');
 evap_25km_full=ncread(source_gcm_month,'evap');
 evap_25km_tmn=squeeze(mean(evap_25km_full,3));
 evap_25km_ztmn=squeeze(mean(evap_25km_tmn,2));
+
+evap_E25km_full=ncread(source_gcm_month_noconv,'evap');
+evap_E25km_tmn=squeeze(mean(evap_E25km_full,3));
+evap_E25km_ztmn=squeeze(mean(evap_E25km_tmn,2));
 
 evap_2km=ncread(source_2km_month,'evap');
 evap_2km_zmn=squeeze(mean(evap_2km,2));
@@ -36,7 +43,9 @@ evap_1km_ztmn=squeeze(mean(evap_1km_zmn_last3,2));
 sh_1km=ncread(source_1km_month,'shflx');
 sh_2km=ncread(source_2km_month,'shflx');
 sh_25km_en_ztmn=read_1var_ztmn(source_gcm_month,'shflx');
+sh_E25km_en_ztmn=read_1var_ztmn(source_gcm_month_noconv,'shflx');
 sh_25km_ztmn=squeeze(mean(sh_25km_en_ztmn,2));
+sh_E25km_ztmn=squeeze(mean(sh_E25km_en_ztmn,2));
 
 sh_1km_zmn=squeeze(mean(sh_1km,2));
 sh_1km_zmn_last3=squeeze(sh_1km_zmn(:,4:6));
@@ -50,6 +59,7 @@ sh_2km_ztmn=squeeze(mean(sh_2km_zmn_last3,2));
 % lvlv = 2.5e6 J/kg  % seems to give values that are too large.
 % latheat = 2.26e6 J/kg    
 evap_25km_en_ztmn=latheat.*evap_25km_ztmn;
+evap_E25km_en_ztmn=latheat.*evap_E25km_ztmn;
 evap_2km_en_ztmn=latheat.*evap_2km_ztmn;
 evap_1km_en_ztmn=latheat.*evap_1km_ztmn;
 %evap_25km_en_ztmn=lvlv.*evap_25km_ztmn;
@@ -60,6 +70,9 @@ evap_1km_en_ztmn=latheat.*evap_1km_ztmn;
 %tdtconv_2km=ncread(source_2km_month,'tdt_conv');
 tdtconv_25km_ztmn=conv.*read_1var_ztmn(source_gcm_month,'tdt_conv');
 tdtconv_25km_prof=squeeze(mean(tdtconv_25km_ztmn,1));
+
+tdtconv_E25km_ztmn=conv.*read_1var_ztmn(source_gcm_month_noconv,'tdt_conv');
+tdtconv_E25km_prof=squeeze(mean(tdtconv_E25km_ztmn,1));
 
 tdtconv_100km_ztmn=conv.*read_1var_ztmn(source_100km_sm_month,'tdt_conv');
 tdtconv_100km_prof=squeeze(mean(tdtconv_100km_ztmn,1));
@@ -82,6 +95,9 @@ tdtls_100km_prof=squeeze(mean(tdtls_100km_ztmn,1));
 tdtls_25km_ztmn=conv.*read_1var_ztmn(source_gcm_month,'tdt_ls');
 tdtls_25km_prof=squeeze(mean(tdtls_25km_ztmn,1));
 
+tdtls_E25km_ztmn=conv.*read_1var_ztmn(source_gcm_month_noconv,'tdt_ls');
+tdtls_E25km_prof=squeeze(mean(tdtls_E25km_ztmn,1));
+
 tdtls_2=conv.*tdtls_2km(:,:,:,t_mid:t_end);
 tdtls_2_tmn=squeeze(mean(tdtls_2,4));
 tdtls_2_ztmn=squeeze(mean(tdtls_2_tmn,2));
@@ -96,11 +112,15 @@ tdtls_1km_prof=squeeze(mean(tdtls_1_ztmn,1));
 tdtvdif_25km=ncread(source_gcm_month,'tdt_vdif');
 tdtvdif_25km=conv.*tdtvdif_25km;
 
+tdtvdif_E25km=ncread(source_gcm_month_noconv,'tdt_vdif');
+tdtvdif_E25km=conv.*tdtvdif_E25km;
+
 tdtvdif_2km=ncread(source_2km_month,'tdt_vdif');
 tdtvdif_2km=conv.*tdtvdif_2km;
 
 % det K/s; using 'conv' converts to K/day
 tdtlw_25_ztmn=conv.*read_1var_ztmn(source_gcm_month,'tdt_lw');
+tdtlw_E25_ztmn=conv.*read_1var_ztmn(source_gcm_month_noconv,'tdt_lw');
 tdtlw_100_ztmn=conv.*read_1var_ztmn(source_100km_sm_month,'tdt_lw');
 
 tdtlw_2km=ncread(source_2km_month,'tdt_lw');
@@ -116,6 +136,7 @@ tdtlw_1_ztmn=squeeze(mean(tdtlw_1_tmn,2));
 % det K/s
 tdtsw_100_ztmn=conv.*read_1var_ztmn(source_100km_sm_month,'tdt_sw');
 tdtsw_25_ztmn=conv.*read_1var_ztmn(source_gcm_month,'tdt_sw');
+tdtsw_E25_ztmn=conv.*read_1var_ztmn(source_gcm_month_noconv,'tdt_sw');
 
 tdtsw_2km=ncread(source_2km_month,'tdt_sw');
 tdtsw_2km=conv.*tdtsw_2km(:,:,:,4:6);
@@ -129,6 +150,7 @@ tdtsw_1_ztmn=squeeze(mean(tdtsw_1_tmn,2));
 
 % W/m2  net lw flux (at the surface i think)
 lwflx_25km=ncread(source_gcm_month,'lwflx');
+lwflx_E25km=ncread(source_gcm_month_noconv,'lwflx');
 lwflx_2km=ncread(source_2km_month,'lwflx');
 
 % W/m2  net sh flux 
@@ -211,6 +233,7 @@ precip_1km_en_b=lvlv*precip_1_tmn
 % compute the surface enthalpy flux (sum of latent and sensible heat fluxes)
 % see for example, Wing and Emanuel, 2014
 s_enth_25km=evap_25km_en_ztmn+sh_25km_ztmn;
+s_enth_E25km=evap_E25km_en_ztmn+sh_E25km_ztmn;
 s_enth_2km=evap_2km_en_ztmn+sh_2km_ztmn;
 s_enth_1km=evap_1km_en_ztmn+sh_1km_ztmn;
 
@@ -218,10 +241,12 @@ s_enth_1km=evap_1km_en_ztmn+sh_1km_ztmn;
 
 heatrad_100km=ncread(source_100km_sm_month,'heat2d_rad');
 heatrad_25km=ncread(source_gcm_month,'heat2d_rad');
+heatrad_E25km=ncread(source_gcm_month_noconv,'heat2d_rad');
 heatrad_2km=ncread(source_2km_month,'heat2d_rad');
 heatrad_1km=ncread(source_1km_month,'heat2d_rad');
 
 heatsw_25km=ncread(source_gcm_month,'heat2d_sw');
+heatsw_E25km=ncread(source_gcm_month_noconv,'heat2d_sw');
 %heatsw_2km=ncread(source_2km_month,'heat2d_sw');
 
 heatr_100km_1=squeeze(mean(heatrad_100km,1));
@@ -234,7 +259,12 @@ heatr_25km_1=squeeze(mean(heatrad_25km,1));
 heatr_25km_2=squeeze(mean(heatr_25km_1,1));
 heatr_25km_dmn=squeeze(mean(heatr_25km_2,2));
 
+heatr_E25km_1=squeeze(mean(heatrad_E25km,1));
+heatr_E25km_2=squeeze(mean(heatr_E25km_1,1));
+heatr_E25km_dmn=squeeze(mean(heatr_E25km_2,2));
+
 MeanRadH_25km=heatr_25km_dmn
+MeanRadH_E25km=heatr_E25km_dmn
 
 heatr_2km_1=squeeze(mean(heatrad_2km,1));
 heatr_2km_2=squeeze(mean(heatr_2km_1,1));
@@ -713,6 +743,13 @@ sgtitle(tit_en)
 %suptitle(tit_en)
 %
 %
+tdt_cond_25km_ztmn=tdtls_25km_ztmn+tdtconv_25km_ztmn;
+tdt_cond_E25km_ztmn=tdtls_E25km_ztmn+tdtconv_E25km_ztmn;
+tdt_total_25km_ztmn=tdt_cond_25km_ztmn+tdtlw_25_ztmn+tdtsw_25_ztmn;
+tdt_total_E25km_ztmn=tdt_cond_E25km_ztmn+tdtlw_E25_ztmn+tdtsw_E25_ztmn;
+tdt_total_2km_ztmn=tdtls_2_ztmn+tdtlw_2_ztmn+tdtsw_2_ztmn;
+%
+%
 figure
 subplot(3,3,1)
 heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
@@ -738,10 +775,6 @@ plot(xcrm(1:xcrm_ngp),evap_2km_en_ztmn,'k','LineWidth',1.5);
 plot(xcrm(1:xcrm_ngp),sh_2km_ztmn,'k','LineWidth',1.5);
 title('Surface Fluxes: W/m2')
 
-%
-tdt_cond_25km_ztmn=tdtls_25km_ztmn+tdtconv_25km_ztmn;
-tdt_total_25km_ztmn=tdt_cond_25km_ztmn+tdtlw_25_ztmn+tdtsw_25_ztmn;
-tdt_total_2km_ztmn=tdtls_2_ztmn+tdtlw_2_ztmn+tdtsw_2_ztmn;
 %
 subplot(3,3,7)
 heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
@@ -794,7 +827,6 @@ title('CRM: lw heating K/d')
 set(gca,'Ydir','reverse')
 
 tit_en=strcat('Energetics: ',tit_st);
-%suptitle(tit_en)
 sgtitle(tit_en)
 
 figure
@@ -820,6 +852,120 @@ set(gca,'Ydir','reverse')
 tit_en=strcat('Energetics: ',tit_st);
 sgtitle(tit_en)
 
+% %------------------------
+
+figure
+subplot(2,1,1)
+%heating_cons=[-5.,-4.,-3.,-2.0,-1.5,-1.,-0.5,0.0,1.0,2.0,3.,4.,5.,6.];
+heating_cons=[-5.,-4.,-3.,-2.0,-1.,0.0,1.0,2.0,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',heating_cons);
+%v=[-5.0,-4.0,-3.0,-2.0,-1.0,0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0]; % if labels are desired on contours
+v=[-5.0,-4.0,-2.0,0.0,2.0,4.0,6.0,8.0,10.0,12.0]; % if labels are desired on contours
+clabel(C,h,v);
+set(h,'EdgeColor','none') % to turn off the black overline on the contours
+title('P25: tdt due to rad and cond K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,1,2)
+%[C,h]=contourf(1:xcrm_ngp,pfull_2km,tdt_total_2km_ztmn',heating_cons);
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',heating_cons);
+clabel(C,h,v);
+set(h,'EdgeColor','none') % no contour lines
+title('E25: tdt due to rad and cond K/d')
+set(gca,'Ydir','reverse')
+
+tit_en=strcat('Energetics: ',tit_st);
+sgtitle(tit_en)
+
+%tdt_cond_25km_ztmn=tdtls_25km_ztmn+tdtconv_25km_ztmn;
+
+figure
+subplot(2,5,1)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtlw_25_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('lw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,5,2)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtsw_25_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('sw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,5,3)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_25km_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('tdtls heating K/d')
+set(gca,'Ydir','reverse') 
+
+subplot(2,5,4)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtconv_25km_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('tdt conv heating K/d')
+set(gca,'Ydir','reverse') 
+
+subplot(2,5,5)
+heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',heating_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,5,6)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtlw_E25_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('lw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,5,7)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtsw_E25_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('sw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(2,5,8)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_E25km_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('tdtls heating K/d')
+set(gca,'Ydir','reverse') 
+
+subplot(2,5,9)
+heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtconv_E25km_ztmn',heating_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('tdt conv heating K/d')
+set(gca,'Ydir','reverse') 
+
+subplot(2,5,10)
+heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',heating_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+%
+
+tit_en=strcat('Energetics: ',tit_st);
+sgtitle(tit_en)
 
 % %------------------------
 % 
