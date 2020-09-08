@@ -6,6 +6,7 @@
 %----------------------------------------------------------------------------
 
 colyel=[0.9290,0.6940,0.1250];  % used for 25km runs
+colpur=[0.40,0.31,0.75]; % used for E25km
 colblu=[0.3010,0.7450,0.9330];  % 2 km runs
 colgrn=[0.4660,0.6740,0.1880];  % 1 km runs
 
@@ -300,6 +301,34 @@ plot(xcrm(1:xcrm_ngp),s_enth_2km,'Color',colblu,'LineWidth',1.5);
 plot(xcrm_1km(1:xcrm_1km_ngp),s_enth_1km,'Color',colgrn,'LineWidth',1.5);
 title('Surface Enthalpy FLux: LWCRE on: Exp Conv')
 
+SfcFluxArray=zeros(3,3);
+SfcFluxArray(1,1)=mean(evap_1km_en_ztmn);
+SfcFluxArray(1,2)=mean(sh_1km_ztmn);
+SfcFluxArray(1,3)=mean(s_enth_1km);
+SfcFluxArray(2,1)=mean(evap_2km_en_ztmn);
+SfcFluxArray(2,2)=mean(sh_2km_ztmn);
+SfcFluxArray(2,3)=mean(s_enth_2km);
+SfcFluxArray(3,1)=mean(evap_25km_en_ztmn);
+SfcFluxArray(3,2)=mean(sh_25km_ztmn);
+SfcFluxArray(3,3)=mean(s_enth_25km);
+
+%>> SfcFluxArray_lwoff
+%
+%SfcFluxArray_lwoff =
+%   evap_en    sh        enthalpy
+%   95.2840   12.0675  107.3514
+%   93.2667   11.4852  104.7519
+%   94.7736   12.8100  107.5835
+%
+%>> SfcFluxArray
+%
+%SfcFluxArray =
+%
+%   87.4167   10.5631   97.9799
+%   83.6155   10.3803   93.9959
+%  100.4318   12.7106  113.1424
+%
+%  the evap changes by about 6-10 W/m2 while the sh flux changes by about 0.1-1.5 W/m2.
 
 if lwoff 
 
@@ -468,7 +497,7 @@ ylim([20000 100000])
 title('1km h[K]')
 set(gca,'Ydir','reverse')
 tit_en=strcat('moist static energy divided by cp');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 figure
 subplot(1,3,1)
@@ -494,7 +523,7 @@ ylim([20000 100000])
 title('1km h[K]')
 set(gca,'Ydir','reverse')
 tit_en=strcat('dry static energy divided by cp');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 figure
 thck=1.5;
@@ -554,7 +583,7 @@ hold on
 plot(h_1km(1750,:),pfull_2km)
 title('1km')
 tit_en=strcat('moist static energy divided by cp, saturated and unsaturated ');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 figure
 subplot(2,3,1)
@@ -784,7 +813,7 @@ xlabel('K')
 xlim([295 345])
 
 tit_en=strcat('Mock Walker Cell: ','Vert Structure');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
@@ -869,7 +898,7 @@ xlabel('K')
 xlim([295 345])
 
 tit_en=strcat('Mock Walker Cell: ','Conv vs. Noconv');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 
 stop
@@ -1051,7 +1080,7 @@ title('GCM: strat cloud heating K/d')
 set(gca,'Ydir','reverse')
 
 tit_en=strcat('Energetics: ',tit_st);
-suptitle(tit_en)
+sgtitle(tit_en)
 
 % create profile figures of domain mean relative humidity
 
@@ -1251,7 +1280,7 @@ xlabel('K')
 xlim([295 345])
 
 tit_en=strcat('Mock Walker Cell: ','Vert Structure with LWCRE');
-suptitle(tit_en)
+sgtitle(tit_en)
 
 %-------------------------------------------------------
 % look at equilibration times of RH for the 25km control case and the case with no convective param.
