@@ -22,14 +22,11 @@ theta_crm1  = zeros(4000,nlev);
 theta_e_crm1  = zeros(4000,nlev);
 theta_crm2  = zeros(2000,nlev);
 theta_e_crm2  = zeros(2000,nlev);
-%lts_f       = zeros(nlat,nlon);
 rh_sfc      = zeros(nlat,nlon);
 theta_temp  = zeros(nlat,nlon);
 %staticst    = zeros(nlat,nlev);
 gamma_d     = zeros(1,nlev);
 gamma_m     = zeros(3,nlev);
-%gamma_m_edge= zeros(3,nlev);
-%gamma_full  = zeros(nlat,nlev);
 gamma       = zeros(3,nlev);
 stastapar   = zeros(3,nlev);
 es          = zeros(1,nlev);
@@ -53,13 +50,6 @@ tsurf_crm2_ztmn=squeeze(mean(tsurf_crm2_zmn,2));
 theta_25_sfc=tsurf_zmn.*(1.).^kappa;
 theta_2_sfc=tsurf_crm2_ztmn.*(1.).^kappa;
 theta_1_sfc=tsurf_crm1_ztmn.*(1.).^kappa;
-
-
-%stastapar(2,:)=stastap(temp_crm_ztmn,plot_lat,psurf_2km_zmn,pfull_gen,zfull_prof);
-%plot_lat=2000;
-%%zfull_prof=squeeze(zfull_1km_ztmn(plot_lat,:));
-%stastapar(3,:)=stastap(temp_crm1_ztmn,plot_lat,psurf_1km_zmn,pfull_gen,zfull_prof);
-
 
 % assume psurf are the same for all models and experiments
 
@@ -95,14 +85,6 @@ Tv_E25km =temp_E25km_ztmn.*(1+q_E25km_ztmn./epsilon)./(1+q_E25km_ztmn);
 Tv_25km  =temp_25km_ztmn.*(1+q_25km_ztmn./epsilon)./(1+q_25km_ztmn);
 Tv_2km   =temp_crm_ztmn.*(1+q_2km_ztmn./epsilon)./(1+q_2km_ztmn);
 Tv_1km   =temp_crm1_ztmn.*(1+q_1km_ztmn./epsilon)./(1+q_1km_ztmn);
-
-%clear rho_25km;
-%clear rho_2km;
-%clear rho_1km;
-%
-%rho_25km=rho_2d_gen(temp_25km_ztmn,q_25km_ztmn,pfull_25km,160);
-%rho_2km=rho_2d_gen(temp_crm_ztmn,q_2km_ztmn,pfull_2km,2000);
-%rho_1km=rho_2d_gen(temp_crm1_ztmn,q_1km_ztmn,pfull_1km,2000);
 
 % Lapse Rate
 % lev 1 is the at the top of the domain, lev 33 is the lowest atmospheric level
@@ -226,13 +208,11 @@ msts_25km                  = zeros(160,nlev); % moist static energy: cp*T+gz+Lq
 h_25km                     = zeros(160,nlev); % T+gz/cp+Lq/cp
 s_25km                     = zeros(160,nlev); % T+gz/cp
 staticst_par_25km          = zeros(160,nlev);
-%div_d_25km                 = zeros(160,nlev);
 staticst_E25km             = zeros(160,nlev); % static energy: cp*T+gz
 msts_E25km                 = zeros(160,nlev); % moist static energy: cp*T+gz+Lq
 h_E25km                    = zeros(160,nlev); % T+gz/cp+Lq/cp
 s_E25km                    = zeros(160,nlev); % T+gz/cp
 staticst_par_E25km         = zeros(160,nlev);
-%div_d_E25km                = zeros(160,nlev);
 
 
 [msts_25km,staticst_25km,staticst_par_25km]=stasta_3d(temp_eq_ztmn,q_25km_ztmn,160,psurf_zmn,pfull_gen,zfull_prof);
@@ -288,11 +268,6 @@ stap_up_1km=squeeze(mean(stap_up_c,1));
 % location of updraft:
 gcm1=80;
 gcm2=120;
-
-%w_d_25km_asc_int=squeeze(mean(vvel_d_25km(gcm1:gcm2,:),1));
-%rho_25km_dmn=squeeze(mean(rho_25km,1));
-%w_d_25km_asc_int2=w_d_25km_asc_int/8640.;
-%w_d_25km_asc=w_d_25km_asc_int2./rho_25km_dmn;
 
 % compute the domain mean total vertical velocity
 w_25km_dmn=squeeze(mean(w_25km_ztmn,1));
@@ -354,25 +329,4 @@ end
 
 fr_line=zeros(1,33)+273.15;
 
-%figure
-%plot(xgcm(1:xgcm_ngp),lts_25km,'Color',colyel)
-%hold on
-%%set(gca,'Ydir','reverse')
-%plot(xcrm_1km(1:xcrm_1km_ngp),lts_1km,'Color',colgrn)
-%plot(xcrm(1:xcrm_ngp),lts_2km,'Color',colblu)
-%title('lower tropospheric stability [K]')
-%
-%figure
-%plot(xgcm(1:xgcm_ngp),eis_gcm,'Color',colyel)
-%hold on
-%plot(xcrm_1km(1:xcrm_1km_ngp),eis_crm_1km,'Color',colgrn)
-%plot(xcrm(1:xcrm_ngp),eis_crm_2km,'Color',colblu)
-%title('estimated inversion strength [K]')
-%
-%figure
-%plot(xgcm(1:xgcm_ngp),lcl_gcm_x,'Color',colyel)
-%hold on
-%plot(xcrm_1km(1:xcrm_1km_ngp),lcl_crm1_x,'Color',colgrn)
-%plot(xcrm(1:xcrm_ngp),lcl_crm2_x,'Color',colblu)
-%title('lifting condensation level [m]')
 
