@@ -197,6 +197,8 @@ end
 %%source_gcm_month=strcat(path_25km,'_noconv',yearstr,'.atmos_month_tmn.nc');
 %%source_gcm_month=strcat(path_100km,yearstr,'.atmos_month_tmn.nc');
 
+source_gcm_month_noconv=strcat('/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9_noconv/',yearstr,'.atmos_month_tmn.nc');
+
 source_25km_lg_month   =strcat(path_25km_lg,yearstr,'.atmos_month_tmn.nc');
 
 source_100km_lg_month  =strcat(path_100km,yearstr,'.atmos_month_tmn.nc');
@@ -309,17 +311,21 @@ gcm_wvp=ncread(source_gcm_month,'WVP');
 
 % surface temperature
 tsurf_fulltime=ncread(source_gcm_month,'t_surf');
-%tsfc=tsurf_fulltime(:,:,:);
 tsfc_mn=mean(tsurf_fulltime,3);
+tsurf_fulltime_E25=ncread(source_gcm_month_noconv,'t_surf');
+tsfc_E25_mn=mean(tsurf_fulltime_E25,3);
 %tsfc_zmn=squeeze(mean(tsfc_mn,2)); computed in compTheta.m
 tsurf_crm=ncread(source_2km_month,'t_surf');
 tsurf_crm1=ncread(source_1km_month,'t_surf');
 
 % surface pressure
-%p_sfc_fulltime=ncread(source_25km,'ps');
 p_sfc_fulltime=ncread(source_gcm_month,'ps');
 psurf=mean(p_sfc_fulltime,3);
 psurf_zmn=squeeze(mean(psurf,2));
+
+p_sfc_E_fulltime=ncread(source_gcm_month_noconv,'ps');
+psurf_E=mean(p_sfc_E_fulltime,3);
+psurf_E25_zmn=squeeze(mean(psurf_E,2));
 
 p_sfc_2km_fulltime=ncread(source_2km_month,'ps');
 psurf_2km=mean(p_sfc_2km_fulltime,3);
@@ -385,6 +391,8 @@ hur_2km=ncread(source_2km_month,'rh');
 
 pfull_25km=ncread(source_gcm_month,'pfull');
 pfull_25km=100.*pfull_25km; % convert to Pa
+pfull_E25km=ncread(source_gcm_month_noconv,'pfull');
+pfull_E25km=100.*pfull_E25km; % convert to Pa
 
 pfull_2km=ncread(source_2km_month,'pfull');
 pfull_2km=100.*pfull_2km; % convert to Pa
@@ -397,6 +405,7 @@ pfull_1km=100.*pfull_1km; % convert to Pa
 %temp_25km=ncread(source_gcm_month,'temp');
 
 zfull_25km_ztmn=read_1var_ztmn(source_gcm_month,'z_full');
+zfull_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'z_full');
 
 zfull_2km=ncread(source_2km_month,'z_full');
 zfull_2km_zmn=squeeze(mean(zfull_2km,2));
@@ -450,6 +459,7 @@ liq_25km_tot_ztmn=liq_25km_ztmn+ice_25km_ztmn;
 % for the 2km runs, the time dimension is often not present becuase it is 1
 
 hur_25km_ztmn  = read_1var_ztmn(source_gcm_month,'rh');
+hur_E25km_ztmn  = read_1var_ztmn(source_gcm_month_noconv,'rh');
 
 hur_2km_zmn=squeeze(mean(hur_2km,2));
 hur_1km_zmn=squeeze(mean(hur_1km,2));
@@ -463,19 +473,22 @@ hur_1km_zmn=hur_1km_zmn(:,:,t_mid:t_end);
 hur_1km_zmn=squeeze(mean(hur_1km_zmn,3));
 hur_1km_ztmn=hur_1km_zmn;
 
-% specific humidity
-q_25km_ztmn    = read_1var_ztmn(source_gcm_month,'sphum');
-
-q_2km=ncread(source_2km_month,'sphum');
-q_2km_zmn=squeeze(mean(q_2km,2));
-q_2km_ztmn=squeeze(q_2km_zmn(:,:,1));
-
-q_1km=ncread(source_1km_month,'sphum');
-q_1km_zmn=squeeze(mean(q_1km,2));
-q_1km_ztmn=squeeze(q_1km_zmn(:,:,1));
+Walker_readfrom_source  % --> script that reads in data from the data files
+%% specific humidity
+%q_25km_ztmn     = read_1var_ztmn(source_gcm_month,'sphum');
+%q_E25km_ztmn    = read_1var_ztmn(source_gcm_month_noconv,'sphum');
+%
+%q_2km=ncread(source_2km_month,'sphum');
+%q_2km_zmn=squeeze(mean(q_2km,2));
+%q_2km_ztmn=squeeze(q_2km_zmn(:,:,1));
+%
+%q_1km=ncread(source_1km_month,'sphum');
+%q_1km_zmn=squeeze(mean(q_1km,2));
+%q_1km_ztmn=squeeze(q_1km_zmn(:,:,1));
 
 
 temp_25km_ztmn = read_1var_ztmn(source_gcm_month,'temp');
+temp_E25km_ztmn = read_1var_ztmn(source_gcm_month_noconv,'temp');
 tsurf1=squeeze(tsurf_fulltime(:,4,1)); % indices shouldn't matter here...
 
 clt_100km_ztmn = read_1var_ztmn(source_100km_sm_month,'cld_amt');
@@ -575,12 +588,14 @@ q2=q_2km_ztmn';
 % call script compTheta
 % prelims to calling compTheta: 
 clear rho_25km;
+clear rho_E25km;
 clear rho_2km;
 clear rho_1km;
 
-rho_25km=rho_2d_gen(temp_25km_ztmn,q_25km_ztmn,pfull_25km,160);
-rho_2km=rho_2d_gen(temp_crm_ztmn,q_2km_ztmn,pfull_2km,2000);
-rho_1km=rho_2d_gen(temp_crm1_ztmn,q_1km_ztmn,pfull_1km,4000);
+rho_25km  =rho_2d_gen(temp_25km_ztmn,q_25km_ztmn,pfull_25km,160);
+rho_E25km =rho_2d_gen(temp_E25km_ztmn,q_E25km_ztmn,pfull_E25km,160);
+rho_2km   =rho_2d_gen(temp_crm_ztmn,q_2km_ztmn,pfull_2km,2000);
+rho_1km   =rho_2d_gen(temp_crm1_ztmn,q_1km_ztmn,pfull_1km,4000);
 
 
 % below for 25km
@@ -593,21 +608,24 @@ nlon=8;
 %nlon=50;
 
 pfull_gen=pfull_25km;
+pfull_gen_E25=pfull_E25km;
 %temp_gen=temp_25km;
 
+compTheta
 % WalkerEnergetics depends on theta_gcm...
 WalkerEnergetics % compute several of the radiative flux fields
 %
 % compTheta depends on vvel_d_25km
-compTheta % compute the potential temperature
+%compTheta % compute the potential temperature
 
 %WalkerEnergetics % compute several of the radiative flux fields
 %compTheta % compute the potential temperature
 
 % compute the diabatic divergence
-div_d_25km=diabdiv(vvel_d_25km,160,psurf_zmn,pfull_gen);
-div_d_2km=diabdiv(vvel_d_2km,2000,psurf_2km_zmn,pfull_gen);
-div_d_1km=diabdiv(vvel_d_1km,4000,psurf_1km_zmn,pfull_gen);
+div_d_25km  =diabdiv(vvel_d_25km,160,psurf_zmn,pfull_gen);
+div_d_E25km =diabdiv(vvel_d_E25km,160,psurf_E25_zmn,pfull_gen);
+div_d_2km   =diabdiv(vvel_d_2km,2000,psurf_2km_zmn,pfull_gen);
+div_d_1km   =diabdiv(vvel_d_1km,4000,psurf_1km_zmn,pfull_gen);
 
 
 %StreamFun % compute the streamfunction

@@ -81,11 +81,15 @@ tdtlw_25km_sub_b=tdtlw_25_ztmn(bc_b_25km:bc_c_25km,:);
 tdtlw_25km_sub_prof_b=mean(tdtlw_25km_sub_b,1);
 tdtlw_25km_sub_prof=(tdtlw_25km_sub_prof_a+tdtlw_25km_sub_prof_b)/2;
 
+tdtlw_25km_prof=mean(tdtlw_25_ztmn,1);
+
 tdtlw_E25km_sub_a=tdtlw_E25_ztmn(1:bc_a_25km,:);
 tdtlw_E25km_sub_prof_a=mean(tdtlw_E25km_sub_a,1);
 tdtlw_E25km_sub_b=tdtlw_E25_ztmn(bc_b_25km:bc_c_25km,:);
 tdtlw_E25km_sub_prof_b=mean(tdtlw_E25km_sub_b,1);
 tdtlw_E25km_sub_prof=(tdtlw_E25km_sub_prof_a+tdtlw_E25km_sub_prof_b)/2;
+
+tdtlw_E25km_prof=mean(tdtlw_E25_ztmn,1);
 
 tdtlw_100km_sub_a=tdtlw_100_ztmn(1:bc_a_100km,:);
 tdtlw_100km_sub_prof_a=mean(tdtlw_100km_sub_a,1);
@@ -93,12 +97,16 @@ tdtlw_100km_sub_b=tdtlw_100_ztmn(bc_b_100km:bc_c_100km,:);
 tdtlw_100km_sub_prof_b=mean(tdtlw_100km_sub_b,1);
 tdtlw_100km_sub_prof=(tdtlw_100km_sub_prof_a+tdtlw_100km_sub_prof_b)/2;
 
-% compute cloud fraction in the subsidence region
+%-----------------------------------------------------------------------
+% compute cloud fraction in the domain mean and subsidence regions
+%
 clt_1km_sub_a=clt_1km_znm_eq_tmn(1:bc_a_1km,:);
 clt_1km_sub_prof_a=mean(clt_1km_sub_a,1);
 clt_1km_sub_b=clt_1km_znm_eq_tmn(bc_b_1km:bc_c_1km,:);
 clt_1km_sub_prof_b=mean(clt_1km_sub_b,1);
 clt_1km_sub_prof=(clt_1km_sub_prof_a+clt_1km_sub_prof_b)/2;
+
+clt_1km_prof=mean(clt_1km_znm_eq_tmn,1);
 
 clt_2km_sub_a=clt_2km_znm_eq_tmn(1:bc_a_2km,:);
 clt_2km_sub_prof_a=mean(clt_2km_sub_a,1);
@@ -106,11 +114,15 @@ clt_2km_sub_b=clt_2km_znm_eq_tmn(bc_b_2km:bc_c_2km,:);
 clt_2km_sub_prof_b=mean(clt_2km_sub_b,1);
 clt_2km_sub_prof=(clt_2km_sub_prof_a+clt_2km_sub_prof_b)/2;
 
+clt_2km_prof=mean(clt_2km_znm_eq_tmn,1);
+
 clt_25km_sub_a=clt_25km_znm_tmn(1:bc_a_25km,:);
 clt_25km_sub_prof_a=mean(clt_25km_sub_a,1);
 clt_25km_sub_b=clt_25km_znm_tmn(bc_b_25km:bc_c_25km,:);
 clt_25km_sub_prof_b=mean(clt_25km_sub_b,1);
 clt_25km_sub_prof=(clt_25km_sub_prof_a+clt_25km_sub_prof_b)/2;
+
+clt_25km_prof=mean(clt_25km_znm_tmn,1);
 
 clt_E25km_sub_a=clt_E25km_znm_tmn(1:bc_a_25km,:);
 clt_E25km_sub_prof_a=mean(clt_E25km_sub_a,1);
@@ -118,10 +130,14 @@ clt_E25km_sub_b=clt_E25km_znm_tmn(bc_b_25km:bc_c_25km,:);
 clt_E25km_sub_prof_b=mean(clt_E25km_sub_b,1);
 clt_E25km_sub_prof=(clt_E25km_sub_prof_a+clt_E25km_sub_prof_b)/2;
 
+clt_E25km_prof=mean(clt_E25km_znm_tmn,1);
+
 clt_100km_sub_a=clt_100km_sm_znm_tmn(1:bc_a_100km,:);
 clt_100km_sub_prof_a=mean(clt_100km_sub_a,1);
 clt_100km_sub_b=clt_100km_sm_znm_tmn(bc_b_100km:bc_c_100km,:);
 clt_100km_sub_prof_b=mean(clt_100km_sub_b,1);
 clt_100km_sub_prof=(clt_100km_sub_prof_a+clt_100km_sub_prof_b)/2;
+
+clt_100km_prof=mean(clt_100km_sm_znm_tmn,1);
 
 % are we ready to plot?

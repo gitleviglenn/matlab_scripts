@@ -9,7 +9,7 @@ cltscale=100. % convert to cloud fraction
 
 % define paths: 
 
-source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
+%source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
 source_gcm_month_noconv='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9_noconv/1980th1983.atmos_month_tmn.nc';
 source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
 source_100km_sm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x40L33_am4p0_100km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
@@ -26,11 +26,21 @@ tdtlw_ctl_25km_sub_prof=tdtlw_25km_sub_prof;
 tdtlw_ctl_E25km_sub_prof=tdtlw_E25km_sub_prof;
 tdtlw_ctl_100km_sub_prof=tdtlw_100km_sub_prof;
 
+tdtlw_ctl_25km_prof=tdtlw_25km_prof;
+tdtlw_ctl_E25km_prof=tdtlw_E25km_prof;
+
 clt_ctl_1km_sub_prof=clt_1km_sub_prof;
 clt_ctl_2km_sub_prof=clt_2km_sub_prof;
 clt_ctl_25km_sub_prof=clt_25km_sub_prof;
 clt_ctl_E25km_sub_prof=clt_E25km_sub_prof;
 clt_ctl_100km_sub_prof=clt_100km_sub_prof;
+
+clt_ctl_1km_prof=clt_1km_prof;
+clt_ctl_2km_prof=clt_2km_prof;
+clt_ctl_25km_prof=clt_25km_prof;
+clt_ctl_E25km_prof=clt_E25km_prof;
+clt_ctl_100km_prof=clt_100km_prof;
+
 
 % define source paths for files from the lwoff experiments: 
 source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9_lwoff/1980th1983.atmos_month_tmn.nc';
@@ -49,11 +59,20 @@ tdtlw_lwoff_25km_sub_prof=tdtlw_25km_sub_prof;
 tdtlw_lwoff_E25km_sub_prof=tdtlw_E25km_sub_prof;
 tdtlw_lwoff_100km_sub_prof=tdtlw_100km_sub_prof;
 
+tdtlw_lwoff_25km_prof=tdtlw_25km_prof;
+tdtlw_lwoff_E25km_prof=tdtlw_E25km_prof;
+
 clt_lwoff_1km_sub_prof=clt_1km_sub_prof;
 clt_lwoff_2km_sub_prof=clt_2km_sub_prof;
 clt_lwoff_25km_sub_prof=clt_25km_sub_prof;
 clt_lwoff_E25km_sub_prof=clt_E25km_sub_prof;
 clt_lwoff_100km_sub_prof=clt_100km_sub_prof;
+
+clt_lwoff_1km_prof=clt_1km_prof;
+clt_lwoff_2km_prof=clt_2km_prof;
+clt_lwoff_25km_prof=clt_25km_prof;
+clt_lwoff_E25km_prof=clt_E25km_prof;
+clt_lwoff_100km_prof=clt_100km_prof;
 
 
 
@@ -140,4 +159,84 @@ tit_tdtlw=strcat('LW Radiative Heating');
 xlabel('K/day')
 title(tit_tdtlw)
 
+figure
+subplot(2,1,1)
+ax5=gca;
+plot(clt_lwoff_1km_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
+set(ax5,'YScale','Log')
+set(ax5,'Ydir','reverse')
+ylim(ax5,[10000 100000]);
+ax5.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax5.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+%ax3.YTickLabels = [" " " " " " " " " " " " " " " " " " " "]
+ax5.FontSize = 14;
+ax5.XLim=[0 30];
+hold on
+plot(clt_lwoff_2km_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
+plot(clt_lwoff_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_lwoff_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(clt_lwoff_100km_prof,pfull_2km,'r','LineWidth',1.5)
+xlabel('%')
+ylabel('hPa')
+tit_clt=strcat('Domain mean Cloud Fraction, LWCRE-off');
+title(tit_clt)
+
+subplot(2,1,2)
+ax6=gca;
+plot(clt_ctl_1km_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
+set(ax6,'YScale','Log')
+set(ax6,'Ydir','reverse')
+ylim(ax6,[10000 100000]);
+ax6.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax6.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax6.FontSize = 14;
+ax6.XLim=[0 30];
+hold on
+plot(clt_ctl_2km_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
+plot(clt_ctl_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_ctl_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(clt_ctl_100km_prof,pfull_2km,'r','LineWidth',1.5)
+xlabel('%')
+ylabel('hPa')
+tit_clt=strcat('Domain mean Cloud Fraction, LWCRE-on');
+title(tit_clt)
+
+figure
+subplot(2,1,1)
+ax6=gca;
+plot(clt_ctl_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+set(ax6,'YScale','Log')
+set(ax6,'Ydir','reverse')
+ylim(ax6,[10000 100000]);
+ax6.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax6.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax6.FontSize = 14;
+ax6.XLim=[0 30];
+hold on
+plot(clt_lwoff_25km_prof,pfull_2km,'--','Color',colyel,'LineWidth',1.5)
+plot(clt_ctl_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(clt_lwoff_E25km_prof,pfull_2km,'--','Color',colpur,'LineWidth',1.5)
+xlabel('%')
+ylabel('hPa')
+tit_clt=strcat('Domain mean Cloud Fraction');
+title(tit_clt)
+
+subplot(2,1,2)
+ax6=gca;
+plot(tdtlw_ctl_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+set(ax6,'YScale','Log')
+set(ax6,'Ydir','reverse')
+ylim(ax6,[10000 100000]);
+ax6.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax6.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax6.FontSize = 14;
+%ax6.XLim=[0 30];
+hold on
+plot(tdtlw_lwoff_25km_prof,pfull_2km,'--','Color',colyel,'LineWidth',1.5)
+plot(tdtlw_ctl_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
+plot(tdtlw_lwoff_E25km_prof,pfull_2km,'--','Color',colpur,'LineWidth',1.5)
+xlabel('%')
+ylabel('hPa')
+tit_clt=strcat('Domain mean tdtlw');
+title(tit_clt)
 

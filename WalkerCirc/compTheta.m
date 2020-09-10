@@ -16,6 +16,7 @@
 clear gamma_d;
 
 theta_gcm   = zeros(nlat,nlev);
+theta_E25_gcm   = zeros(nlat,nlev);
 theta_e_gcm = zeros(nlat,nlev);
 theta_crm1  = zeros(4000,nlev);
 theta_e_crm1  = zeros(4000,nlev);
@@ -48,6 +49,7 @@ tsurf_crm2_ztmn=squeeze(mean(tsurf_crm2_zmn,2));
 %theta_2_sfc=tsurf_crm2_ztmn.*(p0./psurf_2km_zmn).^kappa;
 %theta_1_sfc=tsurf_crm1_ztmn.*(p0./psurf_1km_zmn).^kappa;
 
+% potential temperature
 theta_25_sfc=tsurf_zmn.*(1.).^kappa;
 theta_2_sfc=tsurf_crm2_ztmn.*(1.).^kappa;
 theta_1_sfc=tsurf_crm1_ztmn.*(1.).^kappa;
@@ -61,41 +63,38 @@ theta_1_sfc=tsurf_crm1_ztmn.*(1.).^kappa;
 
 % assume psurf are the same for all models and experiments
 
+Walker_readfrom_source % call a script that reads data from consistent source files
+
 % now compute theta throughout the atmospheric depth
 %theta_temp=tsfc_mn.*((p0/pfull_gen(33))^kappa);
 %theta_f(:,:,33)=theta_temp(:,:);
-
-%temp_gen=ncread(source_gcm_month,'temp');
-%temp_equil=temp_gen(:,:,:,1:4);
-%temp_eq_tmn=squeeze(mean(temp_equil,4));
-%temp_eq_ztmn=squeeze(mean(temp_eq_tmn,2));
-
-Walker_readfrom_source % call a script that reads data from consistent source files
-%temp_eq_ztmn=read_1var_ztmn(source_gcm_month,'temp');
-%temp_crm_ztmn=read_1var_ztmn(source_2km_month,'temp');
-%temp_crm1_ztmn=read_1var_ztmn(source_1km_month,'temp');
-
 for lev=1:nlev; % compute the 3d potential temperature field
    %theta_gcm(:,lev)=temp_eq_ztmn(:,lev).*(p0/pfull_gen(lev))^kappa;
    %theta_crm2(:,lev)=temp_crm_ztmn(:,lev).*(p0/pfull_gen(lev))^kappa;
    %theta_crm1(:,lev)=temp_crm1_ztmn(:,lev).*(p0/pfull_gen(lev))^kappa;
-   theta_gcm(:,lev)=temp_eq_ztmn(:,lev).*(psurf_zmn(:)./pfull_gen(lev)).^kappa;
-   theta_crm2(:,lev)=temp_crm_ztmn(:,lev).*(psurf_2km_zmn(:)./pfull_gen(lev)).^kappa;
-   theta_crm1(:,lev)=temp_crm1_ztmn(:,lev).*(psurf_1km_zmn(:)./pfull_gen(lev)).^kappa;
+   theta_gcm(:,lev)        =temp_eq_ztmn(:,lev).*(psurf_zmn(:)./pfull_gen(lev)).^kappa;
+   theta_E25_gcm(:,lev)    =temp_eq_E25_ztmn(:,lev).*(psurf_E25_zmn(:)./pfull_gen(lev)).^kappa;
+   theta_crm2(:,lev)       =temp_crm_ztmn(:,lev).*(psurf_2km_zmn(:)./pfull_gen(lev)).^kappa;
+   theta_crm1(:,lev)       =temp_crm1_ztmn(:,lev).*(psurf_1km_zmn(:)./pfull_gen(lev)).^kappa;
 end
 
-theta_e_gcm=theta_gcm.*exp((q_25km_ztmn*latheat)./(cp*temp_25km_ztmn));
-theta_e_crm1=theta_crm1.*exp((q_1km_ztmn*latheat)./(cp*temp_crm1_ztmn));
-theta_e_crm2=theta_crm2.*exp((q_2km_ztmn*latheat)./(cp*temp_crm_ztmn));
+% calculate the equivalent potential temperature.
+theta_e_gcm        =theta_gcm.*exp((q_25km_ztmn*latheat)./(cp*temp_25km_ztmn));
+theta_e_E25_gcm    =theta_gcm.*exp((q_E25km_ztmn*latheat)./(cp*temp_E25km_ztmn));
+theta_e_crm1       =theta_crm1.*exp((q_1km_ztmn*latheat)./(cp*temp_crm1_ztmn));
+theta_e_crm2       =theta_crm2.*exp((q_2km_ztmn*latheat)./(cp*temp_crm_ztmn));
 
-theta_e_gcm_mid=mean(theta_e_gcm(80:120,:));
-theta_e_crm1_mid=mean(theta_e_crm1(1500:2500,:));
-theta_e_crm2_mid=mean(theta_e_crm2(750:1250,:));
+% calculate the equivalent potential temperature in the center region
+theta_e_gcm_mid       =mean(theta_e_gcm(80:120,:));
+theta_e_E25_gcm_mid   =mean(theta_e_E25_gcm(80:120,:));
+theta_e_crm1_mid      =mean(theta_e_crm1(1500:2500,:));
+theta_e_crm2_mid      =mean(theta_e_crm2(750:1250,:));
 
 % compute the virtual temperature and density
-Tv_25km=temp_25km_ztmn.*(1+q_25km_ztmn./epsilon)./(1+q_25km_ztmn);
-Tv_2km=temp_crm_ztmn.*(1+q_2km_ztmn./epsilon)./(1+q_2km_ztmn);
-Tv_1km=temp_crm1_ztmn.*(1+q_1km_ztmn./epsilon)./(1+q_1km_ztmn);
+Tv_E25km =temp_E25km_ztmn.*(1+q_E25km_ztmn./epsilon)./(1+q_E25km_ztmn);
+Tv_25km  =temp_25km_ztmn.*(1+q_25km_ztmn./epsilon)./(1+q_25km_ztmn);
+Tv_2km   =temp_crm_ztmn.*(1+q_2km_ztmn./epsilon)./(1+q_2km_ztmn);
+Tv_1km   =temp_crm1_ztmn.*(1+q_1km_ztmn./epsilon)./(1+q_1km_ztmn);
 
 %clear rho_25km;
 %clear rho_2km;
@@ -105,6 +104,7 @@ Tv_1km=temp_crm1_ztmn.*(1+q_1km_ztmn./epsilon)./(1+q_1km_ztmn);
 %rho_2km=rho_2d_gen(temp_crm_ztmn,q_2km_ztmn,pfull_2km,2000);
 %rho_1km=rho_2d_gen(temp_crm1_ztmn,q_1km_ztmn,pfull_1km,2000);
 
+% Lapse Rate
 % lev 1 is the at the top of the domain, lev 33 is the lowest atmospheric level
 % gamma = -g*rho*delT/delp
 %plot_lat=100;
@@ -112,7 +112,8 @@ plot_lat=80;
 %plot_lat=5;
 gamma_full  = zeros(160,nlev);
 for jx=1:160;
-  gamma_full(jx,:)=lapser(temp_eq_ztmn,rho_25km,jx,tsfc_mn,psurf_zmn,pfull_gen);
+  gamma_E25_full(jx,:)=lapser(temp_eq_E25_ztmn,rho_E25km,jx,tsfc_E25_mn,psurf_E25_zmn,pfull_gen_E25);
+  gamma_full(jx,:)    =lapser(temp_eq_ztmn,rho_25km,jx,tsfc_mn,psurf_zmn,pfull_gen);
 end
 gamma(1,:)=mean(gamma_full,1);
 
@@ -126,10 +127,20 @@ temp_eq_prof=temp_eq_ztmn(plot_lat,:);
 es(:)=satvappres(temp_eq_prof);
 qs(:)=qstar(es,pfull_gen);
 gamma_m(1,:)=moistadiabat(temp_eq_prof,qs);
+
+temp_eq_E25_prof=temp_eq_E25_ztmn(plot_lat,:);
+es(:)=satvappres(temp_eq_E25_prof);
+qs_E25(:)=qstar(es,pfull_gen_E25);
+gamma_m_E25(1,:)=moistadiabat(temp_eq_E25_prof,qs_E25);
+
 zfull_prof=squeeze(zfull_25km_ztmn(plot_lat,:));
+zfull_E25_prof=squeeze(zfull_E25km_ztmn(plot_lat,:));
 
 hsat_25km_full=hsat_2d(temp_eq_ztmn,160,qs,zfull_prof);
 hsat_25km=hsat_25km_full(plot_lat,:);
+
+hsat_E25km_full=hsat_2d(temp_eq_E25_ztmn,160,qs_E25,zfull_E25_prof);
+hsat_E25km=hsat_E25km_full(plot_lat,:);
 
 % lapse rate stuff for 2km 
 clear gamma_full
@@ -210,14 +221,22 @@ plot_lat=2000;
 stastapar(3,:)=stastap(temp_crm1_ztmn,hur_1km_ztmn,plot_lat,psurf_1km_zmn,pfull_gen,zfull_prof);
 
 %compute the static stability throughout the domain
-staticst_25km             = zeros(160,nlev); % static energy: cp*T+gz
-msts_25km                 = zeros(160,nlev); % moist static energy: cp*T+gz+Lq
-h_25km                    = zeros(160,nlev); % T+gz/cp+Lq/cp
-s_25km                    = zeros(160,nlev); % T+gz/cp
-staticst_par_25km         = zeros(160,nlev);
-%vvel_d_25km               = zeros(160,nlev);
-div_d_25km                = zeros(160,nlev);
+staticst_25km              = zeros(160,nlev); % static energy: cp*T+gz
+msts_25km                  = zeros(160,nlev); % moist static energy: cp*T+gz+Lq
+h_25km                     = zeros(160,nlev); % T+gz/cp+Lq/cp
+s_25km                     = zeros(160,nlev); % T+gz/cp
+staticst_par_25km          = zeros(160,nlev);
+%div_d_25km                 = zeros(160,nlev);
+staticst_E25km             = zeros(160,nlev); % static energy: cp*T+gz
+msts_E25km                 = zeros(160,nlev); % moist static energy: cp*T+gz+Lq
+h_E25km                    = zeros(160,nlev); % T+gz/cp+Lq/cp
+s_E25km                    = zeros(160,nlev); % T+gz/cp
+staticst_par_E25km         = zeros(160,nlev);
+%div_d_E25km                = zeros(160,nlev);
+
+
 [msts_25km,staticst_25km,staticst_par_25km]=stasta_3d(temp_eq_ztmn,q_25km_ztmn,160,psurf_zmn,pfull_gen,zfull_prof);
+[msts_E25km,staticst_E25km,staticst_par_E25km]=stasta_3d(temp_eq_E25_ztmn,q_E25km_ztmn,160,psurf_zmn,pfull_gen,zfull_prof);
 h_25km=msts_25km./cp; % divide by cp to give units of Kelvin
 s_25km=staticst_25km./cp; % divide by cp to give units of Kelvin
 %staticst_par_25km=stastap_3d(staticst_25km,160,psurf_zmn,pfull_gen); % divides staticst_25km by cp and takes the pressure derivative
@@ -263,7 +282,6 @@ s_1km_dmn=mean(s_1km,1);
 staticst_par_1_a=staticst_par_1km(1550:2500,:);
 stastapar(3,:)=mean(staticst_par_1_a,1);
 
-
 stap_up_c=staticst_par_1km(1500:2500,:);
 stap_up_1km=squeeze(mean(stap_up_c,1));
 
@@ -271,15 +289,10 @@ stap_up_1km=squeeze(mean(stap_up_c,1));
 gcm1=80;
 gcm2=120;
 
-%% compute the diabatic vertical velocity
-%vvel_d_25km=rad_heating_25./staticst_par_25km;
-%vvel_d_2km=rad_heating_2./staticst_par_2km;
-%vvel_d_1km=rad_heating_1./staticst_par_1km;
-
-w_d_25km_asc_int=squeeze(mean(vvel_d_25km(gcm1:gcm2,:),1));
-rho_25km_dmn=squeeze(mean(rho_25km,1));
-w_d_25km_asc_int2=w_d_25km_asc_int/8640.;
-w_d_25km_asc=w_d_25km_asc_int2./rho_25km_dmn;
+%w_d_25km_asc_int=squeeze(mean(vvel_d_25km(gcm1:gcm2,:),1));
+%rho_25km_dmn=squeeze(mean(rho_25km,1));
+%w_d_25km_asc_int2=w_d_25km_asc_int/8640.;
+%w_d_25km_asc=w_d_25km_asc_int2./rho_25km_dmn;
 
 % compute the domain mean total vertical velocity
 w_25km_dmn=squeeze(mean(w_25km_ztmn,1));
@@ -341,25 +354,25 @@ end
 
 fr_line=zeros(1,33)+273.15;
 
-figure
-plot(xgcm(1:xgcm_ngp),lts_25km,'Color',colyel)
-hold on
-%set(gca,'Ydir','reverse')
-plot(xcrm_1km(1:xcrm_1km_ngp),lts_1km,'Color',colgrn)
-plot(xcrm(1:xcrm_ngp),lts_2km,'Color',colblu)
-title('lower tropospheric stability [K]')
-
-figure
-plot(xgcm(1:xgcm_ngp),eis_gcm,'Color',colyel)
-hold on
-plot(xcrm_1km(1:xcrm_1km_ngp),eis_crm_1km,'Color',colgrn)
-plot(xcrm(1:xcrm_ngp),eis_crm_2km,'Color',colblu)
-title('estimated inversion strength [K]')
-
-figure
-plot(xgcm(1:xgcm_ngp),lcl_gcm_x,'Color',colyel)
-hold on
-plot(xcrm_1km(1:xcrm_1km_ngp),lcl_crm1_x,'Color',colgrn)
-plot(xcrm(1:xcrm_ngp),lcl_crm2_x,'Color',colblu)
-title('lifting condensation level [m]')
+%figure
+%plot(xgcm(1:xgcm_ngp),lts_25km,'Color',colyel)
+%hold on
+%%set(gca,'Ydir','reverse')
+%plot(xcrm_1km(1:xcrm_1km_ngp),lts_1km,'Color',colgrn)
+%plot(xcrm(1:xcrm_ngp),lts_2km,'Color',colblu)
+%title('lower tropospheric stability [K]')
+%
+%figure
+%plot(xgcm(1:xgcm_ngp),eis_gcm,'Color',colyel)
+%hold on
+%plot(xcrm_1km(1:xcrm_1km_ngp),eis_crm_1km,'Color',colgrn)
+%plot(xcrm(1:xcrm_ngp),eis_crm_2km,'Color',colblu)
+%title('estimated inversion strength [K]')
+%
+%figure
+%plot(xgcm(1:xgcm_ngp),lcl_gcm_x,'Color',colyel)
+%hold on
+%plot(xcrm_1km(1:xcrm_1km_ngp),lcl_crm1_x,'Color',colgrn)
+%plot(xcrm(1:xcrm_ngp),lcl_crm2_x,'Color',colblu)
+%title('lifting condensation level [m]')
 

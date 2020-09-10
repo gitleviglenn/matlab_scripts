@@ -317,7 +317,9 @@ rad_heating_100=tdtlw_100_ztmn+tdtsw_100_ztmn;
 rad_heat_prof_100=mean(rad_heating_100,1);
 
 rad_heating_25=tdtlw_25_ztmn+tdtsw_25_ztmn; % radiative heating is needed in compTheta
+rad_heating_E25=tdtlw_E25_ztmn+tdtsw_E25_ztmn; % radiative heating is needed in compTheta
 rad_heat_prof_25=mean(rad_heating_25,1);
+rad_heat_prof_E25=mean(rad_heating_E25,1);
 
 rad_heating_1=tdtlw_1_ztmn+tdtsw_1_ztmn;
 rad_heat_prof_1=mean(rad_heating_1,1);
@@ -358,9 +360,7 @@ plot(tdtlw_2km_sub_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
 plot(tdtlw_25km_sub_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
 plot(tdtlw_100km_sub_prof,pfull_2km,'r','LineWidth',1.5)
 %xlim([0 15])
-%title('tdtlw in Subsiding region with LWCRE')
 tit_tdtlw=strcat('tdtlw in Subsiding region ',lwcreonoff);
-%title('Cloud Fraction in Subsiding region with LWCRE')
 title(tit_tdtlw)
 
 figure
@@ -381,12 +381,11 @@ plot(clt_1km_prof,pfull_2km,'Color',colgrn,'LineWidth',1.5)
 set(gca,'Ydir','reverse')
 hold on
 plot(clt_2km_prof,pfull_2km,'Color',colblu,'LineWidth',1.5)
-%plot(clt_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
+plot(clt_25km_prof,pfull_2km,'Color',colyel,'LineWidth',1.5)
 plot(clt_25km_prof,pfull_2km,'Color',colpur,'LineWidth',1.5)
 plot(clt_100km_prof,pfull_2km,'r','LineWidth',1.5)
 xlim([0 30])
 tit_clt=strcat('Domain Mean Cloud Fraction ',lwcreonoff);
-%title('Cloud Fraction in Subsiding region with LWCRE')
 title(tit_clt)
 
 % compute the diabatic vertical velocity
@@ -403,6 +402,7 @@ x_local_2=1000;
 x_local_1=2000;
 
 vvel_d_25km               = zeros(160,nlev);
+vvel_d_E25km              = zeros(160,nlev);
 vvel_d_2km                = zeros(2000,nlev);
 vvel_d_1km                = zeros(4000,nlev);
 vvel_d_25km_1d            = zeros(1,nlev);
@@ -413,6 +413,7 @@ vvel_d_2km_1d_sig         = zeros(1,nlev);
 vvel_d_1km_1d_sig         = zeros(1,nlev);
 
 vvel_d_25km        =rad_heating_25./staticst_par_25km;
+vvel_d_E25km       =rad_heating_E25./staticst_par_E25km;
 vvel_d_2km         =rad_heating_2./staticst_par_2km;
 vvel_d_1km         =rad_heating_1./staticst_par_1km;
 
@@ -427,6 +428,14 @@ vvel_d_ideal_1     =rad_cool./staticst_par_1km;
 vvel_d_1km_1d_sig  =rad_heating_1(x_local_1,:)./staticst_const;
 vvel_d_2km_1d_sig  =rad_heating_2(x_local_2,:)./staticst_const;
 vvel_d_25km_1d_sig =rad_heating_25(x_local_25,:)./staticst_const;
+vvel_d_E25km_1d_sig =rad_heating_25(x_local_25,:)./staticst_const;
+
+% compute the diabatically driven vertical velocity (originally in compTheta)
+w_d_25km_asc_int=squeeze(mean(vvel_d_25km(gcm1:gcm2,:),1));
+rho_25km_dmn=squeeze(mean(rho_25km,1));
+w_d_25km_asc_int2=w_d_25km_asc_int/8640.;
+w_d_25km_asc=w_d_25km_asc_int2./rho_25km_dmn;
+
 
 % compute the divergent velocity at individual locations
 % full variability in Q and sigma
@@ -897,8 +906,8 @@ title('sw heating K/d')
 set(gca,'Ydir','reverse')
 
 subplot(2,5,3)
-heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
-[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_25km_ztmn',heating_cons);
+tdtls_cons=[-5.0,-4.5,-4.0,-3.5,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.,3.5,4.,4.5,5.,5.5,6.,6.5,7.,7.5,8.,8.5,9.,9.5,10.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_25km_ztmn',tdtls_cons);
 v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
 clabel(C,h,v);
 title('tdtls heating K/d')
@@ -914,7 +923,7 @@ set(gca,'Ydir','reverse')
 
 subplot(2,5,5)
 heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
-[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',heating_cons);
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',tdtls_cons);
 %v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
 v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
 clabel(C,h,v);
@@ -938,8 +947,8 @@ title('sw heating K/d')
 set(gca,'Ydir','reverse')
 
 subplot(2,5,8)
-heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
-[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_E25km_ztmn',heating_cons);
+tdtls_cons=[-5.0,-4.5,-4.0,-3.5,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.,3.5,4.,4.5,5.,5.5,6.,6.5,7.,7.5,8.,8.5,9.,9.5,10.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtls_E25km_ztmn',tdtls_cons);
 v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
 clabel(C,h,v);
 title('tdtls heating K/d')
@@ -955,7 +964,7 @@ set(gca,'Ydir','reverse')
 
 subplot(2,5,10)
 heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
-[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',heating_cons);
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',tdtls_cons);
 %v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
 v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
 clabel(C,h,v);

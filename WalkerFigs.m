@@ -712,8 +712,12 @@ temp_crm1_ztmn(centerp_1,33)
 temp_25km_ztmn(centerp_25,18)
 temp_crm_ztmn(centerp_2,18)
 temp_crm1_ztmn(centerp_1,18)
+title('temperature near convective center')
 
 %--------------------------------------
+% 6 panel figure showing the Vertical Structure.  
+% Plotted is the RH, Condensate, Diabatic Heating, Lapse Rate, 
+% Static Stability Par and Equivalent Pot Temp.
 
 figure 
 subplot(2,3,1)
@@ -899,6 +903,31 @@ xlim([295 345])
 
 tit_en=strcat('Mock Walker Cell: ','Conv vs. Noconv');
 sgtitle(tit_en)
+
+
+% these three figures were orignally created in compTheta.m
+figure
+plot(xgcm(1:xgcm_ngp),lts_25km,'Color',colyel)
+hold on
+%set(gca,'Ydir','reverse')
+plot(xcrm_1km(1:xcrm_1km_ngp),lts_1km,'Color',colgrn)
+plot(xcrm(1:xcrm_ngp),lts_2km,'Color',colblu)
+title('lower tropospheric stability [K]')
+
+figure
+plot(xgcm(1:xgcm_ngp),eis_gcm,'Color',colyel)
+hold on
+plot(xcrm_1km(1:xcrm_1km_ngp),eis_crm_1km,'Color',colgrn)
+plot(xcrm(1:xcrm_ngp),eis_crm_2km,'Color',colblu)
+title('estimated inversion strength [K]')
+
+figure
+plot(xgcm(1:xgcm_ngp),lcl_gcm_x,'Color',colyel)
+hold on
+plot(xcrm_1km(1:xcrm_1km_ngp),lcl_crm1_x,'Color',colgrn)
+plot(xcrm(1:xcrm_ngp),lcl_crm2_x,'Color',colblu)
+title('lifting condensation level [m]')
+
 
 
 stop
