@@ -11,20 +11,6 @@ colblu=[0.3010,0.7450,0.9330];  % 2 km runs
 colgrn=[0.4660,0.6740,0.1880];  % 1 km runs
 
 
-%rh_tmp_arr       =zeros(5,33);
-%rh_sub_arr       =zeros(5,33);
-%ice_prof_arr     =zeros(5,33);
-%liq_prof_arr     =zeros(5,33);
-%gam_arr          =zeros(5,33);
-%gam_m_arr        =zeros(5,33);
-%rad_prof_arr     =zeros(5,33);
-%tdtconv_prof_arr =zeros(5,33);
-%tdtls_prof_arr   =zeros(5,33);
-%stap_arr         =zeros(5,33);
-%th_e_gcm_arr     =zeros(5,33);
-%th_gcm_arr       =zeros(5,33);
-
-
 xcrm_2to1=0:2:3998;
 xaxis_gcm2crm=0:25:3975;
 
@@ -36,28 +22,6 @@ lwoff = false;
 % saved to the appropriate arrays to be plotted as lwoff, as below.  Then the paths
 % must be changed back to the control experiment and rerun. 
 
-%evap_25km_ztmn_lwoff=evap_25km_ztmn;
-%evap_2km_ztmn_lwoff=evap_2km_ztmn;
-%evap_1km_ztmn_lwoff=evap_1km_ztmn;
-%q_25km_ztmn_lwoff=q_25km_ztmn;
-%q_2km_ztmn_lwoff=q_2km_ztmn;
-%q_1km_ztmn_lwoff=q_1km_ztmn;
-%u_25km_ztmn_lwoff=u_25km_ztmn;
-%u_2km_ztmn_lwoff=u_2km_ztmn;
-%u_1km_ztmn_lwoff=u_1km_ztmn;
-%theta_e_gcm_lwoff=theta_e_gcm;
-%theta_e_crm2_lwoff=theta_e_crm2;
-%theta_e_crm1_lwoff=theta_e_crm1;
-%temp_eq_ztmn_lwoff=temp_eq_ztmn;
-%temp_crm1_ztmn_lwoff=temp_crm1_ztmn;
-%temp_crm_ztmn_lwoff=temp_crm_ztmn;
-%Tv_1km_lwoff=Tv_1km;
-%Tv_2km_lwoff=Tv_2km;
-%Tv_25km_lwoff=Tv_25km;
-%u_1km_dmn_lwoff=u_1km_dmn;
-%u_2km_dmn_lwoff=u_2km_dmn;
-%u_25km_dmn_lwoff=u_25km_dmn;
-%
 
 %-------------------------------------(*&()*&(*&)(*&)(*&
 % save data from particular experiments so that it can be 
@@ -65,74 +29,6 @@ lwoff = false;
 
 % to get the full figure, this code will need to be run 4 times
 % each time switching the value of ind in WalkerCell.m
-
-%if ind==3; % control
-%  evap_25km_ztmn_ctl=evap_25km_ztmn;
-%  theta_e_gcm_ctl   =theta_e_gcm;
-%  q_25km_ztmn_ctl   =q_25km_ztmn;
-%  u_25km_ztmn_ctl   =u_25km_ztmn;
-%  temp_eq_ztmn_ctl  =temp_eq_ztmn;
-%  Tv_25km_ctl       =Tv_25km;
-%  u_25km_dmn_ctl    =u_25km_dmn;
-%  s_enth_25km_ctl   =s_enth_25km;
-%  % below is for high resolution experiments
-%  evap_2km_ztmn_ctl =evap_2km_ztmn;
-%  evap_1km_ztmn_ctl =evap_1km_ztmn;
-%  s_enth_2km_ctl    =s_enth_2km;
-%  s_enth_1km_ctl    =s_enth_1km;
-%  q_2km_ztmn_ctl    =q_2km_ztmn;
-%  q_1km_ztmn_ctl    =q_1km_ztmn;
-%  theta_e_crm2_ctl  =theta_e_crm2;
-%  theta_e_crm1_ctl  =theta_e_crm1;
-%  temp_crm1_ztmn_ctl=temp_crm1_ztmn;
-%  temp_crm_ztmn_ctl =temp_crm_ztmn;
-%  Tv_1km_ctl        =Tv_1km;
-%  Tv_2km_ctl        =Tv_2km;
-%  u_1km_dmn_ctl     =u_1km_dmn;
-%  u_2km_dmn_ctl     =u_2km_dmn;
-%elseif (ind==1)
-%  evap_25km_ztmn_noconv=evap_25km_ztmn;
-%  theta_e_gcm_noconv=theta_e_gcm;
-%  q_25km_ztmn_noconv=q_25km_ztmn;
-%  u_25km_ztmn_noconv=u_25km_ztmn;
-%  temp_eq_ztmn_noconv=temp_eq_ztmn;
-%  Tv_25km_noconv=Tv_25km;
-%  u_25km_dmn_noconv=u_25km_dmn;
-%  s_enth_25km_noconv   =s_enth_25km;
-%elseif (ind==2)  % lwoff
-%  evap_25km_ztmn_lwoff=evap_25km_ztmn;
-%  theta_e_gcm_lwoff=theta_e_gcm;
-%  q_25km_ztmn_lwoff=q_25km_ztmn;
-%  u_25km_ztmn_lwoff=u_25km_ztmn;
-%  temp_eq_ztmn_lwoff=temp_eq_ztmn;
-%  Tv_25km_lwoff=Tv_25km;
-%  u_25km_dmn_lwoff=u_25km_dmn;
-%  s_enth_25km_lwoff   =s_enth_25km;
-%  % below is for high resolution experiments
-%  evap_2km_ztmn_lwoff =evap_2km_ztmn;
-%  evap_1km_ztmn_lwoff =evap_1km_ztmn;
-%  s_enth_2km_lwoff    =s_enth_2km;
-%  s_enth_1km_lwoff    =s_enth_1km;
-%  q_2km_ztmn_lwoff    =q_2km_ztmn;
-%  q_1km_ztmn_lwoff    =q_1km_ztmn;
-%  theta_e_crm2_lwoff  =theta_e_crm2;
-%  theta_e_crm1_lwoff  =theta_e_crm1;
-%  temp_crm1_ztmn_lwoff=temp_crm1_ztmn;
-%  temp_crm_ztmn_lwoff =temp_crm_ztmn;
-%  Tv_1km_lwoff        =Tv_1km;
-%  Tv_2km_lwoff        =Tv_2km;
-%  u_1km_dmn_lwoff     =u_1km_dmn;
-%  u_2km_dmn_lwoff     =u_2km_dmn;
-%elseif (ind==4)
-%  evap_25km_ztmn_noconvlwoff =evap_25km_ztmn;
-%  theta_e_gcm_noconvlwoff    =theta_e_gcm;
-%  q_25km_ztmn_noconvlwoff    =q_25km_ztmn;
-%  u_25km_ztmn_noconvlwoff    =u_25km_ztmn;
-%  temp_eq_ztmn_noconvlwoff   =temp_eq_ztmn;
-%  Tv_25km_noconvlwoff        =Tv_25km;
-%  u_25km_dmn_noconvlwoff     =u_25km_dmn;
-%  s_enth_25km_noconvlwoff    =s_enth_25km;
-%end
 
 thin=0.5;
 thick=2;
@@ -206,25 +102,18 @@ rh_25km_sub_a=rh_25km_ind(1:40,:);
 rh_25km_sub=squeeze(mean(rh_25km_sub_a,1));
 rh_25km_tmp=squeeze(mean(rh_25km_ind,1));
 
+rh_E25km_ind=hur_E25km_ztmn;
+rh_E25km_sub_a=rh_E25km_ind(1:40,:);
+rh_E25km_sub=squeeze(mean(rh_E25km_sub_a,1));
+rh_E25km_tmp=squeeze(mean(rh_E25km_ind,1));
+
+
 hur_crm=mean(hur_2km_ztmn,1);
 hur_crm_sub_a=hur_2km_ztmn(1:500,:);
 hur_crm_sub=squeeze(mean(hur_crm_sub_a,1));
 hur_crm_1km=mean(hur_1km_ztmn,1);
 hur_crm_1km_sub_a=hur_1km_ztmn(1:1000,:);
 hur_crm_1km_sub=mean(hur_crm_1km_sub_a,1);
-
-%rh_tmp=rh_25km_tmp;
-%rh_sub=rh_25km_sub;
-%ice_prof=ice_25km_prof;
-%liq_prof=liq_25km_prof;
-%gam=gamma(1,:);
-%gam_m=gamma_m(1,:);
-%rad_prof=rad_heat_prof_25;
-%tdtconv_prof=tdtconv_25km_prof;
-%tdtls_prof=tdtls_25km_prof;
-%stap=stastapar;
-%th_e_gcm=theta_e_gcm_mid;
-%th_gcm=theta_gcm;
 
 % Specify the averaging region-------------------------------
   stasta_dmn=mean(staticst_par_25km,1);
@@ -848,30 +737,31 @@ sgtitle(tit_en)
 %%%%%%%%%%%%%%%%%%%%%%%
 %
 %linesize=2;
-%colnoconv=colblu;
 
 % ConvNoConv
 % figure comparing convection vs no convection in the 25km simulations
 
-figure  % just for the caorse simulations
+figure 
 subplot(2,3,1)
-plot(rh_tmp_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize);
+plot(rh_25km_tmp,pfull_2km,'Color',colyel,'LineWidth',2);
+%set(gca,'YScale','log')
 hold on
-plot(rh_tmp_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize);
-plot(rh_sub_arr(1,:),pfull_2km,'--','Color',colyel,'LineWidth',linesize);
-plot(rh_sub_arr(2,:),pfull_2km,'--','Color',colnoconv,'LineWidth',linesize);
+plot(rh_E25km_tmp,pfull_2km,'Color',colpur,'LineWidth',2);
+plot(rh_25km_sub,pfull_2km,'--','Color',colyel,'LineWidth',2);
+plot(rh_E25km_sub,pfull_2km,'--','Color',colpur,'LineWidth',2);
 set(gca,'Ydir','reverse')
+%title('equivalent pot temp')
 ylim([10000 100000])
 title('Relative Humidity')
 xlabel('%')
 
 subplot(2,3,2)
-plot(ice_prof_arr(1,:)+liq_prof_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize)
+plot(ice_25km_prof+liq_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2)
 ylim([10000 100000]);
 set(gca,'Ydir','reverse')
 hold on
-plot(ice_prof_arr(2,:)+liq_prof_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize)
-%plot(ice_25km_prof+liq_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2)
+plot(ice_E25km_prof+liq_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2)
+%plot(liq_wat_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2)
 title('Mn Liq + Ice ')
 xlabel('kg/kg')
 
@@ -880,59 +770,71 @@ subplot(2,3,4)
 ylim([10000 100000]);
 box('on');
 hold('on');
-plot(-1000.*gam_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize)
+plot(-1000.*gamma(1,:),pfull_2km,'Color',colyel,'LineWidth',2)
 hold on
-plot(-1000.*gam_asc_arr(1,:),pfull_2km,'--','Color',colyel,'LineWidth',linesize);
-plot(-1000.*gam_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize)
-plot(-1000.*gam_asc_arr(2,:),pfull_2km,'--','Color',colnoconv,'LineWidth',linesize);
-plot(1000.*gam_m_arr(1,:),pfull_2km,'Color',colyel)
-plot(1000.*gam_m_arr(2,:),pfull_2km,'Color',colnoconv)
+plot(-1000.*gamma_E25,pfull_2km,'Color',colpur,'LineWidth',2)
+plot(1000.*gamma_m(1,:),pfull_2km,'Color',colyel)
+plot(1000.*gamma_m_E25,pfull_2km,'Color',colpur)
 xlim([0 10])
 set(gca,'Ydir','reverse')
 title('Lapse Rate')
 xlabel('K/km')
 
-%figure_full_prof=figure
 subplot(2,3,3)
 ylim([10000 100000]);
-plot(rad_prof_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize);
+plot(rad_heat_prof_25,pfull_2km,'Color',colyel,'LineWidth',2);
 set(gca,'Ydir','reverse')
 title('Diabatic Heating')
 xlabel('K/day')
 hold on
-plot(rad_prof_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize);
-plot(tdtconv_prof_arr(1,:)+tdtls_prof_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize);
-plot(tdtconv_prof_arr(2,:)+tdtls_prof_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize);
+plot(rad_heat_prof_E25,pfull_2km,'Color',colpur,'LineWidth',2);
+plot(tdtconv_25km_prof+tdtls_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2);
+plot(tdtconv_E25km_prof+tdtls_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2);
 
 subplot(2,3,5)
 ylim([10000 100000]);
-plot(10000*stap_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize)
+plot(10000*stastapar(1,:),pfull_2km,'-o','Color',colyel)
 set(gca,'Ydir','reverse')
 hold on
-plot(10000*stap_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize)
 xlim([-10 0])
 xlabel('K/100hPa')
 title('Static Stability Par')
 
 subplot(2,3,6)
 ylim([10000 100000])
-plot(th_e_gcm_arr(1,:),pfull_2km,'Color',colyel,'LineWidth',linesize)
+plot(theta_e_gcm_mid,pfull_2km,'Color',colyel,'LineWidth',2)
 hold on
-plot(th_e_gcm_arr(2,:),pfull_2km,'Color',colnoconv,'LineWidth',linesize)
 set(gca,'Ydir','reverse')
-plot(th_gcm_arr(1,:),pfull_2km,'Color',colyel)
-plot(th_gcm_arr(2,:),pfull_2km,'Color',colnoconv)
+plot(theta_e_E25_gcm_mid,pfull_2km,'Color',colpur,'LineWidth',2)
+plot(theta_gcm(80,:),pfull_2km,'Color',colyel)
+plot(theta_E25_gcm(80,:),pfull_2km,'Color',colpur)
 title('Equivalent Pot Temp')
 xlabel('K')
 xlim([295 345])
 
-tit_en=strcat('Mock Walker Cell: ','Conv vs. Noconv');
+tit_en=strcat('Mock Walker Cell: ','Vert Structure');
 sgtitle(tit_en)
 
+
+gam_diff=-gamma(1,:)-gamma_m(1,:);
+gam_diff_E25=-gamma_E25(1,:)-gamma_m_E25(1,:);
+
+figure
+ylim([20000 85000]);
+box('on');
+hold('on');
+plot(-1000.*gam_diff,pfull_2km,'Color',colyel,'LineWidth',2)
+hold on
+plot(-1000.*gam_diff_E25,pfull_2km,'Color',colpur,'LineWidth',2)
+xlim([-2 2])
+set(gca,'Ydir','reverse')
+title('Lapse Rate')
+xlabel('K/km')
 
 
 
 stop
+%=====================================================
 
 figure
 plot(temp_crm_ztmn(1000,top_2plot:33),zzfull(top_2plot:33),'k')
