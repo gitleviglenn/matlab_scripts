@@ -431,8 +431,16 @@ liq_25km_ztmn=read_1var_ztmn(source_gcm_month,'tot_liq_amt');
 liq_25km_prof=squeeze(mean(liq_25km_ztmn,1));
 ice_25km_ztmn=read_1var_ztmn(source_gcm_month,'tot_ice_amt');
 ice_25km_prof=squeeze(mean(ice_25km_ztmn,1));
+
+liq_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'tot_liq_amt');
+liq_E25km_prof=squeeze(mean(liq_E25km_ztmn,1));
+ice_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'tot_ice_amt');
+ice_E25km_prof=squeeze(mean(ice_E25km_ztmn,1));
+
 liq_wat_25km_ztmn=read_1var_ztmn(source_gcm_month,'liq_wat');
 liq_wat_25km_prof=squeeze(mean(liq_wat_25km_ztmn,1));
+liq_wat_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'liq_wat');
+liq_wat_E25km_prof=squeeze(mean(liq_wat_E25km_ztmn,1));
 
 liq_2km_ztmn=read_1var_ztmn(source_2km_month,'tot_liq_amt');
 liq_2km_prof=squeeze(mean(liq_2km_ztmn,1));
@@ -458,7 +466,7 @@ liq_25km_tot_ztmn=liq_25km_ztmn+ice_25km_ztmn;
 % relative humidity
 % for the 2km runs, the time dimension is often not present becuase it is 1
 
-hur_25km_ztmn  = read_1var_ztmn(source_gcm_month,'rh');
+hur_25km_ztmn   = read_1var_ztmn(source_gcm_month,'rh');
 hur_E25km_ztmn  = read_1var_ztmn(source_gcm_month_noconv,'rh');
 
 hur_2km_zmn=squeeze(mean(hur_2km,2));

@@ -18,6 +18,7 @@ clear gamma_d;
 theta_gcm   = zeros(nlat,nlev);
 theta_E25_gcm   = zeros(nlat,nlev);
 theta_e_gcm = zeros(nlat,nlev);
+theta_e_E25_gcm = zeros(nlat,nlev);
 theta_crm1  = zeros(4000,nlev);
 theta_e_crm1  = zeros(4000,nlev);
 theta_crm2  = zeros(2000,nlev);
@@ -98,6 +99,7 @@ for jx=1:160;
   gamma_full(jx,:)    =lapser(temp_eq_ztmn,rho_25km,jx,tsfc_mn,psurf_zmn,pfull_gen);
 end
 gamma(1,:)=mean(gamma_full,1);
+gamma_E25=mean(gamma_E25_full,1);
 
 gamma_ascent=gamma_full(80:120,:);
 gamma_asc(1,:)=mean(gamma_ascent,1);
@@ -113,7 +115,7 @@ gamma_m(1,:)=moistadiabat(temp_eq_prof,qs);
 temp_eq_E25_prof=temp_eq_E25_ztmn(plot_lat,:);
 es(:)=satvappres(temp_eq_E25_prof);
 qs_E25(:)=qstar(es,pfull_gen_E25);
-gamma_m_E25(1,:)=moistadiabat(temp_eq_E25_prof,qs_E25);
+gamma_m_E25=moistadiabat(temp_eq_E25_prof,qs_E25);
 
 zfull_prof=squeeze(zfull_25km_ztmn(plot_lat,:));
 zfull_E25_prof=squeeze(zfull_E25km_ztmn(plot_lat,:));
