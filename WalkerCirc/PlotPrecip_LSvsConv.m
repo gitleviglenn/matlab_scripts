@@ -5,6 +5,7 @@
 %
 % levi silvers                                   april 2020
 %--------------------------------------------------------------------------
+path_new='/Users/silvers/data/WalkerCell/testing_20181203';
 
 source_gcm_l_mly           =strcat(path_new,'/c8x640L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc');
 source_gcm_l_mly_lwoff     =strcat(path_new,'/c8x640L33_am4p0_25km_wlkr_ent0p9_lwoff/1980th1983.atmos_month_tmn.nc');
