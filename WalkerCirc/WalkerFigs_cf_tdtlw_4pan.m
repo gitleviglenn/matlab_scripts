@@ -240,3 +240,12 @@ ylabel('hPa')
 tit_clt=strcat('Domain mean tdtlw');
 title(tit_clt)
 
+% reset the source paths to make sure that we don't have any unintended lowoff data...
+%source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
+source_gcm_month_noconv='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9_noconv/1980th1983.atmos_month_tmn.nc';
+source_gcm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_25km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
+source_100km_sm_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x40L33_am4p0_100km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
+source_100km_lg_month='/Users/silvers/data/WalkerCell/testing_20181203/c8x160L33_am4p0_100km_wlkr_ent0p9/1980th1983.atmos_month_tmn.nc';
+source_2km_month='/Users/silvers/data/WalkerCell/testing_20181203/c50x2000L33_am4p0_2km_wlkr_4K/1979_6mn.atmos_month.nc';
+source_1km_month='/Users/silvers/data/WalkerCell/testing_20181203/c10x4000L33_am4p0_1km_wlkr_4K/1979_6mn.atmos_month.nc';
+
