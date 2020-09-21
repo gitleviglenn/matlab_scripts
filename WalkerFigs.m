@@ -98,13 +98,29 @@ thick=2;
 
 % a few computation before makeing figures...
 rh_25km_ind=hur_25km_ztmn;
+rh_25km_sub=rh_25km_ind(1:40,:);
 rh_25km_sub_a=rh_25km_ind(1:40,:);
-rh_25km_sub=squeeze(mean(rh_25km_sub_a,1));
+rh_25km_sub_b=rh_25km_ind(120:160,:);
+rh_25km_sub_prof_a=squeeze(mean(rh_25km_sub_a,1));
+rh_25km_sub_prof_b=squeeze(mean(rh_25km_sub_b,1));
+rh_25km_sub_prof=(rh_25km_sub_prof_a+rh_25km_sub_prof_b)/2.;
+
+rh_100km_ind=hur_100km_ztmn;
+rh_100km_sub_a=rh_100km_ind(1:10,:);
+rh_100km_sub_b=rh_100km_ind(30:40,:);
+rh_100km_sub_prof_a=squeeze(mean(rh_100km_sub_a,1));
+rh_100km_sub_prof_b=squeeze(mean(rh_100km_sub_b,1));
+hur_100km_sub_prof=(rh_100km_sub_prof_a+rh_100km_sub_prof_b)/2.;
+
 rh_25km_tmp=squeeze(mean(rh_25km_ind,1));
 
 rh_E25km_ind=hur_E25km_ztmn;
 rh_E25km_sub_a=rh_E25km_ind(1:40,:);
-rh_E25km_sub=squeeze(mean(rh_E25km_sub_a,1));
+rh_E25km_sub_b=rh_E25km_ind(120:160,:);
+rh_E25km_sub_prof_a=squeeze(mean(rh_E25km_sub_a,1));
+rh_E25km_sub_prof_b=squeeze(mean(rh_E25km_sub_b,1));
+rh_E25km_sub_prof=(rh_E25km_sub_prof_a+rh_E25km_sub_prof_b)/2.;
+
 rh_E25km_tmp=squeeze(mean(rh_E25km_ind,1));
 
 
@@ -153,22 +169,22 @@ end
 % arr_ind=2 should correspond to the case with no parameterized convection
 %arr_ind=1; % should be set in WalkerCell.m where the type of simulation is set. 
 
-rh_tmp_arr(arr_ind,:)=rh_25km_tmp;
-rh_sub_arr(arr_ind,:)=rh_25km_sub;
-ice_prof_arr(arr_ind,:)=ice_25km_prof;
-liq_prof_arr(arr_ind,:)=liq_25km_prof;
-gam_arr(arr_ind,:)=gamma(1,:);
-gam_asc_arr(arr_ind,:)=gamma_asc(1,:);
-gam_m_arr(arr_ind,:)=gamma_m(1,:);
-rad_prof_arr(arr_ind,:)=rad_heat_prof_25;
-tdtconv_prof_arr(arr_ind,:)=tdtconv_25km_prof;
-tdtls_prof_arr(arr_ind,:)=tdtls_25km_prof;
+%rh_tmp_arr(arr_ind,:)=rh_25km_tmp;
+%rh_sub_arr(arr_ind,:)=rh_25km_sub;
+%ice_prof_arr(arr_ind,:)=ice_25km_prof;
+%liq_prof_arr(arr_ind,:)=liq_25km_prof;
+%gam_arr(arr_ind,:)=gamma(1,:);
+%gam_asc_arr(arr_ind,:)=gamma_asc(1,:);
+%gam_m_arr(arr_ind,:)=gamma_m(1,:);
+%rad_prof_arr(arr_ind,:)=rad_heat_prof_25;
+%tdtconv_prof_arr(arr_ind,:)=tdtconv_25km_prof;
+%tdtls_prof_arr(arr_ind,:)=tdtls_25km_prof;
 %stap_arr(arr_ind,:)=stastapar(1,:);
-stap_arr(arr_ind,:)=stasta_dmn;
-%th_e_gcm_arr(arr_ind,:)=theta_e_gcm_mid; % theta_e_gcm has dims of 160:33; theta_e_gcm_mid dims of 33
-%th_gcm_arr(arr_ind,:)=theta_gcm(100,:);  % theta_gcm has dims of 160:33 and is computed in compTheta.m
-th_e_gcm_arr(arr_ind,:)=theta_e_dmn; % theta_e_gcm has dims of 160:33; theta_e_gcm_mid dims of 33
-th_gcm_arr(arr_ind,:)=theta_dmn;  % theta_gcm has dims of 160:33 and is computed in compTheta.m
+%stap_arr(arr_ind,:)=stasta_dmn;
+%%th_e_gcm_arr(arr_ind,:)=theta_e_gcm_mid; % theta_e_gcm has dims of 160:33; theta_e_gcm_mid dims of 33
+%%th_gcm_arr(arr_ind,:)=theta_gcm(100,:);  % theta_gcm has dims of 160:33 and is computed in compTheta.m
+%th_e_gcm_arr(arr_ind,:)=theta_e_dmn; % theta_e_gcm has dims of 160:33; theta_e_gcm_mid dims of 33
+%th_gcm_arr(arr_ind,:)=theta_dmn;  % theta_gcm has dims of 160:33 and is computed in compTheta.m
 
 linesize=2;
 colnoconv=colblu;
@@ -388,6 +404,8 @@ set(gca,'Ydir','reverse')
 tit_en=strcat('moist static energy divided by cp');
 sgtitle(tit_en)
 
+
+% 2D plot of dry static energy 
 figure
 subplot(1,3,1)
 msts_cons=[300.,305.,310.,315.,320.,325.,330.,335.,340.,345.,350.,355.,360.];
@@ -420,15 +438,17 @@ plot(hsat_25km_full(80,:)./cp,pfull_2km,'Color',colyel,'LineWidth',thck) % the l
 set(gca,'Ydir','reverse')
 ylim([20000 100000])
 hold on
-plot(h_25km(80,:),pfull_2km,'Color',colyel,'LineWidth',thck)
-plot(s_25km(80,:),pfull_2km,'Color',colyel,'LineWidth',thck)
+plot(h_25km(40,:),pfull_2km,'Color',colyel,'LineWidth',thck)
+plot(s_25km(40,:),pfull_2km,'Color',colyel,'LineWidth',thck)
 plot(hsat_2km_full(850,:)./cp,pfull_2km,'Color',colblu,'LineWidth',thck)
-plot(h_2km(850,:),pfull_2km,'Color',colblu,'LineWidth',thck)
-plot(s_2km(850,:),pfull_2km,'Color',colblu,'LineWidth',thck)
+%plot(h_2km(850,:),pfull_2km,'Color',colblu,'LineWidth',thck)
+%plot(s_2km(850,:),pfull_2km,'Color',colblu,'LineWidth',thck)
+plot(h_2km(1000,:),pfull_2km,'Color',colblu,'LineWidth',thck)
+plot(s_2km(1000,:),pfull_2km,'Color',colblu,'LineWidth',thck)
 plot(hsat_1km_full(1750,:)./cp,pfull_2km,'Color',colgrn,'LineWidth',thck)
 plot(h_1km(1750,:),pfull_2km,'Color',colgrn,'LineWidth',thck)
 plot(s_1km(1750,:),pfull_2km,'Color',colgrn,'LineWidth',thck)
-title('Static Energies over the warm pool: s,h,hsat')
+title('Profiles of Static Energies over the warm pool: s,h,hsat')
 
 figure
 plot(hsat_25km_dmn./cp,pfull_2km,'Color',colyel,'LineWidth',thck)
@@ -738,82 +758,140 @@ sgtitle(tit_en)
 %
 %linesize=2;
 
+WalkerFigs_cf_tdtlw_4pan
+
 % ConvNoConv
 % figure comparing convection vs no convection in the 25km simulations
-
+% plot a row of panels comparing P25 and E25 experiments
 figure 
-subplot(2,3,1)
+subplot(1,5,1)
+ax1=gca;
 plot(rh_25km_tmp,pfull_2km,'Color',colyel,'LineWidth',2);
-%set(gca,'YScale','log')
+set(ax1,'YScale','Log')
+set(ax1,'Ydir','reverse')
+ylim(ax1,[10000 100000]);
+ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
+ax1.XLim=[0 100];
 hold on
+plot(hur_100km_prof,pfull_2km,'r','LineWidth',2);
 plot(rh_E25km_tmp,pfull_2km,'Color',colpur,'LineWidth',2);
-plot(rh_25km_sub,pfull_2km,'--','Color',colyel,'LineWidth',2);
-plot(rh_E25km_sub,pfull_2km,'--','Color',colpur,'LineWidth',2);
-set(gca,'Ydir','reverse')
-%title('equivalent pot temp')
-ylim([10000 100000])
+plot(rh_25km_sub_prof,pfull_2km,'--','Color',colyel,'LineWidth',2);
+plot(rh_E25km_sub_prof,pfull_2km,'--','Color',colpur,'LineWidth',2);
+plot(hur_100km_sub_prof,pfull_2km,'--r','LineWidth',2);
+%ylim([10000 100000])
 title('Relative Humidity')
 xlabel('%')
 
-subplot(2,3,2)
-plot(ice_25km_prof+liq_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2)
-ylim([10000 100000]);
-set(gca,'Ydir','reverse')
+subplot(1,5,2)
+ax1=gca;
+plot(1000.*(ice_25km_prof+liq_25km_prof),pfull_2km,'Color',colyel,'LineWidth',2)
+set(ax1,'YScale','Log')
+set(ax1,'Ydir','reverse')
+ylim(ax1,[10000 100000]);
+ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
+%ax1.XLi3m=[0 100];
 hold on
-plot(ice_E25km_prof+liq_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2)
-%plot(liq_wat_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2)
-title('Mn Liq + Ice ')
-xlabel('kg/kg')
+plot(1000.*(ice_100km_prof+liq_100km_prof),pfull_2km,'r','LineWidth',2)
+plot(1000.*(ice_E25km_prof+liq_E25km_prof),pfull_2km,'Color',colpur,'LineWidth',2)
+title('Domain Mean Liq + Ice ')
+xlabel('g/kg')
 
-subplot(2,3,4)
-% to plot the data points with an open circle use '-o' before 'Color'
-ylim([10000 100000]);
-box('on');
-hold('on');
-plot(-1000.*gamma(1,:),pfull_2km,'Color',colyel,'LineWidth',2)
+subplot(1,5,3)
+ax1=gca;
+plot(clt_ctl_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2)
+set(ax1,'YScale','Log')
+set(ax1,'Ydir','reverse')
+ylim(ax1,[10000 100000]);
+ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
+%ax1.XLi3m=[0 100];
 hold on
-plot(-1000.*gamma_E25,pfull_2km,'Color',colpur,'LineWidth',2)
-plot(1000.*gamma_m(1,:),pfull_2km,'Color',colyel)
-plot(1000.*gamma_m_E25,pfull_2km,'Color',colpur)
-xlim([0 10])
-set(gca,'Ydir','reverse')
-title('Lapse Rate')
-xlabel('K/km')
+plot(clt_ctl_100km_prof,pfull_2km,'r','LineWidth',2)
+plot(clt_ctl_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2)
+title('Cloud Fraction')
+xlabel('%')
 
-subplot(2,3,3)
+subplot(1,5,4)
+ax1=gca;
 ylim([10000 100000]);
 plot(rad_heat_prof_25,pfull_2km,'Color',colyel,'LineWidth',2);
-set(gca,'Ydir','reverse')
-title('Diabatic Heating')
+set(ax1,'YScale','Log')
+set(ax1,'Ydir','reverse')
+ylim(ax1,[10000 100000]);
+ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
+ax1.XLim=[-7 9];
+title('Heating')
 xlabel('K/day')
 hold on
+plot(rad_heat_prof_100,pfull_2km,'r','LineWidth',2);
 plot(rad_heat_prof_E25,pfull_2km,'Color',colpur,'LineWidth',2);
+plot(tdtconv_100km_prof+tdtls_100km_prof,pfull_2km,'r','LineWidth',2);
 plot(tdtconv_25km_prof+tdtls_25km_prof,pfull_2km,'Color',colyel,'LineWidth',2);
 plot(tdtconv_E25km_prof+tdtls_E25km_prof,pfull_2km,'Color',colpur,'LineWidth',2);
 
-subplot(2,3,5)
+subplot(1,5,5)
+ax1=gca;
 ylim([10000 100000]);
-plot(10000*stastapar(1,:),pfull_2km,'-o','Color',colyel)
-set(gca,'Ydir','reverse')
-hold on
-xlim([-10 0])
-xlabel('K/100hPa')
-title('Static Stability Par')
-
-subplot(2,3,6)
-ylim([10000 100000])
-plot(theta_e_gcm_mid,pfull_2km,'Color',colyel,'LineWidth',2)
-hold on
-set(gca,'Ydir','reverse')
-plot(theta_e_E25_gcm_mid,pfull_2km,'Color',colpur,'LineWidth',2)
-plot(theta_gcm(80,:),pfull_2km,'Color',colyel)
-plot(theta_E25_gcm(80,:),pfull_2km,'Color',colpur)
-title('Equivalent Pot Temp')
+plot(temp_100km_prof_bias,pfull_2km,'r','LineWidth',2);
+set(ax1,'YScale','Log')
+set(ax1,'Ydir','reverse')
+ylim(ax1,[10000 100000]);
+ax1.YTick = [10000 20000 30000 40000 50000 60000 70000 80000 90000 100000]
+ax1.YTickLabels = [100 200 300 " " 500 " " 700 " " 900 1000]
+ax1.FontSize = 14;
+ax1.XLim=[-3 3];
+title('Temperature Bias')
 xlabel('K')
-xlim([295 345])
+hold on
+plot(temp_25km_prof_bias,pfull_2km,'Color',colyel,'LineWidth',2);
+plot(temp_E25km_prof_bias,pfull_2km,'Color',colpur,'LineWidth',2);
 
-tit_en=strcat('Mock Walker Cell: ','Vert Structure');
-sgtitle(tit_en)
+%subplot(1,4,4)
+%% to plot the data points with an open circle use '-o' before 'Color'
+%ylim([10000 100000]);
+%box('on');
+%hold('on');
+%plot(-1000.*gamma(1,:),pfull_2km,'Color',colyel,'LineWidth',2)
+%hold on
+%plot(-1000.*gamma_E25,pfull_2km,'Color',colpur,'LineWidth',2)
+%plot(1000.*gamma_m(1,:),pfull_2km,'Color',colyel)
+%plot(1000.*gamma_m_E25,pfull_2km,'Color',colpur)
+%xlim([0 10])
+%set(gca,'Ydir','reverse')
+%title('Lapse Rate')
+%xlabel('K/km')
+%
+
+%subplot(2,3,5)
+%ylim([10000 100000]);
+%plot(10000*stastapar(1,:),pfull_2km,'-o','Color',colyel)
+%set(gca,'Ydir','reverse')
+%hold on
+%xlim([-10 0])
+%xlabel('K/100hPa')
+%title('Static Stability Par')
+%
+%subplot(2,3,6)
+%ylim([10000 100000])
+%plot(theta_e_gcm_mid,pfull_2km,'Color',colyel,'LineWidth',2)
+%hold on
+%set(gca,'Ydir','reverse')
+%plot(theta_e_E25_gcm_mid,pfull_2km,'Color',colpur,'LineWidth',2)
+%plot(theta_gcm(80,:),pfull_2km,'Color',colyel)
+%plot(theta_E25_gcm(80,:),pfull_2km,'Color',colpur)
+%title('Equivalent Pot Temp')
+%xlabel('K')
+%xlim([295 345])
+
+%tit_en=strcat('Mock Walker Cell: ','Vert Structure');
+%sgtitle(tit_en)
 
 
 gam_diff=-gamma(1,:)-gamma_m(1,:);
