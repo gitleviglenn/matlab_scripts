@@ -971,6 +971,106 @@ clabel(C,h,v);
 title(' total tdt K/d')
 set(gca,'Ydir','reverse')
 
+
+%========================
+figure
+subplot(3,3,1)
+lw_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtlw_25_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('lw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,2)
+%heating_cons=[-5.0,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtsw_25_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('sw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,3)
+%tot_cons=[-5.0,-4.5,-4.0,-3.5,-3.,-2.5,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.,3.5,4.,4.5,5.,5.5,6.,6.5,7.,7.5,8.,8.5,9.,9.5,10.];
+tot_cons=[-3.,-2.0,-1.,0.0,1.0,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.];
+%tot_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',tot_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,4)
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtlw_E25_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('lw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,5)
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdtsw_E25_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('sw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,6)
+%heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',tot_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,7)
+[C,h]=contourf(1:xcrm_ngp,pfull_2km,tdtlw_2_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('lw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,8)
+[C,h]=contourf(1:xcrm_ngp,pfull_2km,tdtsw_2_ztmn',lw_cons);
+v=[-3.5,-2.5,-1.5,-0.5,0.0,0.5,1.0,2.0]; % if labels are desired on contours
+clabel(C,h,v);
+title('sw heating K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,3,9)
+%heating_cons=[-3.,-2.0,-1.5,-1.,-0.5,0.0,0.5,1.0,1.5,2.,2.5,3.];
+[C,h]=contourf(1:xcrm_ngp,pfull_2km,tdt_total_2km_ztmn',tot_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-3.0,-1.5,-0.5,0.0,0.5,1.5,3.0]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+%=====================================
+figure
+subplot(3,1,1)
+%tot_cons=[-3.,-2.,-1.,0.0,1.0,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.];
+tot_cons=[-2.,-1.,0.0,1.,2.,4.,6.,8.,10.,12.,14.,16.,18.,20.];
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_25km_ztmn',tot_cons);
+%v=[-0.5,0.0,0.5,1.0,2.0,3.0]; % if labels are desired on contours
+v=[-0.1,1.,4,6,8,10,12,14,16]; % if labels are desired on contours
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,1,2)
+[C,h]=contourf(1:xgcm_ngp,pfull_2km,tdt_total_E25km_ztmn',tot_cons);
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
+subplot(3,1,3)
+[C,h]=contourf(1:xcrm_ngp,pfull_2km,tdt_total_2km_ztmn',tot_cons);
+clabel(C,h,v);
+title(' total tdt K/d')
+set(gca,'Ydir','reverse')
+
 %
 
 tit_en=strcat('Energetics: ',tit_st);

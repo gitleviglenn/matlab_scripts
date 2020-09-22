@@ -252,6 +252,8 @@ cltscale=100. % convert to percentage of cloud fraction
 % precipitation
 precip_25km_daily=ncread(source_gcm_daily,'precip');
 precip_25km=ncread(source_gcm_month,'precip'); % [xdim ydim tdim], last four yrs of 5 yr run
+precip_cv_25km=ncread(source_gcm_month,'prec_conv'); % [xdim ydim tdim], last four yrs of 5 yr run
+precip_ls_25km=ncread(source_gcm_month,'prec_ls'); % [xdim ydim tdim], last four yrs of 5 yr run
 precip_25km_lg=ncread(source_25km_lg_month,'precip'); % [xdim ydim tdim], last four yrs of 5 yr run
 precip_100km=ncread(source_100km_lg_month,'precip'); % [xdim ydim tdim], last four yrs of 5 yr run
 precip_100km_sm=ncread(source_100km_sm_month,'precip'); % [xdim ydim tdim], last four yrs of 5 yr run
@@ -350,6 +352,7 @@ u_1km_dmn      = squeeze(mean(u_1km_ztmn,1));
 
 % vertical velocity
 w_25km=ncread(source_gcm_month,'w');
+w_E25km_ztmn       = read_1var_ztmn(source_gcm_month_noconv,'w');
 w_25km_ztmn       = read_1var_ztmn(source_gcm_month,'w');
 w_25km_lg_ztmn    = read_1var_ztmn(source_25km_lg_month,'w');
 
@@ -432,6 +435,11 @@ liq_25km_prof=squeeze(mean(liq_25km_ztmn,1));
 ice_25km_ztmn=read_1var_ztmn(source_gcm_month,'tot_ice_amt');
 ice_25km_prof=squeeze(mean(ice_25km_ztmn,1));
 
+liq_100km_ztmn=read_1var_ztmn(source_100km_sm_month,'tot_liq_amt');
+liq_100km_prof=squeeze(mean(liq_100km_ztmn,1));
+ice_100km_ztmn=read_1var_ztmn(source_100km_sm_month,'tot_ice_amt');
+ice_100km_prof=squeeze(mean(ice_100km_ztmn,1));
+
 liq_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'tot_liq_amt');
 liq_E25km_prof=squeeze(mean(liq_E25km_ztmn,1));
 ice_E25km_ztmn=read_1var_ztmn(source_gcm_month_noconv,'tot_ice_amt');
@@ -466,6 +474,9 @@ liq_25km_tot_ztmn=liq_25km_ztmn+ice_25km_ztmn;
 % relative humidity
 % for the 2km runs, the time dimension is often not present becuase it is 1
 
+hur_100km_ztmn  = read_1var_ztmn(source_100km_sm_month,'rh');
+hur_100km_prof  = squeeze(mean(hur_100km_ztmn,1));
+
 hur_25km_ztmn   = read_1var_ztmn(source_gcm_month,'rh');
 hur_E25km_ztmn  = read_1var_ztmn(source_gcm_month_noconv,'rh');
 
@@ -494,9 +505,18 @@ Walker_readfrom_source  % --> script that reads in data from the data files
 %q_1km_zmn=squeeze(mean(q_1km,2));
 %q_1km_ztmn=squeeze(q_1km_zmn(:,:,1));
 
+temp_100km_ztmn = read_1var_ztmn(source_100km_sm_month,'temp');
+temp_100km_prof = squeeze(mean(temp_100km_ztmn,1));
 
 temp_25km_ztmn = read_1var_ztmn(source_gcm_month,'temp');
+temp_25km_prof = squeeze(mean(temp_25km_ztmn,1));
 temp_E25km_ztmn = read_1var_ztmn(source_gcm_month_noconv,'temp');
+temp_E25km_prof = squeeze(mean(temp_E25km_ztmn,1));
+
+temp_100km_prof_bias =temp_100km_prof-temp_100km_prof;
+temp_25km_prof_bias  =temp_25km_prof-temp_100km_prof;
+temp_E25km_prof_bias =temp_E25km_prof-temp_100km_prof;
+
 tsurf1=squeeze(tsurf_fulltime(:,4,1)); % indices shouldn't matter here...
 
 clt_100km_ztmn = read_1var_ztmn(source_100km_sm_month,'cld_amt');
@@ -725,6 +745,7 @@ hold on
 plot(xcrm_1km(1:xcrm_1km_ngp),w_1km_smooth_ts,'Color',colgrn,'LineWidth',1.5);
 %plot(xgcm(1:xgcm_ngp),w_25km_ztmn(:,wlev),'c','LineWidth',2); % used for the lwoff
 plot(xgcm(1:xgcm_ngp),w_25km_ztmn(:,wlev),'Color',colyel,'LineWidth',2);
+plot(xgcm(1:xgcm_ngp),w_E25km_ztmn(:,wlev),'Color',colpur,'LineWidth',2);
 %plot(xgcm_640(1:xgcm_lg_ngp),w_25km_lg_ztmn(:,wlev),'--','Color',colyel,'LineWidth',2);
 %plot(xgcm(1:xgcm_ngp),w_100km_lg_ztmn(:,wlev),'--r','LineWidth',2);
 plot(xgcm_40(1:xgcm_sm_ngp),w_100km_sm_ztmn(:,wlev),'r','LineWidth',2);
