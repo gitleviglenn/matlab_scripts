@@ -1,6 +1,12 @@
+%---------------------------------------------------------------------
 function var = stastap(temp,hur,plot_lat,psfc,press,zfull)
-% compute the static stability parameter, as shown in Mapes
-% 2001, figure 1b.  
+%---------------------------------------------------------------------
+% compute the 1D dry and moist static energy; sten(p) and msts(p) 
+%
+% also computes the static stability parameter as in Mapes, 2001
+%
+% levi silvers                                    June 2019
+%---------------------------------------------------------------------
 
 % dry static energy: sts=cp*T+gz
 phys_constants
@@ -12,7 +18,6 @@ sts=zeros(1,33);
 for j=1:33
     sts(j)=cp*temp(plot_lat,j)+grav*zfull(j);
     msts(j)=cp*temp(plot_lat,j)+grav*zfull(j)+hur(plot_lat,j)*latheat;
-    %sts(j)=cp%*temp(plot_lat,j)%+grav*zfull(j);
 end
 
 %figure

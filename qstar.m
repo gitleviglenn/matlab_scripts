@@ -6,5 +6,5 @@ function var = qstar(estar,press)
 phys_constants
 
 for j=1:33
-	var(j) = epsilon.*estar(j)/press(j);
+  var(j) = epsilon.*estar(j)/press(j);
 end

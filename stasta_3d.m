@@ -1,11 +1,12 @@
-function [msts,sten,ststp] = stasta_3d(temp,hur,nxg,psfc,press,zfull)
 %--------------------------------------------------------------
-% compute the dry and moist static energy 
+function [msts,sten,ststp] = stasta_3d(temp,hur,nxg,psfc,press,zfull)
+%---------------------------------------------------------------------
+% compute the 2D dry and moist static energy; sten(x,p) and msts(x,p) 
 %
-% also computes the moist static energy
+% also computes the static stability parameter as in Mapes, 2001
 %
 % levi silvers                                    June 2019
-%--------------------------------------------------------------
+%---------------------------------------------------------------------
 
 % dry static energy: sts=cp*T+gz
 phys_constants
@@ -18,11 +19,10 @@ ststp=zeros(nxg,33); % static stability par
 
 % compute the static stability
 for i=1:nxg
-for j=1:33
+  for j=1:33
     sten(i,j)=cp*temp(i,j)+grav*zfull(j);
     msts(i,j)=cp*temp(i,j)+grav*zfull(j)+hur(i,j)*latheat;
-    %sts(j)=cp%*temp(plot_lat,j)%+grav*zfull(j);
-end
+  end
 end
 %% compute the static stability parameter [K/Pa]
 for i=1:nxg
