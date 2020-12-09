@@ -7,7 +7,7 @@ phys_constants
 
 %temp=temp-273.15; % convert to celcius
 
-for j=1:33
+for j=1:33   % compute e_star, or saturation vapor pressure
   var(j) = 6.11*exp((latheat/Rv)*(1./273-1./temp(j)));
 end
 

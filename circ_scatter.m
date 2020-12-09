@@ -142,6 +142,173 @@ xlabel('Lapse Rate')
 ylabel('Circulation Strength')
 sgtitle('SST = 295K')
 
+%% 
 
+figure
+% subsidence
+foo={TableA2RCElarge295{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,1)
+scatter(foob,circ_gcm(1,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('OLR')
+ylabel('sub Circulation Strength')
 
+foo={TableA2RCElarge295{GCMs(:),10}};
+bar={TableA2RCElarge295{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,4)
+scatter(enthalpy,circ_gcm(1,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Enthalpy Flux')
+ylabel('sub Circulation Strength')
 
+foo={TableA2RCElarge295{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,7)
+scatter(foob,circ_gcm(1,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Lapse Rate')
+ylabel('sub Circulation Strength')
+sgtitle('SST = 295K')
+
+% ascending
+foo={TableA2RCElarge295{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,2)
+scatter(foob,circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('OLR')
+ylabel('asc Circulation Strength')
+
+foo={TableA2RCElarge295{GCMs(:),10}};
+bar={TableA2RCElarge295{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,5)
+scatter(enthalpy,circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Enthalpy Flux')
+ylabel('asc Circulation Strength')
+
+foo={TableA2RCElarge295{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,8)
+scatter(foob,circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Lapse Rate')
+ylabel('asc Circulation Strength')
+sgtitle('SST = 295K')
+
+% total
+foo={TableA2RCElarge295{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,3)
+scatter(foob,circ_gcm(1,1,:)+circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+xlabel('OLR')
+ylabel('tot Circulation Strength')
+
+foo={TableA2RCElarge295{GCMs(:),10}};
+bar={TableA2RCElarge295{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,6)
+scatter(enthalpy,circ_gcm(1,1,:)+circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+xlabel('Enthalpy Flux')
+ylabel('tot Circulation Strength')
+
+foo={TableA2RCElarge295{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,9)
+scatter(foob,circ_gcm(1,1,:)+circ_gcm(1,2,:),[],col,'filled','SizeData',100)
+xlabel('Lapse Rate')
+ylabel('tot Circulation Strength')
+sgtitle('SST = 295K')
+
+% SST 305K
+figure
+% subsidence
+foo={TableA2RCElarge305{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,1)
+scatter(foob,circ_gcm(3,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('OLR')
+ylabel('sub Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),10}};
+bar={TableA2RCElarge305{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,4)
+scatter(enthalpy,circ_gcm(3,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Enthalpy Flux')
+ylabel('sub Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,7)
+scatter(foob,circ_gcm(3,1,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Lapse Rate')
+ylabel('sub Circulation Strength')
+
+% ascending
+foo={TableA2RCElarge305{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,2)
+scatter(foob,circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('OLR')
+ylabel('asc Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),10}};
+bar={TableA2RCElarge305{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,5)
+scatter(enthalpy,circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Enthalpy Flux')
+ylabel('asc Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,8)
+scatter(foob,circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+ylim([5 25])
+xlabel('Lapse Rate')
+ylabel('asc Circulation Strength')
+
+% total
+foo={TableA2RCElarge305{GCMs(:),8}};
+foob=cell2mat(foo);
+subplot(3,3,3)
+scatter(foob,circ_gcm(3,1,:)+circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+xlabel('OLR')
+ylabel('tot Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),10}};
+bar={TableA2RCElarge305{GCMs(:),11}};
+foob=cell2mat(foo);
+barf=cell2mat(bar);
+enthalpy=foob+barf;
+subplot(3,3,6)
+scatter(enthalpy,circ_gcm(3,1,:)+circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+xlabel('Enthalpy Flux')
+ylabel('tot Circulation Strength')
+
+foo={TableA2RCElarge305{GCMs(:),17}};
+foob=cell2mat(foo);
+subplot(3,3,9)
+scatter(foob,circ_gcm(3,1,:)+circ_gcm(3,2,:),[],col,'filled','SizeData',100)
+xlabel('Lapse Rate')
+ylabel('tot Circulation Strength')
+sgtitle('SST = 305K')
