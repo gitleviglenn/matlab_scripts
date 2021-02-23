@@ -32,6 +32,8 @@ exp_string=strcat(model_generation,'_GCM_RCE_large305_0D_');
 glbmn_toa_fb
 rad_305_array=rad_ts_array;
 
+
+
 % compute a Cess-style sensitivity
 cess_a=zeros(5,ts_length);
 cess_b=zeros(5,ts_length);
@@ -39,6 +41,13 @@ cess_a=-(3.7*5)./(rad_300_array-rad_295_array);
 lambda_a=(rad_300_array-rad_295_array)/5;
 cess_b=-(3.7*5)./(rad_305_array-rad_300_array);
 lambda_b=(rad_305_array-rad_300_array)/5;
+
+%lambda_tot=(rad_305_array-rad_295_array)/10;
+lambda_tot=(rad_305_array(1,equilt+1:ts_length)-rad_295_array(1,equilt+1:ts_length))/10;
+cess_tot_c6=-3.7./lambda_tot;
+
+lambda_a_c6=mean(lambda_a,2);
+lambda_b_c6=mean(lambda_b,2);
 
 % comppute the mean equilibrated(neglect 50 days) Cess sensitivity 
 cess_eq(3,:)=cess_a(1,equilt+1:ts_length);
@@ -100,16 +109,24 @@ lambda_a=(rad_300_array-rad_295_array)/5;
 cess_b=-(3.7*5)./(rad_305_array-rad_300_array);
 lambda_b=(rad_305_array-rad_300_array)/5;
 
+lambda_a_c5=mean(lambda_a,2);
+lambda_b_c5=mean(lambda_b,2);
+
 % comppute the mean equilibrated(neglect 100 days) Cess sensitivity 
 cess_eq(1,:)=cess_a(1,equilt+1:ts_length);
 cess_eq(2,:)=cess_b(1,equilt+1:ts_length);
 lambda(1,:)=lambda_a(1,equilt+1:ts_length);
 lambda(2,:)=lambda_b(1,equilt+1:ts_length);
 
+lambda_tot=(rad_305_array(1,equilt+1:ts_length)-rad_295_array(1,equilt+1:ts_length))/10;
+cess_tot_c5=-3.7./lambda_tot;
+
 %cess_feedback(1,:)=(rad_305_array-rad_300_array)./5.;
 
 mean_cess=mean(cess_eq,2);
 mean_lambda=mean(lambda,2);
+mean_cess_t_c5=mean(cess_tot_c5,2);
+mean_cess_t_c6=mean(cess_tot_c6,2);
 
 figure
 subplot(3,1,1)
