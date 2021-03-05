@@ -1,6 +1,15 @@
 %--------------------------------------------------------------------------
 % circ_vs_temp.m
 %
+% this script creates scatter plots for the RCEMIP GCMs.  Shown are the 
+% relationships between OLR, SST, anvil CF, and Circulation Strength.
+%
+% values are not calculated in this script but manually written into the
+% arrays that are used for the scatter plots.  
+%
+% at the time of writing, the values come from an ncl script that is run 
+% on casper utilizing the RCEMIP data stored there.  
+%
 % levi silvers                                            October 7, 2020 
 %--------------------------------------------------------------------------
 %
