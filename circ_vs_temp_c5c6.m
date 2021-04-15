@@ -49,7 +49,9 @@ test_scat =[295 295 295 295 295 295 295 295 295 295 295];
 omega_gcm(:,1:2,1)  =[37.3 89.1;31.5 82.9;29.4 69.9];  % CAM5
 omega_gcm(:,1:2,2)  =[48.9 111.5;39.8 116.4;30.9 79.7]; % CAM6
 
-omega_d_gcm = [28.4 24.2 20.9 29.8 26.7 18.1];   % first 3 values are CAM5, second 3 C6
+; old values
+;omega_d_gcm = [28.4 24.2 20.9 29.8 26.7 18.1];   % first 3 values are CAM5, second 3 C6
+omega_d_gcm = [32.8 28.0 24.2 34.5 30.9 21.0];   % first 3 values are CAM5, second 3 C6
 
   
 sst_a=[295 295];
