@@ -336,7 +336,7 @@ hold(subplot3,'on');
 plot(rh(1).third,temp(1).third,'DisplayName','CAM5','Parent',subplot3,'Color',col(1,:),'LineWidth',2)
 set(subplot3,'Ydir','reverse')
 plot(rh(2).third,temp(2).third,'DisplayName','CAM6','Parent',subplot3,'Color',col(2,:),'LineWidth',2)
-plot(rh(3).third,temp(3).third,'DisplayName','CAM6','Parent',subplot3,'Color',col(3,:),'LineWidth',2)
+plot(rh(3).third,temp(3).third,'DisplayName','CNRM','Parent',subplot3,'Color',col(3,:),'LineWidth',2)
 plot(rh(4).third,temp(4).third,'DisplayName','ECHAM6','Parent',subplot3,'Color',col(4,:),'LineWidth',2)
 plot(rh(5).third,temp(5).third,'DisplayName','GEOS','Parent',subplot3,'Color',col(5,:),'LineWidth',2)
 plot(rh(6).third,temp(6).third,'DisplayName','ICON','Parent',subplot3,'Color',col(6,:),'LineWidth',2)
@@ -351,6 +351,12 @@ ylim(subplot3,[200 305]);
 xlim(subplot3,[1 100]);
 legend1=legend(subplot3,'show');
 box(legend1,'off');
-
+title(subplot1,'SST=295K')
+title(subplot2,'SST=300K')
+title(subplot3,'SST=305K')
+ylabel(subplot1,'Temperature K')
+xlabel(subplot1,'Relative Humidity %')
+xlabel(subplot2,'Relative Humidity %')
+xlabel(subplot3,'Relative Humidity %')
 
 
