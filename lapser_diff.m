@@ -1,10 +1,13 @@
 function [mn_gam,mn_mgam,diff_gam]=lapser_diff(ttmp,ptmp,modelnum)
 
 % physical constants:
+% these are also defined in create_RCEMIP_colors.m but I don't want 
+% to pass them all in here as well...
 grav      =9.81;
 Rd        =287.;   % J/kg K gas constant for dry air
 Rv        =461.;   % J/(kg K) gas constant for water vapor
-latheat   =2.52e6; % J/kg latent heat of vaporization
+%latheat   =2.52e6; % J/kg latent heat of vaporization
+latheat   =2.501e6; % J/kg latent heat of vaporization recommended by Wing et al. 2018
 cpd       =1000.;  % J/kg K cp for dry air
 epsilon   =Rd/Rv;
 psfc      =1015.0;
@@ -35,7 +38,9 @@ gamma(lasti)=gamma(lasti-1);
 gamma(1)=-1000.*grav*rho(1)*((ttmp(1)-tsfc)/(100.*(ptmp(1)-psfc)));
 % end if
 
-% saturation vapor pressure (should be in Pa)
+% saturation vapor pressure (estar in Pa) and 
+% saturation mixing ratio (qstar)
+% take from Randall's notes
 for zi=1:lasti
   estar(zi)   = 611*exp((latheat/Rv)*(1/273-1/ttmp(zi))); % Pa
   qstar(zi)   = epsilon*estar(zi)/(100.*ptmp(zi));
@@ -70,17 +75,17 @@ mn_mgam  = gamm_part/(plevs(1)-plevs(p2));
 
 diff_gam=mn_gam-mn_mgam;
 
-%figure
-%plot(ptmp,gamma_m)
-%plot(ptmp,gamma)
-%plot(gamma,ptmp)
-%set(gca,'Ydir','reverse')
-%ylabel('pressure (hPa)')
-%xlabel('Lapse Rate')
-%title(modelnum)
-%set(gca,'FontWeight','bold')
-%ylim([100,1000])
-%xlim([-10.,0.0])
-%hold on
-%plot(gamma_m,ptmp)
+figure
+plot(ptmp,gamma_m)
+plot(ptmp,gamma)
+plot(gamma,ptmp)
+set(gca,'Ydir','reverse')
+ylabel('pressure (hPa)')
+xlabel('Lapse Rate')
+title(modelnum)
+set(gca,'FontWeight','bold')
+ylim([100,1000])
+xlim([-10.,0.0])
+hold on
+plot(gamma_m,ptmp)
 
