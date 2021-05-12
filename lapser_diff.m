@@ -75,17 +75,17 @@ mn_mgam  = gamm_part/(plevs(1)-plevs(p2));
 
 diff_gam=mn_gam-mn_mgam;
 
-figure
-plot(ptmp,gamma_m)
-plot(ptmp,gamma)
-plot(gamma,ptmp)
-set(gca,'Ydir','reverse')
-ylabel('pressure (hPa)')
-xlabel('Lapse Rate')
-title(modelnum)
-set(gca,'FontWeight','bold')
-ylim([100,1000])
-xlim([-10.,0.0])
-hold on
-plot(gamma_m,ptmp)
+%figure
+%plot(ptmp,gamma_m)
+%plot(ptmp,gamma)
+%plot(gamma,ptmp)
+%set(gca,'Ydir','reverse')
+%ylabel('pressure (hPa)')
+%xlabel('Lapse Rate')
+%title(modelnum)
+%set(gca,'FontWeight','bold')
+%ylim([100,1000])
+%xlim([-10.,0.0])
+%hold on
+%plot(gamma_m,ptmp)
 

@@ -54,6 +54,38 @@ col(9,:)  =c20;  % SPCAM        % 51
 col(10,:) =c21;  % SPXCAM       % 60
 col(11,:) =c23; % UKMO
 
+col9(1,:)  =c1;  % CAM5         % 67
+col9(2,:)  =c2;  % CAM6         % 19
+col9(3,:)  =c20;  % SPCAM 
+col9(4,:)  =c21;  % SPXCAM % 44
+col9(5,:)  =c6;  % ECHAM % 35
+col9(6,:)  =c8; % GEOS
+col9(7,:)  =c4;  % CNRM  % 51
+col9(8,:) =c16;  % SAM0-UNICON       % 60
+col9(9,:) =c23; % UKMO
+
+col8(1,:)  =c1;  % CAM5         % 67
+col8(2,:)  =c2;  % CAM6         % 19
+col8(3,:)  =c20;  % SPCAM 
+col8(4,:)  =c21;  % SPXCAM % 44
+col8(5,:)  =c6;  % ECHAM % 35
+col8(6,:)  =c8; % GEOS
+col8(7,:) =c16;  % SAM0-UNICON       % 60
+col8(8,:) =c23; % UKMO
+
+
+col10(1,:)  =c1;  % CAM5         % 67
+col10(2,:)  =c2;  % CAM6         % 19
+col10(3,:)  =c4;  % CNRM
+col10(4,:)  =c6;  % ECHAM        % 44
+col10(5,:)  =c8;  % GEOS         % 35
+col10(6,:)  =c9;  % ICON
+col10(7,:)  =c16; % SAM0-UNICON
+col10(8,:)  =c20;  % SPCAM        % 51
+col10(9,:) =c21;  % SPXCAM       % 60
+col10(10,:) =c23; % UKMO
+
+
 % physical constants:
 grav      =9.81;
 Rd        =287.;   % J/kg K gas constant for dry air 

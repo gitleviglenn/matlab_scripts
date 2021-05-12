@@ -73,6 +73,8 @@ end
 
 % mindy?
 
+% there is a code for a figure of the lapse rate profiles within 
+% lapser_diff.m; default is to have figure commented out...
 mindex=11;
 for mi=1:mindex;
   % A -> 295K; B -> 300K; C -> 305K
@@ -147,7 +149,6 @@ xlabel('Lapse Rates, K/km')
 title('Dry, Ambient, and Moist Lapse Rates')
 %ylabel('models ')
 
-% this code probably depends on openRCEprofiles.m being run first... bad practice
 % Sfc Enthalpy Flux vs. lapse rate
 figure
 scatter(mLR_a,mlhf_a+mshf_a,[],col,'filled','o','SizeData',70)

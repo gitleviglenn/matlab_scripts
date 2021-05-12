@@ -23,6 +23,7 @@
 %hold on
 %plot(gamma_m,pa.m1a)
 
+% RH profiles
 figure
 plot(hur.m1a(5:16),pa.m1a(5:16),'Color',c1)
 hold on
@@ -155,6 +156,53 @@ fig.FontWeight = 'bold';
 xlabel('sensible heat flux')
 ylabel('latent heat flux')
 
+% scatter of Intensity vs omega_db
+figure
+scatter(mnomeg8ms295K.omega_db,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+fig=gca;
+hold on
+scatter(mnomeg8ms300K.omega_db,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+scatter(mnomeg8ms305K.omega_db,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+fig.FontSize = 14;
+fig.FontWeight = 'bold';
+xlabel('Diabatic Omega hPa/day')
+ylabel('Circulation Intensity hPa/day')
+
+% scatter of Intensity vs omega_d
+figure
+scatter(mnomeg8ms295K.omega_d,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+fig=gca;
+hold on
+scatter(mnomeg8ms300K.omega_d,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+scatter(mnomeg8ms305K.omega_d,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+fig.FontSize = 14;
+fig.FontWeight = 'bold';
+xlabel('Subsiding Omega hPa/day')
+ylabel('Circulation Intensity hPa/day')
+
+% scatter of Intensity vs omega_d
+figure
+scatter(mnomeg8ms295K.omega_u,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+fig=gca;
+hold on
+scatter(mnomeg8ms300K.omega_u,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+scatter(mnomeg8ms305K.omega_u,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+fig.FontSize = 14;
+fig.FontWeight = 'bold';
+xlabel('Ascending Omega hPa/day')
+ylabel('Circulation Intensity hPa/day')
+
+% scatter of Intensity vs omega_d
+figure
+scatter(mnomeg8ms295K.SF,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+fig=gca;
+hold on
+scatter(mnomeg8ms300K.SF,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+scatter(mnomeg8ms305K.SF,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+fig.FontSize = 14;
+fig.FontWeight = 'bold';
+xlabel('Subsidence Fraction')
+ylabel('Circulation Intensity hPa/day')
 
 % SHF vs. SST
 figure
@@ -169,6 +217,103 @@ xlabel('SST, K')
 fig.XTick = [295 300 305]
 xlim([294 306])
 ylabel('Sensible Heat Flux, W/m2')
+
+figure
+scatter(CircSF295.SST,CircSF295.I,[],col10,'filled','s','SizeData',70);
+hold on
+scatter(CircSF300.SST,CircSF300.I,[],col10,'filled','s','SizeData',120);
+scatter(CircSF305.SST,CircSF305.I,[],col10,'filled','s','SizeData',170);
+xlim([294 306])
+line([CircSF295.SST(1),CircSF300.SST(1),CircSF305.SST(1)],[CircSF295.I(1),CircSF300.I(1),CircSF305.I(1)],'Color',col10(1,:),'LineWidth',2)
+line([CircSF295.SST(2),CircSF300.SST(2),CircSF305.SST(2)],[CircSF295.I(2),CircSF300.I(2),CircSF305.I(2)],'Color',col10(2,:),'LineWidth',2)
+line([CircSF295.SST(3),CircSF300.SST(3),CircSF305.SST(3)],[CircSF295.I(3),CircSF300.I(3),CircSF305.I(3)],'Color',col10(3,:),'LineWidth',2)
+line([CircSF295.SST(4),CircSF300.SST(4),CircSF305.SST(4)],[CircSF295.I(4),CircSF300.I(4),CircSF305.I(4)],'Color',col10(4,:),'LineWidth',2)
+line([CircSF295.SST(5),CircSF300.SST(5),CircSF305.SST(5)],[CircSF295.I(5),CircSF300.I(5),CircSF305.I(5)],'Color',col10(5,:),'LineWidth',2)
+line([CircSF295.SST(6),CircSF300.SST(6),CircSF305.SST(6)],[CircSF295.I(6),CircSF300.I(6),CircSF305.I(6)],'Color',col10(6,:),'LineWidth',2)
+line([CircSF295.SST(7),CircSF300.SST(7),CircSF305.SST(7)],[CircSF295.I(7),CircSF300.I(7),CircSF305.I(7)],'Color',col10(7,:),'LineWidth',2)
+line([CircSF295.SST(8),CircSF300.SST(8),CircSF305.SST(8)],[CircSF295.I(8),CircSF300.I(8),CircSF305.I(8)],'Color',col10(8,:),'LineWidth',2)
+line([CircSF295.SST(9),CircSF300.SST(9),CircSF305.SST(9)],[CircSF295.I(9),CircSF300.I(9),CircSF305.I(9)],'Color',col10(9,:),'LineWidth',2)
+line([CircSF295.SST(10),CircSF300.SST(10),CircSF305.SST(10)],[CircSF295.I(10),CircSF300.I(10),CircSF305.I(10)],'Color',col10(10,:),'LineWidth',2)
+% plot the scaled values
+scatter(CircSF295.SST,scaleI295,[],col10,'filled','o','SizeData',70);
+scatter(CircSF300.SST,scaleI300,[],col10,'filled','o','SizeData',120);
+scatter(CircSF305.SST,scaleI305,[],col10,'filled','o','SizeData',170);
+line([CircSF295.SST(1),CircSF300.SST(1),CircSF305.SST(1)],[scaleI295(1),scaleI300(1),scaleI305(1)],'Color',col10(1,:),'LineWidth',1)
+line([CircSF295.SST(2),CircSF300.SST(2),CircSF305.SST(2)],[scaleI295(2),scaleI300(2),scaleI305(2)],'Color',col10(2,:),'LineWidth',1)
+line([CircSF295.SST(3),CircSF300.SST(3),CircSF305.SST(3)],[scaleI295(3),scaleI300(3),scaleI305(3)],'Color',col10(3,:),'LineWidth',1)
+line([CircSF295.SST(4),CircSF300.SST(4),CircSF305.SST(4)],[scaleI295(4),scaleI300(4),scaleI305(4)],'Color',col10(4,:),'LineWidth',1)
+line([CircSF295.SST(5),CircSF300.SST(5),CircSF305.SST(5)],[scaleI295(5),scaleI300(5),scaleI305(5)],'Color',col10(5,:),'LineWidth',1)
+line([CircSF295.SST(6),CircSF300.SST(6),CircSF305.SST(6)],[scaleI295(6),scaleI300(6),scaleI305(6)],'Color',col10(6,:),'LineWidth',1)
+line([CircSF295.SST(7),CircSF300.SST(7),CircSF305.SST(7)],[scaleI295(7),scaleI300(7),scaleI305(7)],'Color',col10(7,:),'LineWidth',1)
+line([CircSF295.SST(8),CircSF300.SST(8),CircSF305.SST(8)],[scaleI295(8),scaleI300(8),scaleI305(8)],'Color',col10(8,:),'LineWidth',1)
+line([CircSF295.SST(9),CircSF300.SST(9),CircSF305.SST(9)],[scaleI295(9),scaleI300(9),scaleI305(9)],'Color',col10(9,:),'LineWidth',1)
+line([CircSF295.SST(10),CircSF300.SST(10),CircSF305.SST(10)],[scaleI295(10),scaleI300(10),scaleI305(10)],'Color',col10(10,:),'LineWidth',1)
+ylabel('hPa/d')
+xlabel('surface temperature (K)')
+set(gca,'YScale','log')
+set(gca,'FontWeight','bold')
+xlabel('surface temperature (K)')
+set(gca,'FontSize',14)
+ylim([80 250])
+title('Large-Scale Circulation')
+
+SF295  =CircSF295.SF;
+odn295 =CircSF295.omega_dn;
+SF300  =CircSF300.SF;
+odn300 =CircSF300.omega_dn;
+SF305  =CircSF305.SF;
+odn305 =CircSF305.omega_dn;
+scaleI295=(1./(1-SF295)).*odn295;
+scaleI300=(1./(1-SF300)).*odn300;
+scaleI305=(1./(1-SF305)).*odn305;
+
+figure
+scatter(RCEMIPomega295.VarName6,RCEMIPomega295.VarName3,[],col9,'filled','s','SizeData',70);
+hold on
+scatter(RCEMIPomega295.VarName6,RCEMIPomega295.VarName4,[],col9,'filled','v','SizeData',70);
+scatter(RCEMIPomega295.VarName6,-RCEMIPomega295.VarName5,[],col9,'filled','^','SizeData',70);
+scatter(RCEMIPomega300.VarName6,RCEMIPomega300.VarName3,[],col9,'filled','s','SizeData',120);
+scatter(RCEMIPomega300.VarName6,RCEMIPomega300.VarName4,[],col9,'filled','v','SizeData',120);
+scatter(RCEMIPomega300.VarName6,-RCEMIPomega300.VarName5,[],col9,'filled','^','SizeData',120);
+scatter(RCEMIPomega305.VarName6,RCEMIPomega305.VarName3,[],col9,'filled','s','SizeData',170);
+scatter(RCEMIPomega305.VarName6,RCEMIPomega305.VarName4,[],col9,'filled','v','SizeData',170);
+scatter(RCEMIPomega305.VarName6,-RCEMIPomega305.VarName5,[],col9,'filled','^','SizeData',170);
+xlim([294 306])
+line([RCEMIPomega295.VarName6(1),RCEMIPomega300.VarName6(1),RCEMIPomega305.VarName6(1)],[RCEMIPomega295.VarName3(1),RCEMIPomega300.VarName3(1),RCEMIPomega305.VarName3(1)],'Color',col9(1,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(2),RCEMIPomega300.VarName6(2),RCEMIPomega305.VarName6(2)],[RCEMIPomega295.VarName3(2),RCEMIPomega300.VarName3(2),RCEMIPomega305.VarName3(2)],'Color',col9(2,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(3),RCEMIPomega300.VarName6(3),RCEMIPomega305.VarName6(3)],[RCEMIPomega295.VarName3(3),RCEMIPomega300.VarName3(3),RCEMIPomega305.VarName3(3)],'Color',col9(3,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(4),RCEMIPomega300.VarName6(4),RCEMIPomega305.VarName6(4)],[RCEMIPomega295.VarName3(4),RCEMIPomega300.VarName3(4),RCEMIPomega305.VarName3(4)],'Color',col9(4,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(5),RCEMIPomega300.VarName6(5),RCEMIPomega305.VarName6(5)],[RCEMIPomega295.VarName3(5),RCEMIPomega300.VarName3(5),RCEMIPomega305.VarName3(5)],'Color',col9(5,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(6),RCEMIPomega300.VarName6(6),RCEMIPomega305.VarName6(6)],[RCEMIPomega295.VarName3(6),RCEMIPomega300.VarName3(6),RCEMIPomega305.VarName3(6)],'Color',col9(6,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(7),RCEMIPomega300.VarName6(7),RCEMIPomega305.VarName6(7)],[RCEMIPomega295.VarName3(7),RCEMIPomega300.VarName3(7),RCEMIPomega305.VarName3(7)],'Color',col9(7,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(8),RCEMIPomega300.VarName6(8),RCEMIPomega305.VarName6(8)],[RCEMIPomega295.VarName3(8),RCEMIPomega300.VarName3(8),RCEMIPomega305.VarName3(8)],'Color',col9(8,:),'LineWidth',2)
+line([RCEMIPomega295.VarName6(9),RCEMIPomega300.VarName6(9),RCEMIPomega305.VarName6(9)],[RCEMIPomega295.VarName3(9),RCEMIPomega300.VarName3(9),RCEMIPomega305.VarName3(9)],'Color',col9(9,:),'LineWidth',2)
+ylabel('hPa/d')
+line([RCEMIPomega295.VarName6(1),RCEMIPomega300.VarName6(1),RCEMIPomega305.VarName6(1)],[RCEMIPomega295.VarName4(1),RCEMIPomega300.VarName4(1),RCEMIPomega305.VarName4(1)],'Color',col9(1,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(2),RCEMIPomega300.VarName6(2),RCEMIPomega305.VarName6(2)],[RCEMIPomega295.VarName4(2),RCEMIPomega300.VarName4(2),RCEMIPomega305.VarName4(2)],'Color',col9(2,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(3),RCEMIPomega300.VarName6(3),RCEMIPomega305.VarName6(3)],[RCEMIPomega295.VarName4(3),RCEMIPomega300.VarName4(3),RCEMIPomega305.VarName4(3)],'Color',col9(3,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(4),RCEMIPomega300.VarName6(4),RCEMIPomega305.VarName6(4)],[RCEMIPomega295.VarName4(4),RCEMIPomega300.VarName4(4),RCEMIPomega305.VarName4(4)],'Color',col9(4,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(5),RCEMIPomega300.VarName6(5),RCEMIPomega305.VarName6(5)],[RCEMIPomega295.VarName4(5),RCEMIPomega300.VarName4(5),RCEMIPomega305.VarName4(5)],'Color',col9(5,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(6),RCEMIPomega300.VarName6(6),RCEMIPomega305.VarName6(6)],[RCEMIPomega295.VarName4(6),RCEMIPomega300.VarName4(6),RCEMIPomega305.VarName4(6)],'Color',col9(6,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(7),RCEMIPomega300.VarName6(7),RCEMIPomega305.VarName6(7)],[RCEMIPomega295.VarName4(7),RCEMIPomega300.VarName4(7),RCEMIPomega305.VarName4(7)],'Color',col9(7,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(8),RCEMIPomega300.VarName6(8),RCEMIPomega305.VarName6(8)],[RCEMIPomega295.VarName4(8),RCEMIPomega300.VarName4(8),RCEMIPomega305.VarName4(8)],'Color',col9(8,:),'LineStyle','-.','LineWidth',1)
+line([RCEMIPomega295.VarName6(9),RCEMIPomega300.VarName6(9),RCEMIPomega305.VarName6(9)],[RCEMIPomega295.VarName4(9),RCEMIPomega300.VarName4(9),RCEMIPomega305.VarName4(9)],'Color',col9(9,:),'LineStyle','-.','LineWidth',1)
+xlabel('surface temperature (K)')
+line([RCEMIPomega295.VarName6(1),RCEMIPomega300.VarName6(1),RCEMIPomega305.VarName6(1)],[-RCEMIPomega295.VarName5(1),-RCEMIPomega300.VarName5(1),-RCEMIPomega305.VarName5(1)],'Color',col9(1,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(2),RCEMIPomega300.VarName6(2),RCEMIPomega305.VarName6(2)],[-RCEMIPomega295.VarName5(2),-RCEMIPomega300.VarName5(2),-RCEMIPomega305.VarName5(2)],'Color',col9(2,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(3),RCEMIPomega300.VarName6(3),RCEMIPomega305.VarName6(3)],[-RCEMIPomega295.VarName5(3),-RCEMIPomega300.VarName5(3),-RCEMIPomega305.VarName5(3)],'Color',col9(3,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(4),RCEMIPomega300.VarName6(4),RCEMIPomega305.VarName6(4)],[-RCEMIPomega295.VarName5(4),-RCEMIPomega300.VarName5(4),-RCEMIPomega305.VarName5(4)],'Color',col9(4,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(5),RCEMIPomega300.VarName6(5),RCEMIPomega305.VarName6(5)],[-RCEMIPomega295.VarName5(5),-RCEMIPomega300.VarName5(5),-RCEMIPomega305.VarName5(5)],'Color',col9(5,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(6),RCEMIPomega300.VarName6(6),RCEMIPomega305.VarName6(6)],[-RCEMIPomega295.VarName5(6),-RCEMIPomega300.VarName5(6),-RCEMIPomega305.VarName5(6)],'Color',col9(6,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(7),RCEMIPomega300.VarName6(7),RCEMIPomega305.VarName6(7)],[-RCEMIPomega295.VarName5(7),-RCEMIPomega300.VarName5(7),-RCEMIPomega305.VarName5(7)],'Color',col9(7,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(8),RCEMIPomega300.VarName6(8),RCEMIPomega305.VarName6(8)],[-RCEMIPomega295.VarName5(8),-RCEMIPomega300.VarName5(8),-RCEMIPomega305.VarName5(8)],'Color',col9(8,:),'LineStyle','--','LineWidth',1)
+line([RCEMIPomega295.VarName6(9),RCEMIPomega300.VarName6(9),RCEMIPomega305.VarName6(9)],[-RCEMIPomega295.VarName5(9),-RCEMIPomega300.VarName5(9),-RCEMIPomega305.VarName5(9)],'Color',col9(9,:),'LineStyle','--','LineWidth',1)
+set(gca,'YScale','log')
+set(gca,'FontWeight','bold')
+xlabel('surface temperature (K)')
+set(gca,'FontSize',14)
+title('Large-Scale Circulation')
+
 
 % LHF vs. SST
 figure
