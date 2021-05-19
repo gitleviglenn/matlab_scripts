@@ -218,6 +218,11 @@ fig.XTick = [295 300 305]
 xlim([294 306])
 ylabel('Sensible Heat Flux, W/m2')
 
+% these three scripts import data from 10 GCMs
+import_RCEMIP_table_10GCMs_L295
+import_RCEMIP_table_10GCMs_L300
+import_RCEMIP_table_10GCMs_L305
+
 figure
 scatter(CircSF295.SST,CircSF295.I,[],col10,'filled','s','SizeData',70);
 hold on
@@ -266,6 +271,35 @@ odn305 =CircSF305.omega_dn;
 scaleI295=(1./(1-SF295)).*odn295;
 scaleI300=(1./(1-SF300)).*odn300;
 scaleI305=(1./(1-SF305)).*odn305;
+
+figure
+scatter(CircSF295.omega_db,CircSF295.I,[],col10,'filled','o','SizeData',70)
+hold on
+scatter(CircSF300.omega_db,CircSF300.I,[],col10,'filled','o','SizeData',120)
+scatter(CircSF305.omega_db,CircSF305.I,[],col10,'filled','o','SizeData',170)
+set(gca,'FontSize',14)
+
+figure
+scatter(CircSF295.omega_dn,CircSF295.I,[],col10,'filled','v','SizeData',70)
+hold on
+scatter(CircSF300.omega_dn,CircSF300.I,[],col10,'filled','v','SizeData',120)
+scatter(CircSF305.omega_dn,CircSF305.I,[],col10,'filled','v','SizeData',170)
+scatter(abs(CircSF295.omega_up),CircSF295.I,[],col10,'filled','^','SizeData',70)
+scatter(abs(CircSF300.omega_up),CircSF300.I,[],col10,'filled','^','SizeData',120)
+scatter(abs(CircSF305.omega_up),CircSF305.I,[],col10,'filled','^','SizeData',170)
+ylabel('Circulation Intensity (hPa/d)')
+xlabel('mean upward/downward velocity (hPa/d)')
+set(gca,'FontSize',14)
+
+figure
+scatter(CircSF295.omega_up,CircSF295.I,[],col10,'filled','o','SizeData',70)
+hold on
+scatter(CircSF300.omega_up,CircSF300.I,[],col10,'filled','o','SizeData',120)
+scatter(CircSF305.omega_up,CircSF305.I,[],col10,'filled','o','SizeData',170)
+set(gca,'FontSize',14)
+ylabel('Circulation Intensity (hPa/d)')
+xlabel('mean upward velocity (hPa/d)')
+set(gca,'FontSize',14)
 
 figure
 scatter(RCEMIPomega295.VarName6,RCEMIPomega295.VarName3,[],col9,'filled','s','SizeData',70);
