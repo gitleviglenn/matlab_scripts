@@ -220,9 +220,13 @@ ylabel('Sensible Heat Flux, W/m2')
 
 % these three scripts import data from 10 GCMs
 % data is read into variable structures: CircSF295...
-import_RCEMIP_table_10GCMs_L295
-import_RCEMIP_table_10GCMs_L300
-import_RCEMIP_table_10GCMs_L305
+% import old, probably instantaneous hourly averaged values:
+%import_RCEMIP_table_10GCMs_L295
+%import_RCEMIP_table_10GCMs_L300
+%import_RCEMIP_table_10GCMs_L305
+import_RCEMIP_table_10GCMs_295_5d
+import_RCEMIP_table_10GCMs_300_5d
+import_RCEMIP_table_10GCMs_305_5d
 
 % import data for 5 CRMs
 % data is read into variable structures: Circ_omega_CRMs_295...
@@ -240,15 +244,23 @@ scaleI295=(1./(1-SF295)).*odn295;
 scaleI300=(1./(1-SF300)).*odn300;
 scaleI305=(1./(1-SF305)).*odn305;
 
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+
+
 % below creates a figure showing the circulation intensity as a function of SST for GCMs and CRMs...
+% FIGURE 1
 figure
-scatter(CircSF295.SST,CircSF295.I,[],col10,'s','SizeData',70);
+subplot(1,3,1)
+scatter(CircSF295.SST,CircSF295.I,[],colGCM,'s','SizeData',70);
+%scatter(CircSF295.SST,CircSF295.I,[],col10,'s','SizeData',70);
 hold on
 scatter(Circ_omega_CRMs_295.SST,Circ_omega_CRMs_295.I,[],colCRM,'filled','s','SizeData',70);
-scatter(CircSF300.SST,CircSF300.I,[],col10,'s','SizeData',120);
-%scatter(CircSF300.SST,CircSF300.I,[],col10,'filled','s','SizeData',120);
+scatter(CircSF300.SST,CircSF300.I,[],colGCM,'s','SizeData',120);
+%scatter(CircSF300.SST,CircSF300.I,[],colGCM,'filled','s','SizeData',120);
 scatter(Circ_omega_CRMs_300.SST,Circ_omega_CRMs_300.I,[],colCRM,'filled','s','SizeData',120);
-scatter(CircSF305.SST,CircSF305.I,[],col10,'s','SizeData',170);
+scatter(CircSF305.SST,CircSF305.I,[],colGCM,'s','SizeData',170);
 scatter(Circ_omega_CRMs_305.SST,Circ_omega_CRMs_305.I,[],colCRM,'filled','s','SizeData',170);
 xlim([294 306])
 line([Circ_omega_CRMs_295.SST(1),Circ_omega_CRMs_300.SST(1),Circ_omega_CRMs_305.SST(1)],[Circ_omega_CRMs_295.I(1),Circ_omega_CRMs_300.I(1),Circ_omega_CRMs_305.I(1)],'Color',colCRM(1,:),'LineWidth',2)
@@ -256,24 +268,157 @@ line([Circ_omega_CRMs_295.SST(2),Circ_omega_CRMs_300.SST(2),Circ_omega_CRMs_305.
 line([Circ_omega_CRMs_295.SST(3),Circ_omega_CRMs_300.SST(3),Circ_omega_CRMs_305.SST(3)],[Circ_omega_CRMs_295.I(3),Circ_omega_CRMs_300.I(3),Circ_omega_CRMs_305.I(3)],'Color',colCRM(3,:),'LineWidth',2)
 line([Circ_omega_CRMs_295.SST(4),Circ_omega_CRMs_300.SST(4),Circ_omega_CRMs_305.SST(4)],[Circ_omega_CRMs_295.I(4),Circ_omega_CRMs_300.I(4),Circ_omega_CRMs_305.I(4)],'Color',colCRM(4,:),'LineWidth',2)
 line([Circ_omega_CRMs_295.SST(5),Circ_omega_CRMs_300.SST(5),Circ_omega_CRMs_305.SST(5)],[Circ_omega_CRMs_295.I(5),Circ_omega_CRMs_300.I(5),Circ_omega_CRMs_305.I(5)],'Color',colCRM(5,:),'LineWidth',2)
-line([CircSF295.SST(1),CircSF300.SST(1),CircSF305.SST(1)],[CircSF295.I(1),CircSF300.I(1),CircSF305.I(1)],'Color',col10(1,:),'LineWidth',2)
-line([CircSF295.SST(2),CircSF300.SST(2),CircSF305.SST(2)],[CircSF295.I(2),CircSF300.I(2),CircSF305.I(2)],'Color',col10(2,:),'LineWidth',2)
-line([CircSF295.SST(3),CircSF300.SST(3),CircSF305.SST(3)],[CircSF295.I(3),CircSF300.I(3),CircSF305.I(3)],'Color',col10(3,:),'LineWidth',2)
-line([CircSF295.SST(4),CircSF300.SST(4),CircSF305.SST(4)],[CircSF295.I(4),CircSF300.I(4),CircSF305.I(4)],'Color',col10(4,:),'LineWidth',2)
-line([CircSF295.SST(5),CircSF300.SST(5),CircSF305.SST(5)],[CircSF295.I(5),CircSF300.I(5),CircSF305.I(5)],'Color',col10(5,:),'LineWidth',2)
-line([CircSF295.SST(6),CircSF300.SST(6),CircSF305.SST(6)],[CircSF295.I(6),CircSF300.I(6),CircSF305.I(6)],'Color',col10(6,:),'LineWidth',2)
-line([CircSF295.SST(7),CircSF300.SST(7),CircSF305.SST(7)],[CircSF295.I(7),CircSF300.I(7),CircSF305.I(7)],'Color',col10(7,:),'LineWidth',2)
-line([CircSF295.SST(8),CircSF300.SST(8),CircSF305.SST(8)],[CircSF295.I(8),CircSF300.I(8),CircSF305.I(8)],'Color',col10(8,:),'LineWidth',2)
-line([CircSF295.SST(9),CircSF300.SST(9),CircSF305.SST(9)],[CircSF295.I(9),CircSF300.I(9),CircSF305.I(9)],'Color',col10(9,:),'LineWidth',2)
-line([CircSF295.SST(10),CircSF300.SST(10),CircSF305.SST(10)],[CircSF295.I(10),CircSF300.I(10),CircSF305.I(10)],'Color',col10(10,:),'LineWidth',2)
-ylabel('hPa/d')
+line([CircSF295.SST(1),CircSF300.SST(1),CircSF305.SST(1)],[CircSF295.I(1),CircSF300.I(1),CircSF305.I(1)],'Color',colGCM(1,:),'LineWidth',2)
+line([CircSF295.SST(2),CircSF300.SST(2),CircSF305.SST(2)],[CircSF295.I(2),CircSF300.I(2),CircSF305.I(2)],'Color',colGCM(2,:),'LineWidth',2)
+line([CircSF295.SST(3),CircSF300.SST(3),CircSF305.SST(3)],[CircSF295.I(3),CircSF300.I(3),CircSF305.I(3)],'Color',colGCM(3,:),'LineWidth',2)
+line([CircSF295.SST(4),CircSF300.SST(4),CircSF305.SST(4)],[CircSF295.I(4),CircSF300.I(4),CircSF305.I(4)],'Color',colGCM(4,:),'LineWidth',2)
+line([CircSF295.SST(5),CircSF300.SST(5),CircSF305.SST(5)],[CircSF295.I(5),CircSF300.I(5),CircSF305.I(5)],'Color',colGCM(5,:),'LineWidth',2)
+line([CircSF295.SST(6),CircSF300.SST(6),CircSF305.SST(6)],[CircSF295.I(6),CircSF300.I(6),CircSF305.I(6)],'Color',colGCM(6,:),'LineWidth',2)
+line([CircSF295.SST(7),CircSF300.SST(7),CircSF305.SST(7)],[CircSF295.I(7),CircSF300.I(7),CircSF305.I(7)],'Color',colGCM(7,:),'LineWidth',2)
+line([CircSF295.SST(8),CircSF300.SST(8),CircSF305.SST(8)],[CircSF295.I(8),CircSF300.I(8),CircSF305.I(8)],'Color',colGCM(8,:),'LineWidth',2)
+line([CircSF295.SST(9),CircSF300.SST(9),CircSF305.SST(9)],[CircSF295.I(9),CircSF300.I(9),CircSF305.I(9)],'Color',colGCM(9,:),'LineWidth',2)
+line([CircSF295.SST(10),CircSF300.SST(10),CircSF305.SST(10)],[CircSF295.I(10),CircSF300.I(10),CircSF305.I(10)],'Color',colGCM(10,:),'LineWidth',2)
+ylabel('Circulation Intensity, I (hPa/d)')
 xlabel('surface temperature (K)')
-set(gca,'YScale','log')
+%set(gca,'YScale','log')
 set(gca,'FontWeight','bold')
-xlabel('surface temperature (K)')
 set(gca,'FontSize',14)
-ylim([20 250])
-title('Large-Scale Overturning Circulation')
+ylim([0 150])
+%title('Large-Scale Overturning Circulation')
+
+
+% plot the I as a function of the omega_up and omega_dn
+% Figure 2
+% diabatic velocity values are also here, but commented out at this time... to be
+% plotted in Figure 3.
+%figure
+subplot(1,3,2)
+scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','v','SizeData',70)
+hold on
+scatter(CircSF300.omega_dn,CircSF300.I,[],colGCM,'filled','v','SizeData',120)
+scatter(CircSF305.omega_dn,CircSF305.I,[],colGCM,'filled','v','SizeData',170)
+scatter(abs(CircSF295.omega_up),CircSF295.I,[],colGCM,'filled','^','SizeData',70)
+scatter(abs(CircSF300.omega_up),CircSF300.I,[],colGCM,'filled','^','SizeData',120)
+scatter(abs(CircSF305.omega_up),CircSF305.I,[],colGCM,'filled','^','SizeData',170)
+scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+scatter(abs(Circ_omega_CRMs_300.omega_up),Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
+scatter(abs(Circ_omega_CRMs_305.omega_up),Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
+scatter(abs(Circ_omega_CRMs_295.omega_dn),Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
+scatter(abs(Circ_omega_CRMs_300.omega_dn),Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
+scatter(abs(Circ_omega_CRMs_305.omega_dn),Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
+%scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','o','SizeData',70)
+%scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','o','SizeData',120)
+%scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','o','SizeData',170)
+%scatter(abs(CircSF305.omega_db),CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+%scatter(abs(CircSF300.omega_db),CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+%scatter(abs(CircSF295.omega_db),CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+%ylabel('Circlation Intensity hPa/d')
+%xlabel('surface temperature (K)')
+ylabel('Circulation Intensity, I (hPa/d)')
+xlabel('mean velocity (hPa/d)')
+set(gca,'FontWeight','bold')
+%set(gca,'YScale','log')
+set(gca,'FontSize',14)
+ylim([0 150])
+%title('Components of Overturning Circulation')
+
+% Figure 3
+% plots Circulation intensity vs the diabatically driven velocity
+%figure
+subplot(1,3,3)
+scatter(abs(CircSF295.omega_db),CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+hold on
+scatter(abs(CircSF305.omega_db),CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+scatter(abs(CircSF300.omega_db),CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
+scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
+scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
+scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
+scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
+ylabel('Circulation Intensity, I (hPa/d)')
+xlabel('diabatic velocity (hPa/d)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+ylim([0 150])
+%title('Overturning Circulation vs Diabatic Velocity')
+sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+
+% Relative humidity
+figure1=figure;
+subplot1=subplot(1,3,1,'Parent',figure1);
+hold(subplot1,'on');
+plot(rh(1).first,temp(1).first,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+set(subplot1,'Ydir','reverse')
+%hold on
+set(subplot1,'FontWeight','bold')
+plot(rh(2).first,temp(2).first,'Parent',subplot1,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(rh(3).first,temp(3).first,'Parent',subplot1,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(rh(4).first,temp(4).first,'Parent',subplot1,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(rh(5).first,temp(5).first,'Parent',subplot1,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(rh(6).first,temp(6).first,'Parent',subplot1,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(rh(7).first,temp(7).first,'Parent',subplot1,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(rh(8).first,temp(8).first,'Parent',subplot1,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(rh(9).first,temp(9).first,'Parent',subplot1,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(rh(10).first,temp(10).first,'Parent',subplot1,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(rh(11).first,temp(11).first,'Parent',subplot1,'Color',colGCMfull(11,:),'LineWidth',2)
+set(subplot1,'FontWeight','bold')
+ylim(subplot1,[200 305])
+xlim(subplot1,[1 100])
+
+subplot2=subplot(1,3,2,'Parent',figure1)
+plot(rh(1).second,temp(1).second,'Parent',subplot2,'Color',colGCMfull(1,:),'LineWidth',2)
+hold(subplot2,'on');
+set(subplot2,'Ydir','reverse')
+plot(rh(2).second,temp(2).second,'Parent',subplot2,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(rh(3).second,temp(3).second,'Parent',subplot2,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(rh(4).second,temp(4).second,'Parent',subplot2,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(rh(5).second,temp(5).second,'Parent',subplot2,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(rh(6).second,temp(6).second,'Parent',subplot2,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(rh(7).second,temp(7).second,'Parent',subplot2,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(rh(8).second,temp(8).second,'Parent',subplot2,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(rh(9).second,temp(9).second,'Parent',subplot2,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(rh(10).second,temp(10).second,'Parent',subplot2,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(rh(11).second,temp(11).second,'Parent',subplot2,'Color',colGCMfull(11,:),'LineWidth',2)
+axis(subplot2,'ij');
+set(subplot2,'FontWeight','bold');
+ylim(subplot2,[200 305]);
+xlim(subplot2,[1 100]);
+box(subplot2,'off');
+
+subplot3=subplot(1,3,3,'Parent',figure1);
+hold(subplot3,'on');
+plot(rh(1).third,temp(1).third,'DisplayName','CAM5','Parent',subplot3,'Color',colGCMfull(1,:),'LineWidth',2)
+set(subplot3,'Ydir','reverse')
+plot(rh(2).third,temp(2).third,'DisplayName','CAM6','Parent',subplot3,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(rh(3).third,temp(3).third,'DisplayName','CNRM','Parent',subplot3,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(rh(4).third,temp(4).third,'DisplayName','ECHAM6','Parent',subplot3,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(rh(5).third,temp(5).third,'DisplayName','GEOS','Parent',subplot3,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(rh(6).third,temp(6).third,'DisplayName','ICON','Parent',subplot3,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(rh(7).third,temp(7).third,'DisplayName','IPSL','Parent',subplot3,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(rh(8).third,temp(8).third,'DisplayName','SAM0-UNICON','Parent',subplot3,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(rh(9).third,temp(9).third,'DisplayName','SP-CAM','Parent',subplot3,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(rh(10).third,temp(10).third,'DisplayName','SPX-CAM','Parent',subplot3,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(rh(11).third,temp(11).third,'DisplayName','UKMO-GA7.1','Parent',subplot3,'Color',colGCMfull(11,:),'LineWidth',2)
+axis(subplot3,'ij');
+set(subplot3,'FontWeight','bold');
+ylim(subplot3,[200 305]);
+xlim(subplot3,[1 100]);
+legend1=legend(subplot3,'show');
+box(legend1,'off');
+title(subplot1,'SST=295K')
+title(subplot2,'SST=300K')
+title(subplot3,'SST=305K')
+ylabel(subplot1,'Temperature K')
+xlabel(subplot1,'Relative Humidity %')
+xlabel(subplot2,'Relative Humidity %')
+xlabel(subplot3,'Relative Humidity %')
+
+
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------------------------
 
 
 
@@ -318,9 +463,9 @@ ylim([80 250])
 title('Large-Scale Circulation')
 
 
-% below plots the diabatic velocity vs I for the CRMs: 
+% below shows the mean upward velocity vs I for the CRMs: 
+% plotted on  log y axis.
 figure
-scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','o','SizeData',70)
 scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
 hold on
 scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
@@ -329,8 +474,9 @@ scatter(abs(Circ_omega_CRMs_305.omega_up),Circ_omega_CRMs_305.I,[],colCRM,'fille
 scatter(abs(Circ_omega_CRMs_295.omega_dn),Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
 scatter(abs(Circ_omega_CRMs_300.omega_dn),Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
 scatter(abs(Circ_omega_CRMs_305.omega_dn),Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
-scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','o','SizeData',120)
-scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','o','SizeData',170)
+%scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','o','SizeData',70)
+%scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','o','SizeData',120)
+%scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','o','SizeData',170)
 ylabel('Circlation Intensity hPa/d')
 xlabel('surface temperature (K)')
 set(gca,'YScale','log')
@@ -339,6 +485,8 @@ xlabel('hPa/d')
 set(gca,'FontSize',14)
 %ylim([80 250])
 
+% figures below are using the original colors that I came up with.  See above for colors
+% using those from Wing et al., 2020
 figure
 scatter(CircSF295.omega_db,CircSF295.I,[],col10,'filled','o','SizeData',70)
 hold on
@@ -346,6 +494,7 @@ scatter(CircSF300.omega_db,CircSF300.I,[],col10,'filled','o','SizeData',120)
 scatter(CircSF305.omega_db,CircSF305.I,[],col10,'filled','o','SizeData',170)
 set(gca,'FontSize',14)
 
+% plot the I as a function of the omega_up and omega_dn
 figure
 scatter(CircSF295.omega_dn,CircSF295.I,[],col10,'filled','v','SizeData',70)
 hold on
@@ -357,6 +506,10 @@ scatter(abs(CircSF305.omega_up),CircSF305.I,[],col10,'filled','^','SizeData',170
 ylabel('Circulation Intensity (hPa/d)')
 xlabel('mean upward/downward velocity (hPa/d)')
 set(gca,'FontSize',14)
+
+
+
+
 
 figure
 scatter(CircSF295.omega_up,CircSF295.I,[],col10,'filled','o','SizeData',70)
@@ -534,75 +687,5 @@ plot(rh(10).first,pres(10).first,'Color',col(10,:),'LineWidth',2)
 plot(rh(11).first,pres(11).first,'Color',col(11,:),'LineWidth',2)
 set(gca,'FontWeight','bold')
 ylim([100 1000])
-
-% Relative humidity
-figure1=figure;
-subplot1=subplot(1,3,1,'Parent',figure1);
-hold(subplot1,'on');
-plot(rh(1).first,temp(1).first,'Parent',subplot1,'Color',col(1,:),'LineWidth',2)
-set(subplot1,'Ydir','reverse')
-%hold on
-set(subplot1,'FontWeight','bold')
-plot(rh(2).first,temp(2).first,'Parent',subplot1,'Color',col(2,:),'LineWidth',2)
-plot(rh(3).first,temp(3).first,'Parent',subplot1,'Color',col(3,:),'LineWidth',2)
-plot(rh(4).first,temp(4).first,'Parent',subplot1,'Color',col(4,:),'LineWidth',2)
-plot(rh(5).first,temp(5).first,'Parent',subplot1,'Color',col(5,:),'LineWidth',2)
-plot(rh(6).first,temp(6).first,'Parent',subplot1,'Color',col(6,:),'LineWidth',2)
-plot(rh(7).first,temp(7).first,'Parent',subplot1,'Color',col(7,:),'LineWidth',2)
-plot(rh(8).first,temp(8).first,'Parent',subplot1,'Color',col(8,:),'LineWidth',2)
-plot(rh(9).first,temp(9).first,'Parent',subplot1,'Color',col(9,:),'LineWidth',2)
-plot(rh(10).first,temp(10).first,'Parent',subplot1,'Color',col(10,:),'LineWidth',2)
-plot(rh(11).first,temp(11).first,'Parent',subplot1,'Color',col(11,:),'LineWidth',2)
-set(subplot1,'FontWeight','bold')
-ylim(subplot1,[200 305])
-xlim(subplot1,[1 100])
-
-subplot2=subplot(1,3,2,'Parent',figure1)
-plot(rh(1).second,temp(1).second,'Parent',subplot2,'Color',col(1,:),'LineWidth',2)
-hold(subplot2,'on');
-set(subplot2,'Ydir','reverse')
-plot(rh(2).second,temp(2).second,'Parent',subplot2,'Color',col(2,:),'LineWidth',2)
-plot(rh(3).second,temp(3).second,'Parent',subplot2,'Color',col(3,:),'LineWidth',2)
-plot(rh(4).second,temp(4).second,'Parent',subplot2,'Color',col(4,:),'LineWidth',2)
-plot(rh(5).second,temp(5).second,'Parent',subplot2,'Color',col(5,:),'LineWidth',2)
-plot(rh(6).second,temp(6).second,'Parent',subplot2,'Color',col(6,:),'LineWidth',2)
-plot(rh(7).second,temp(7).second,'Parent',subplot2,'Color',col(7,:),'LineWidth',2)
-plot(rh(8).second,temp(8).second,'Parent',subplot2,'Color',col(8,:),'LineWidth',2)
-plot(rh(9).second,temp(9).second,'Parent',subplot2,'Color',col(9,:),'LineWidth',2)
-plot(rh(10).second,temp(10).second,'Parent',subplot2,'Color',col(10,:),'LineWidth',2)
-plot(rh(11).second,temp(11).second,'Parent',subplot2,'Color',col(11,:),'LineWidth',2)
-axis(subplot2,'ij');
-set(subplot2,'FontWeight','bold');
-ylim(subplot2,[200 305]);
-xlim(subplot2,[1 100]);
-box(subplot2,'off');
-
-subplot3=subplot(1,3,3,'Parent',figure1);
-hold(subplot3,'on');
-plot(rh(1).third,temp(1).third,'DisplayName','CAM5','Parent',subplot3,'Color',col(1,:),'LineWidth',2)
-set(subplot3,'Ydir','reverse')
-plot(rh(2).third,temp(2).third,'DisplayName','CAM6','Parent',subplot3,'Color',col(2,:),'LineWidth',2)
-plot(rh(3).third,temp(3).third,'DisplayName','CNRM','Parent',subplot3,'Color',col(3,:),'LineWidth',2)
-plot(rh(4).third,temp(4).third,'DisplayName','ECHAM6','Parent',subplot3,'Color',col(4,:),'LineWidth',2)
-plot(rh(5).third,temp(5).third,'DisplayName','GEOS','Parent',subplot3,'Color',col(5,:),'LineWidth',2)
-plot(rh(6).third,temp(6).third,'DisplayName','ICON','Parent',subplot3,'Color',col(6,:),'LineWidth',2)
-plot(rh(7).third,temp(7).third,'DisplayName','IPSL','Parent',subplot3,'Color',col(7,:),'LineWidth',2)
-plot(rh(8).third,temp(8).third,'DisplayName','SAM0-UNICON','Parent',subplot3,'Color',col(8,:),'LineWidth',2)
-plot(rh(9).third,temp(9).third,'DisplayName','SP-CAM','Parent',subplot3,'Color',col(9,:),'LineWidth',2)
-plot(rh(10).third,temp(10).third,'DisplayName','SPX-CAM','Parent',subplot3,'Color',col(10,:),'LineWidth',2)
-plot(rh(11).third,temp(11).third,'DisplayName','UKMO-GA7.1','Parent',subplot3,'Color',col(11,:),'LineWidth',2)
-axis(subplot3,'ij');
-set(subplot3,'FontWeight','bold');
-ylim(subplot3,[200 305]);
-xlim(subplot3,[1 100]);
-legend1=legend(subplot3,'show');
-box(legend1,'off');
-title(subplot1,'SST=295K')
-title(subplot2,'SST=300K')
-title(subplot3,'SST=305K')
-ylabel(subplot1,'Temperature K')
-xlabel(subplot1,'Relative Humidity %')
-xlabel(subplot2,'Relative Humidity %')
-xlabel(subplot3,'Relative Humidity %')
 
 
