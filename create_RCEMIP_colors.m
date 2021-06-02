@@ -5,6 +5,8 @@
 %
 % colors are based on the NCL colortable cb_9step
 %
+% called by openRCEprofiles.m
+%
 % levi silvers                         april 2021
 %-----------------------------------------------------------
 
@@ -132,15 +134,4 @@ col10(8,:)  =c20;  % SPCAM        % 51
 col10(9,:) =c21;  % SPXCAM       % 60
 col10(10,:) =c23; % UKMO
 
-
-% physical constants:
-grav      =9.81;
-Rd        =287.;   % J/kg K gas constant for dry air 
-Rv        =461.;   % J/(kg K) gas constant for water vapor
-%latheat   =2.52e6; % J/kg latent heat of vaporization
-latheat   =2.501e6; % J/kg latent heat of vaporization recommended by Wing et al. 2018
-cpd       =1000.;  % J/kg K cp for dry air 
-epsilon   =Rd/Rv;
-psfc      =1015.0;
-tsfc      =295;
 
