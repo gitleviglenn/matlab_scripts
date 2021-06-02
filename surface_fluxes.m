@@ -8,39 +8,41 @@
 %-----------------------------------------------------------------------
 
 
-source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
-source_m1b='~/data/RCEMIP/mn_profiles/CAM5-GCM_large300-profiles.nc';
-source_m1c='~/data/RCEMIP/mn_profiles/CAM5-GCM_large305-profiles.nc';
-source_m2a='~/data/RCEMIP/mn_profiles/CAM6-GCM_large295-profiles.nc';
-source_m2b='~/data/RCEMIP/mn_profiles/CAM6-GCM_large300-profiles.nc';
-source_m2c='~/data/RCEMIP/mn_profiles/CAM6-GCM_large305-profiles.nc';
-source_m6a='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large295-profiles.nc';
-source_m6b='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large300-profiles.nc';
-source_m6c='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large305-profiles.nc';
-source_m4a='~/data/RCEMIP/mn_profiles/CNRM-CM6_large295-profiles.nc';
-source_m4b='~/data/RCEMIP/mn_profiles/CNRM-CM6_large300-profiles.nc';
-source_m4c='~/data/RCEMIP/mn_profiles/CNRM-CM6_large305-profiles.nc';
-source_m8a='~/data/RCEMIP/mn_profiles/GEOS-GCM_large295-profiles.nc';
-source_m8b='~/data/RCEMIP/mn_profiles/GEOS-GCM_large300-profiles.nc';
-source_m8c='~/data/RCEMIP/mn_profiles/GEOS-GCM_large305-profiles.nc';
-source_m9a='~/data/RCEMIP/mn_profiles/ICON-GCM_large295-profiles.nc';
-source_m9b='~/data/RCEMIP/mn_profiles/ICON-GCM_large300-profiles.nc';
-source_m9c='~/data/RCEMIP/mn_profiles/ICON-GCM_large305-profiles.nc';
-source_m12a='~/data/RCEMIP/mn_profiles/IPSL-CM6_large295-profiles.nc';
-source_m12b='~/data/RCEMIP/mn_profiles/IPSL-CM6_large300-profiles.nc';
-source_m12c='~/data/RCEMIP/mn_profiles/IPSL-CM6_large305-profiles.nc';
-source_m16a='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large295-profiles.nc';
-source_m16b='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large300-profiles.nc';
-source_m16c='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large305-profiles.nc';
-source_m20a='~/data/RCEMIP/mn_profiles/SP-CAM_large295-profiles.nc';
-source_m20b='~/data/RCEMIP/mn_profiles/SP-CAM_large300-profiles.nc';
-source_m20c='~/data/RCEMIP/mn_profiles/SP-CAM_large305-profiles.nc';
-source_m21a='~/data/RCEMIP/mn_profiles/SPX-CAM_large295-profiles.nc';
-source_m21b='~/data/RCEMIP/mn_profiles/SPX-CAM_large300-profiles.nc';
-source_m21c='~/data/RCEMIP/mn_profiles/SPX-CAM_large305-profiles.nc';
-source_m23a='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large295-profiles.nc';
-source_m23b='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large300-profiles.nc';
-source_m23c='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large305-profiles.nc';
+%% These path sources are defined in openRCEprofiles.m which should be
+%% run to initialize and prepare the RCEMIP matlab analysis
+%source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
+%source_m1b='~/data/RCEMIP/mn_profiles/CAM5-GCM_large300-profiles.nc';
+%source_m1c='~/data/RCEMIP/mn_profiles/CAM5-GCM_large305-profiles.nc';
+%source_m2a='~/data/RCEMIP/mn_profiles/CAM6-GCM_large295-profiles.nc';
+%source_m2b='~/data/RCEMIP/mn_profiles/CAM6-GCM_large300-profiles.nc';
+%source_m2c='~/data/RCEMIP/mn_profiles/CAM6-GCM_large305-profiles.nc';
+%source_m6a='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large295-profiles.nc';
+%source_m6b='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large300-profiles.nc';
+%source_m6c='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large305-profiles.nc';
+%source_m4a='~/data/RCEMIP/mn_profiles/CNRM-CM6_large295-profiles.nc';
+%source_m4b='~/data/RCEMIP/mn_profiles/CNRM-CM6_large300-profiles.nc';
+%source_m4c='~/data/RCEMIP/mn_profiles/CNRM-CM6_large305-profiles.nc';
+%source_m8a='~/data/RCEMIP/mn_profiles/GEOS-GCM_large295-profiles.nc';
+%source_m8b='~/data/RCEMIP/mn_profiles/GEOS-GCM_large300-profiles.nc';
+%source_m8c='~/data/RCEMIP/mn_profiles/GEOS-GCM_large305-profiles.nc';
+%source_m9a='~/data/RCEMIP/mn_profiles/ICON-GCM_large295-profiles.nc';
+%source_m9b='~/data/RCEMIP/mn_profiles/ICON-GCM_large300-profiles.nc';
+%source_m9c='~/data/RCEMIP/mn_profiles/ICON-GCM_large305-profiles.nc';
+%source_m12a='~/data/RCEMIP/mn_profiles/IPSL-CM6_large295-profiles.nc';
+%source_m12b='~/data/RCEMIP/mn_profiles/IPSL-CM6_large300-profiles.nc';
+%source_m12c='~/data/RCEMIP/mn_profiles/IPSL-CM6_large305-profiles.nc';
+%source_m16a='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large295-profiles.nc';
+%source_m16b='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large300-profiles.nc';
+%source_m16c='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large305-profiles.nc';
+%source_m20a='~/data/RCEMIP/mn_profiles/SP-CAM_large295-profiles.nc';
+%source_m20b='~/data/RCEMIP/mn_profiles/SP-CAM_large300-profiles.nc';
+%source_m20c='~/data/RCEMIP/mn_profiles/SP-CAM_large305-profiles.nc';
+%source_m21a='~/data/RCEMIP/mn_profiles/SPX-CAM_large295-profiles.nc';
+%source_m21b='~/data/RCEMIP/mn_profiles/SPX-CAM_large300-profiles.nc';
+%source_m21c='~/data/RCEMIP/mn_profiles/SPX-CAM_large305-profiles.nc';
+%source_m23a='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large295-profiles.nc';
+%source_m23b='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large300-profiles.nc';
+%source_m23c='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large305-profiles.nc';
 
 
 mindex=11;
@@ -68,25 +70,25 @@ for mi=1:mindex;
   cldfr(mi).third = ncread(eval(source),'cldfrac_avg');
 end
 
-% this requires the Tables txt files to be read into the tables variables Table*
-LR295=Table295K.LapseRate;
-LR300=Table300K.LapseRate;
-LR305=Table305K.LapseRate;
-
-LHF295=Table295K.LHF;
-SHF295=Table295K.SHF;
-LHF300=Table300K.LHF;
-SHF300=Table300K.SHF;
-LHF305=Table305K.LHF;
-SHF305=Table305K.SHF;
-
-%%bowen295=Table295K.LHF./Table295K.SHF;
-%bowen295=LHF295./SHF295;
-%bowen300=LHF300./SHF300;
-%bowen305=LHF305./SHF305;
-bowen295=SHF295./LHF295;
-bowen300=SHF300./LHF300;
-bowen305=SHF305./LHF305;
+%% this requires the Tables txt files to be read into the tables variables Table*
+%LR295=Table295K.LapseRate;
+%LR300=Table300K.LapseRate;
+%LR305=Table305K.LapseRate;
+%
+%LHF295=Table295K.LHF;
+%SHF295=Table295K.SHF;
+%LHF300=Table300K.LHF;
+%SHF300=Table300K.SHF;
+%LHF305=Table305K.LHF;
+%SHF305=Table305K.SHF;
+%
+%%%bowen295=Table295K.LHF./Table295K.SHF;
+%%bowen295=LHF295./SHF295;
+%%bowen300=LHF300./SHF300;
+%%bowen305=LHF305./SHF305;
+%bowen295=SHF295./LHF295;
+%bowen300=SHF300./LHF300;
+%bowen305=SHF305./LHF305;
 
 %% grab the particular models we want:
 %mshf_a=[SHF295(1) SHF295(2) SHF295(4) SHF295(6) SHF295(8) SHF295(9) SHF295(12) SHF295(16) SHF295(20) SHF295(21) SHF295(23)];

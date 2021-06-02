@@ -6,16 +6,50 @@
 % physical constants are defined in the create_RCEMIP_colors.m
 % script
 %
-% levi silvers                         april 2021
+% levi silvers                         june 2021
 %-----------------------------------------------------------
 
 % call the script that defines the rgb colors to use
 create_RCEMIP_colors
 
+% physical constants:
+grav      =9.81;
+Rd        =287.;   % J/kg K gas constant for dry air 
+Rv        =461.;   % J/(kg K) gas constant for water vapor
+%latheat   =2.52e6; % J/kg latent heat of vaporization
+latheat   =2.501e6; % J/kg latent heat of vaporization recommended by Wing et al. 2018
+cpd       =1000.;  % J/kg K cp for dry air 
+epsilon   =Rd/Rv;
+psfc      =1015.0;
+tsfc      =295;
+
+
 % open Tables wtih profile mean statistics and save to structures
+% the scripts below create variables: Table295K, Table300K, and Table305K
 openTable295K
 openTable300K
 openTable305K
+
+% this requires the Tables txt files to be read into the tables variables Table*
+LR295=Table295K.LapseRate;
+LR300=Table300K.LapseRate;
+LR305=Table305K.LapseRate;
+
+LHF295=Table295K.LHF;
+SHF295=Table295K.SHF;
+LHF300=Table300K.LHF;
+SHF300=Table300K.SHF;
+LHF305=Table305K.LHF;
+SHF305=Table305K.SHF;
+
+%%bowen295=Table295K.LHF./Table295K.SHF;
+%bowen295=LHF295./SHF295;
+%bowen300=LHF300./SHF300;
+%bowen305=LHF305./SHF305;
+bowen295=SHF295./LHF295;
+bowen300=SHF300./LHF300;
+bowen305=SHF305./LHF305;
+
 
 source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
 source_m1b='~/data/RCEMIP/mn_profiles/CAM5-GCM_large300-profiles.nc';
