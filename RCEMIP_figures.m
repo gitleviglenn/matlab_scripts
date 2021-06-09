@@ -10,6 +10,32 @@
 % levi silvers                                          april 2021
 %-------------------------------------------------------------------------
 
+%% these three scripts import data from 10 GCMs
+%% data is read into variable structures: CircSF295...
+%% import old, probably instantaneous hourly averaged values:
+%%import_RCEMIP_table_10GCMs_L295
+%%import_RCEMIP_table_10GCMs_L300
+%%import_RCEMIP_table_10GCMs_L305
+%import_RCEMIP_table_10GCMs_295_5d
+%import_RCEMIP_table_10GCMs_300_5d
+%import_RCEMIP_table_10GCMs_305_5d
+%
+%% import data for 5 CRMs
+%% data is read into variable structures: Circ_omega_CRMs_295...
+%import_RCEMIP_table_5CRMs_L295
+%import_RCEMIP_table_5CRMs_L300
+%import_RCEMIP_table_5CRMs_L305
+%
+%SF295  =CircSF295.SF;
+%odn295 =CircSF295.omega_dn;
+%SF300  =CircSF300.SF;
+%odn300 =CircSF300.omega_dn;
+%SF305  =CircSF305.SF;
+%odn305 =CircSF305.omega_dn;
+%scaleI295=(1./(1-SF295)).*odn295;
+%scaleI300=(1./(1-SF300)).*odn300;
+%scaleI305=(1./(1-SF305)).*odn305;
+
 %figure
 %plot(pa.m1a,gamma_m)
 %plot(pa.m1a,gamma)
@@ -218,66 +244,68 @@ fig.XTick = [295 300 305]
 xlim([294 306])
 ylabel('Sensible Heat Flux, W/m2')
 
-% these three scripts import data from 10 GCMs
-% data is read into variable structures: CircSF295...
-% import old, probably instantaneous hourly averaged values:
-%import_RCEMIP_table_10GCMs_L295
-%import_RCEMIP_table_10GCMs_L300
-%import_RCEMIP_table_10GCMs_L305
-import_RCEMIP_table_10GCMs_295_5d
-import_RCEMIP_table_10GCMs_300_5d
-import_RCEMIP_table_10GCMs_305_5d
-
-% import data for 5 CRMs
-% data is read into variable structures: Circ_omega_CRMs_295...
-import_RCEMIP_table_5CRMs_L295
-import_RCEMIP_table_5CRMs_L300
-import_RCEMIP_table_5CRMs_L305
-
-SF295  =CircSF295.SF;
-odn295 =CircSF295.omega_dn;
-SF300  =CircSF300.SF;
-odn300 =CircSF300.omega_dn;
-SF305  =CircSF305.SF;
-odn305 =CircSF305.omega_dn;
-scaleI295=(1./(1-SF295)).*odn295;
-scaleI300=(1./(1-SF300)).*odn300;
-scaleI305=(1./(1-SF305)).*odn305;
+%% these three scripts import data from 10 GCMs
+%% data is read into variable structures: CircSF295...
+%% import old, probably instantaneous hourly averaged values:
+%%import_RCEMIP_table_10GCMs_L295
+%%import_RCEMIP_table_10GCMs_L300
+%%import_RCEMIP_table_10GCMs_L305
+%import_RCEMIP_table_10GCMs_295_5d
+%import_RCEMIP_table_10GCMs_300_5d
+%import_RCEMIP_table_10GCMs_305_5d
+%
+%% import data for 5 CRMs
+%% data is read into variable structures: Circ_omega_CRMs_295...
+%import_RCEMIP_table_5CRMs_L295
+%import_RCEMIP_table_5CRMs_L300
+%import_RCEMIP_table_5CRMs_L305
+%
+%SF295  =CircSF295.SF;
+%odn295 =CircSF295.omega_dn;
+%SF300  =CircSF300.SF;
+%odn300 =CircSF300.omega_dn;
+%SF305  =CircSF305.SF;
+%odn305 =CircSF305.omega_dn;
+%scaleI295=(1./(1-SF295)).*odn295;
+%scaleI300=(1./(1-SF300)).*odn300;
+%scaleI305=(1./(1-SF305)).*odn305;
 
 %-------------------------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------------------------
-
 
 % below creates a figure showing the circulation intensity as a function of SST for GCMs and CRMs...
 % FIGURE 1
 figure
 subplot(1,3,1)
-scatter(CircSF295.SST,CircSF295.I,[],colGCM,'s','SizeData',70);
+scatter(sst_10a,CircSF295.I,[],colGCM,'filled','o','SizeData',70);
 %scatter(CircSF295.SST,CircSF295.I,[],col10,'s','SizeData',70);
 hold on
-scatter(Circ_omega_CRMs_295.SST,Circ_omega_CRMs_295.I,[],colCRM,'filled','s','SizeData',70);
-scatter(CircSF300.SST,CircSF300.I,[],colGCM,'s','SizeData',120);
+scatter(sst_5a,Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,CircSF300.I,[],colGCM,'filled','o','SizeData',120);
 %scatter(CircSF300.SST,CircSF300.I,[],colGCM,'filled','s','SizeData',120);
-scatter(Circ_omega_CRMs_300.SST,Circ_omega_CRMs_300.I,[],colCRM,'filled','s','SizeData',120);
-scatter(CircSF305.SST,CircSF305.I,[],colGCM,'s','SizeData',170);
-scatter(Circ_omega_CRMs_305.SST,Circ_omega_CRMs_305.I,[],colCRM,'filled','s','SizeData',170);
+scatter(sst_5b,Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,CircSF305.I,[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170);
 xlim([294 306])
-line([Circ_omega_CRMs_295.SST(1),Circ_omega_CRMs_300.SST(1),Circ_omega_CRMs_305.SST(1)],[Circ_omega_CRMs_295.I(1),Circ_omega_CRMs_300.I(1),Circ_omega_CRMs_305.I(1)],'Color',colCRM(1,:),'LineWidth',2)
-line([Circ_omega_CRMs_295.SST(2),Circ_omega_CRMs_300.SST(2),Circ_omega_CRMs_305.SST(2)],[Circ_omega_CRMs_295.I(2),Circ_omega_CRMs_300.I(2),Circ_omega_CRMs_305.I(2)],'Color',colCRM(2,:),'LineWidth',2)
-line([Circ_omega_CRMs_295.SST(3),Circ_omega_CRMs_300.SST(3),Circ_omega_CRMs_305.SST(3)],[Circ_omega_CRMs_295.I(3),Circ_omega_CRMs_300.I(3),Circ_omega_CRMs_305.I(3)],'Color',colCRM(3,:),'LineWidth',2)
-line([Circ_omega_CRMs_295.SST(4),Circ_omega_CRMs_300.SST(4),Circ_omega_CRMs_305.SST(4)],[Circ_omega_CRMs_295.I(4),Circ_omega_CRMs_300.I(4),Circ_omega_CRMs_305.I(4)],'Color',colCRM(4,:),'LineWidth',2)
-line([Circ_omega_CRMs_295.SST(5),Circ_omega_CRMs_300.SST(5),Circ_omega_CRMs_305.SST(5)],[Circ_omega_CRMs_295.I(5),Circ_omega_CRMs_300.I(5),Circ_omega_CRMs_305.I(5)],'Color',colCRM(5,:),'LineWidth',2)
-line([CircSF295.SST(1),CircSF300.SST(1),CircSF305.SST(1)],[CircSF295.I(1),CircSF300.I(1),CircSF305.I(1)],'Color',colGCM(1,:),'LineWidth',2)
-line([CircSF295.SST(2),CircSF300.SST(2),CircSF305.SST(2)],[CircSF295.I(2),CircSF300.I(2),CircSF305.I(2)],'Color',colGCM(2,:),'LineWidth',2)
-line([CircSF295.SST(3),CircSF300.SST(3),CircSF305.SST(3)],[CircSF295.I(3),CircSF300.I(3),CircSF305.I(3)],'Color',colGCM(3,:),'LineWidth',2)
-line([CircSF295.SST(4),CircSF300.SST(4),CircSF305.SST(4)],[CircSF295.I(4),CircSF300.I(4),CircSF305.I(4)],'Color',colGCM(4,:),'LineWidth',2)
-line([CircSF295.SST(5),CircSF300.SST(5),CircSF305.SST(5)],[CircSF295.I(5),CircSF300.I(5),CircSF305.I(5)],'Color',colGCM(5,:),'LineWidth',2)
-line([CircSF295.SST(6),CircSF300.SST(6),CircSF305.SST(6)],[CircSF295.I(6),CircSF300.I(6),CircSF305.I(6)],'Color',colGCM(6,:),'LineWidth',2)
-line([CircSF295.SST(7),CircSF300.SST(7),CircSF305.SST(7)],[CircSF295.I(7),CircSF300.I(7),CircSF305.I(7)],'Color',colGCM(7,:),'LineWidth',2)
-line([CircSF295.SST(8),CircSF300.SST(8),CircSF305.SST(8)],[CircSF295.I(8),CircSF300.I(8),CircSF305.I(8)],'Color',colGCM(8,:),'LineWidth',2)
-line([CircSF295.SST(9),CircSF300.SST(9),CircSF305.SST(9)],[CircSF295.I(9),CircSF300.I(9),CircSF305.I(9)],'Color',colGCM(9,:),'LineWidth',2)
-line([CircSF295.SST(10),CircSF300.SST(10),CircSF305.SST(10)],[CircSF295.I(10),CircSF300.I(10),CircSF305.I(10)],'Color',colGCM(10,:),'LineWidth',2)
+line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(1),Circ_omega_CRMs_300.I(1),Circ_omega_CRMs_305.I(1)],'Color',colCRM(1,:),'LineWidth',2)
+line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(2),Circ_omega_CRMs_300.I(2),Circ_omega_CRMs_305.I(2)],'Color',colCRM(2,:),'LineWidth',2)
+line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(3),Circ_omega_CRMs_300.I(3),Circ_omega_CRMs_305.I(3)],'Color',colCRM(3,:),'LineWidth',2)
+line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(4),Circ_omega_CRMs_300.I(4),Circ_omega_CRMs_305.I(4)],'Color',colCRM(4,:),'LineWidth',2)
+line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(5),Circ_omega_CRMs_300.I(5),Circ_omega_CRMs_305.I(5)],'Color',colCRM(5,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(1),CircSF300.I(1),CircSF305.I(1)],'Color',colGCM(1,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(2),CircSF300.I(2),CircSF305.I(2)],'Color',colGCM(2,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(3),CircSF300.I(3),CircSF305.I(3)],'Color',colGCM(3,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(4),CircSF300.I(4),CircSF305.I(4)],'Color',colGCM(4,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(5),CircSF300.I(5),CircSF305.I(5)],'Color',colGCM(5,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(6),CircSF300.I(6),CircSF305.I(6)],'Color',colGCM(6,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(7),CircSF300.I(7),CircSF305.I(7)],'Color',colGCM(7,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(8),CircSF300.I(8),CircSF305.I(8)],'Color',colGCM(8,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(9),CircSF300.I(9),CircSF305.I(9)],'Color',colGCM(9,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[CircSF295.I(10),CircSF300.I(10),CircSF305.I(10)],'Color',colGCM(10,:),'LineWidth',2)
 ylabel('Circulation Intensity, I (hPa/d)')
 xlabel('surface temperature (K)')
 %set(gca,'YScale','log')
@@ -344,6 +372,59 @@ set(gca,'FontSize',14)
 ylim([0 150])
 %title('Overturning Circulation vs Diabatic Velocity')
 sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+
+% compute anomalies relative to 300K
+CircSF295anom=abs(CircSF295.omega_db)-abs(CircSF300.omega_db);
+CircSF300anom=abs(CircSF300.omega_db)-abs(CircSF300.omega_db);
+CircSF305anom=abs(CircSF305.omega_db)-abs(CircSF300.omega_db);
+CircSF295_CRM_anom=abs(Circ_omega_CRMs_295.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+CircSF300_CRM_anom=abs(Circ_omega_CRMs_300.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+CircSF305_CRM_anom=abs(Circ_omega_CRMs_305.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+Circ295_GCM=CircSF295.I-CircSF300.I;
+Circ300_GCM=CircSF300.I-CircSF300.I;
+Circ305_GCM=CircSF305.I-CircSF300.I;
+Circ295_CRM=Circ_omega_CRMs_295.I-Circ_omega_CRMs_300.I;
+Circ300_CRM=Circ_omega_CRMs_300.I-Circ_omega_CRMs_300.I;
+Circ305_CRM=Circ_omega_CRMs_305.I-Circ_omega_CRMs_300.I;
+
+% anomalous omega db values
+figure
+scatter(CircSF295anom,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+hold on
+scatter(CircSF300anom,CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305anom,CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
+scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
+scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
+scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
+scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
+ylabel('Circulation Intensity, I (hPa/d)')
+xlabel('diabatic velocity (hPa/d)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+%title('Overturning Circulation vs Diabatic Velocity')
+sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+
+% anomalous omega db and circulation intensity values
+figure
+scatter(CircSF295anom,Circ295_GCM,[],colGCM,'filled','o','SizeData',70)
+hold on
+scatter(CircSF300anom,Circ300_GCM,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305anom,Circ305_GCM,[],colGCM,'filled','o','SizeData',170)
+scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','v','SizeData',70)
+scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','^','SizeData',70)
+scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','^','SizeData',120)
+scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','v','SizeData',120)
+scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','^','SizeData',170)
+scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','v','SizeData',170)
+ylabel('Circulation Intensity, I (hPa/d)')
+xlabel('diabatic velocity (hPa/d)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+%title('Overturning Circulation vs Diabatic Velocity')
+sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+
 
 % Relative humidity
 figure1=figure;
