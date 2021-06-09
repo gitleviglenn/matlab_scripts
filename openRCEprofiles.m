@@ -24,7 +24,8 @@ psfc      =1015.0;
 tsfc      =295;
 
 
-% open Tables wtih profile mean statistics and save to structures
+% open Tables from Allison with profile mean statistics and save to structures
+%--------------------------------------------------------------------------------------
 % the scripts below create variables: Table295K, Table300K, and Table305K
 openTable295K
 openTable300K
@@ -49,7 +50,43 @@ SHF305=Table305K.SHF;
 bowen295=SHF295./LHF295;
 bowen300=SHF300./LHF300;
 bowen305=SHF305./LHF305;
+%---------------------------------------------------------------------------------------
 
+% open Tables with data that has mostly been analyzed with ncl on casper.  this includes
+% vertical profile data and information about omega, the diabatically driven omega and
+
+% these three scripts import data from 10 GCMs
+% data is read into variable structures: CircSF295...
+% import old, probably instantaneous hourly averaged values:
+%import_RCEMIP_table_10GCMs_L295
+%import_RCEMIP_table_10GCMs_L300
+%import_RCEMIP_table_10GCMs_L305
+% import values averaged over chunks of 5 days.
+import_RCEMIP_table_10GCMs_295_5d
+import_RCEMIP_table_10GCMs_300_5d
+import_RCEMIP_table_10GCMs_305_5d
+
+% import data for 5 CRMs
+% data is read into variable structures: Circ_omega_CRMs_295...
+%import_RCEMIP_table_5CRMs_L295
+%import_RCEMIP_table_5CRMs_L300
+%import_RCEMIP_table_5CRMs_L305
+import_RCEMIP_table_5CRMs_295_5d
+import_RCEMIP_table_5CRMs_300_5d
+import_RCEMIP_table_5CRMs_305_5d
+
+SF295  =CircSF295.SF;
+odn295 =CircSF295.omega_dn;
+SF300  =CircSF300.SF;
+odn300 =CircSF300.omega_dn;
+SF305  =CircSF305.SF;
+odn305 =CircSF305.omega_dn;
+scaleI295=(1./(1-SF295)).*odn295;
+scaleI300=(1./(1-SF300)).*odn300;
+scaleI305=(1./(1-SF305)).*odn305;
+% the subsidence fraction
+
+%---------------------------------------------------------------------------------------
 
 source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
 source_m1b='~/data/RCEMIP/mn_profiles/CAM5-GCM_large300-profiles.nc';
@@ -362,9 +399,15 @@ hrmin_m23c=min(hur.m23c(5:42))
 %bowen305=SHF305./LHF305;
 %
 %
-sst_a=[295 295 295 295 295 295 295 295 295 295 295]
-sst_b=[300 300 300 300 300 300 300 300 300 300 300]
-sst_c=[305 305 305 305 305 305 305 305 305 305 305]
+sst_a=[295 295 295 295 295 295 295 295 295 295 295];
+sst_b=[300 300 300 300 300 300 300 300 300 300 300];
+sst_c=[305 305 305 305 305 305 305 305 305 305 305];
+sst_10a=[295 295 295 295 295 295 295 295 295 295];
+sst_10b=[300 300 300 300 300 300 300 300 300 300];
+sst_10c=[305 305 305 305 305 305 305 305 305 305];
+sst_5a=[295 295 295 295 295];
+sst_5b=[300 300 300 300 300];
+sst_5c=[305 305 305 305 305];
 %
 %% grab the particular models we want:
 hrmin_a=[hrmin_m1a hrmin_m2a hrmin_m4a hrmin_m6a hrmin_m8a hrmin_m9a hrmin_m12a hrmin_m16a hrmin_m20a hrmin_m21a hrmin_m23a];
