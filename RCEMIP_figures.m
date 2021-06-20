@@ -321,28 +321,28 @@ ylim([0 150])
 % plotted in Figure 3.
 %figure
 subplot(1,3,2)
-scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','v','SizeData',70)
+%scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','v','SizeData',70)
+scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
 hold on
-scatter(CircSF300.omega_dn,CircSF300.I,[],colGCM,'filled','v','SizeData',120)
-scatter(CircSF305.omega_dn,CircSF305.I,[],colGCM,'filled','v','SizeData',170)
-scatter(abs(CircSF295.omega_up),CircSF295.I,[],colGCM,'filled','^','SizeData',70)
-scatter(abs(CircSF300.omega_up),CircSF300.I,[],colGCM,'filled','^','SizeData',120)
-scatter(abs(CircSF305.omega_up),CircSF305.I,[],colGCM,'filled','^','SizeData',170)
+scatter(CircSF300.omega_dn,CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.omega_dn,CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+scatter(abs(CircSF295.omega_up),CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+scatter(abs(CircSF300.omega_up),CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+scatter(abs(CircSF305.omega_up),CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+%
 scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
-scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+scatter(abs(Circ_omega_CRMs_295.omega_up),Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
 scatter(abs(Circ_omega_CRMs_300.omega_up),Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
+scatter(abs(Circ_omega_CRMs_300.omega_up),Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
 scatter(abs(Circ_omega_CRMs_305.omega_up),Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
+scatter(abs(Circ_omega_CRMs_305.omega_up),Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
+%
 scatter(abs(Circ_omega_CRMs_295.omega_dn),Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
+scatter(abs(Circ_omega_CRMs_295.omega_dn),Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
 scatter(abs(Circ_omega_CRMs_300.omega_dn),Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
+scatter(abs(Circ_omega_CRMs_300.omega_dn),Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
 scatter(abs(Circ_omega_CRMs_305.omega_dn),Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
-%scatter(abs(Circ_omega_CRMs_295.omega_db),Circ_omega_CRMs_295.I,[],colCRM,'filled','o','SizeData',70)
-%scatter(abs(Circ_omega_CRMs_300.omega_db),Circ_omega_CRMs_300.I,[],colCRM,'filled','o','SizeData',120)
-%scatter(abs(Circ_omega_CRMs_305.omega_db),Circ_omega_CRMs_305.I,[],colCRM,'filled','o','SizeData',170)
-%scatter(abs(CircSF305.omega_db),CircSF305.I,[],colGCM,'filled','o','SizeData',170)
-%scatter(abs(CircSF300.omega_db),CircSF300.I,[],colGCM,'filled','o','SizeData',120)
-%scatter(abs(CircSF295.omega_db),CircSF295.I,[],colGCM,'filled','o','SizeData',70)
-%ylabel('Circlation Intensity hPa/d')
-%xlabel('surface temperature (K)')
+scatter(abs(Circ_omega_CRMs_305.omega_dn),Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
 ylabel('Circulation Intensity, I (hPa/d)')
 xlabel('mean velocity (hPa/d)')
 set(gca,'FontWeight','bold')
@@ -373,59 +373,196 @@ ylim([0 150])
 %title('Overturning Circulation vs Diabatic Velocity')
 sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
 
-% compute anomalies relative to 300K
-CircSF295anom=abs(CircSF295.omega_db)-abs(CircSF300.omega_db);
-CircSF300anom=abs(CircSF300.omega_db)-abs(CircSF300.omega_db);
-CircSF305anom=abs(CircSF305.omega_db)-abs(CircSF300.omega_db);
-CircSF295_CRM_anom=abs(Circ_omega_CRMs_295.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
-CircSF300_CRM_anom=abs(Circ_omega_CRMs_300.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
-CircSF305_CRM_anom=abs(Circ_omega_CRMs_305.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
-Circ295_GCM=CircSF295.I-CircSF300.I;
-Circ300_GCM=CircSF300.I-CircSF300.I;
-Circ305_GCM=CircSF305.I-CircSF300.I;
-Circ295_CRM=Circ_omega_CRMs_295.I-Circ_omega_CRMs_300.I;
-Circ300_CRM=Circ_omega_CRMs_300.I-Circ_omega_CRMs_300.I;
-Circ305_CRM=Circ_omega_CRMs_305.I-Circ_omega_CRMs_300.I;
+%% compute anomalies relative to 300K
+%CircSF295anom=abs(CircSF295.omega_db)-abs(CircSF300.omega_db);
+%CircSF300anom=abs(CircSF300.omega_db)-abs(CircSF300.omega_db);
+%CircSF305anom=abs(CircSF305.omega_db)-abs(CircSF300.omega_db);
+%CircSF295_CRM_anom=abs(Circ_omega_CRMs_295.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+%CircSF300_CRM_anom=abs(Circ_omega_CRMs_300.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+%CircSF305_CRM_anom=abs(Circ_omega_CRMs_305.omega_db)-abs(Circ_omega_CRMs_300.omega_db);
+%Circ295_GCM=CircSF295.I-CircSF300.I;
+%Circ300_GCM=CircSF300.I-CircSF300.I;
+%Circ305_GCM=CircSF305.I-CircSF300.I;
+%Circ295_CRM=Circ_omega_CRMs_295.I-Circ_omega_CRMs_300.I;
+%Circ300_CRM=Circ_omega_CRMs_300.I-Circ_omega_CRMs_300.I;
+%Circ305_CRM=Circ_omega_CRMs_305.I-Circ_omega_CRMs_300.I;
+%
+%% anomalous omega db values
+%figure
+%scatter(CircSF295anom,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+%hold on
+%scatter(CircSF300anom,CircSF300.I,[],colGCM,'filled','o','SizeData',120)
+%scatter(CircSF305anom,CircSF305.I,[],colGCM,'filled','o','SizeData',170)
+%scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
+%scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
+%scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
+%scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
+%scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
+%scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
+%ylabel('Circulation Intensity, I (hPa/d)')
+%xlabel('diabatic velocity (hPa/d)')
+%set(gca,'FontWeight','bold')
+%set(gca,'FontSize',14)
+%%title('Overturning Circulation vs Diabatic Velocity')
+%sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+%
+%% anomalous omega db and circulation intensity values
+%figure
+%scatter(CircSF295anom,Circ295_GCM,[],colGCM,'filled','o','SizeData',70)
+%hold on
+%scatter(CircSF300anom,Circ300_GCM,[],colGCM,'filled','o','SizeData',120)
+%scatter(CircSF305anom,Circ305_GCM,[],colGCM,'filled','o','SizeData',170)
+%scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','v','SizeData',70)
+%scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','^','SizeData',70)
+%scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','^','SizeData',120)
+%scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','v','SizeData',120)
+%scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','^','SizeData',170)
+%scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','v','SizeData',170)
+%ylabel('Circulation Intensity, I (hPa/d)')
+%xlabel('diabatic velocity (hPa/d)')
+%set(gca,'FontWeight','bold')
+%set(gca,'FontSize',14)
+%%title('Overturning Circulation vs Diabatic Velocity')
+%sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
 
-% anomalous omega db values
+% new scatter of Qmn and sigma
 figure
-scatter(CircSF295anom,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
+scatter(Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',70);
 hold on
-scatter(CircSF300anom,CircSF300.I,[],colGCM,'filled','o','SizeData',120)
-scatter(CircSF305anom,CircSF305.I,[],colGCM,'filled','o','SizeData',170)
-scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70)
-scatter(CircSF295_CRM_anom,Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70)
-scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120)
-scatter(CircSF300_CRM_anom,Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120)
-scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170)
-scatter(CircSF305_CRM_anom,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170)
-ylabel('Circulation Intensity, I (hPa/d)')
-xlabel('diabatic velocity (hPa/d)')
+scatter(Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn,Circ_omega_CRMs_300.Qmn,[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn,Circ_omega_CRMs_300.Qmn,[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn,Circ_omega_CRMs_305.Qmn,[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn,Circ_omega_CRMs_305.Qmn,[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn,CircSF295.Qmn,[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn,CircSF300.Qmn,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn,CircSF305.Qmn,[],colGCM,'filled','o','SizeData',170)
+ylabel('Net Radiative Cooling (K/day)')
+xlabel('Static Stability (K/hPa)')
 set(gca,'FontWeight','bold')
 set(gca,'FontSize',14)
-%title('Overturning Circulation vs Diabatic Velocity')
-sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+title('Radiative Heating and Static Stability')
 
-% anomalous omega db and circulation intensity values
+% below is a scatter plot of Qmn vs sig_mn showing anomalies relative to sigma_mn
 figure
-scatter(CircSF295anom,Circ295_GCM,[],colGCM,'filled','o','SizeData',70)
+scatter(Circ_omega_CRMs_295.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',70);
 hold on
-scatter(CircSF300anom,Circ300_GCM,[],colGCM,'filled','o','SizeData',120)
-scatter(CircSF305anom,Circ305_GCM,[],colGCM,'filled','o','SizeData',170)
-scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','v','SizeData',70)
-scatter(CircSF295_CRM_anom,Circ295_CRM,[],colCRM,'filled','^','SizeData',70)
-scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','^','SizeData',120)
-scatter(CircSF300_CRM_anom,Circ300_CRM,[],colCRM,'filled','v','SizeData',120)
-scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','^','SizeData',170)
-scatter(CircSF305_CRM_anom,Circ305_CRM,[],colCRM,'filled','v','SizeData',170)
-ylabel('Circulation Intensity, I (hPa/d)')
-xlabel('diabatic velocity (hPa/d)')
+scatter(Circ_omega_CRMs_295.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_300.Qmn,[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_300.Qmn,[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_305.Qmn,[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_305.Qmn,[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn-CircSF295.sig_mn,CircSF295.Qmn,[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn-CircSF295.sig_mn,CircSF300.Qmn,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn-CircSF295.sig_mn,CircSF305.Qmn,[],colGCM,'filled','o','SizeData',170)
+ylabel('Net Radiative Cooling (K/day)')
+xlabel('Static Stability (K/hPa)')
 set(gca,'FontWeight','bold')
 set(gca,'FontSize',14)
-%title('Overturning Circulation vs Diabatic Velocity')
-sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
+title('Radiative Heating and Static Stability')
 
+figure
+scatter(Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn,Circ_omega_CRMs_300.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn,Circ_omega_CRMs_300.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn,Circ_omega_CRMs_305.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn,Circ_omega_CRMs_305.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn,CircSF295.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn,CircSF300.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn,CircSF305.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',170)
+ylabel('Net Radiative Cooling (K/day)')
+xlabel('Static Stability (K/hPa)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+title('Radiative Heating and Static Stability')
 
+figure
+scatter(abs(Circ_omega_CRMs_295.omega_up),abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(abs(Circ_omega_CRMs_295.omega_up),abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','v','SizeData',70);
+scatter(abs(Circ_omega_CRMs_300.omega_up),abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','^','SizeData',120);
+scatter(abs(Circ_omega_CRMs_300.omega_up),abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','v','SizeData',120);
+scatter(abs(Circ_omega_CRMs_305.omega_up),abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','^','SizeData',170);
+scatter(abs(Circ_omega_CRMs_305.omega_up),abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','v','SizeData',170);
+scatter(abs(CircSF295.omega_up),abs(CircSF295.omega_dn),[],colGCM,'filled','o','SizeData',70)
+scatter(abs(CircSF300.omega_up),abs(CircSF300.omega_dn),[],colGCM,'filled','o','SizeData',120)
+scatter(abs(CircSF305.omega_up),abs(CircSF305.omega_dn),[],colGCM,'filled','o','SizeData',170)
+line([15,45,60],[15,45,60],'Color','k','LineWidth',1)
+%title('diabatic velocity and downward velocity')
+ylabel('omega dn (hPa/day)')
+xlabel('omega up (hPa/day)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+
+figure
+subplot(1,2,1)
+scatter(abs(Circ_omega_CRMs_295.omega_db),abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(abs(Circ_omega_CRMs_295.omega_db),abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','v','SizeData',70);
+scatter(abs(Circ_omega_CRMs_300.omega_db),abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','^','SizeData',120);
+scatter(abs(Circ_omega_CRMs_300.omega_db),abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','v','SizeData',120);
+scatter(abs(Circ_omega_CRMs_305.omega_db),abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','^','SizeData',170);
+scatter(abs(Circ_omega_CRMs_305.omega_db),abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.omega_db,CircSF295.omega_dn,[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.omega_db,CircSF300.omega_dn,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.omega_db,CircSF305.omega_dn,[],colGCM,'filled','o','SizeData',170)
+line([15,45,60],[15,45,60],'Color','k','LineWidth',1)
+%title('diabatic velocity and downward velocity')
+ylabel('omega dn (hPa/day)')
+xlabel('omega diabatic (hPa/day)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+xlim([15 60])
+ylim([10 60])
+
+%figure
+subplot(1,2,2)
+scatter(abs(Circ_omega_CRMs_295.omega_db),abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(abs(Circ_omega_CRMs_295.omega_db),abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','v','SizeData',70);
+scatter(abs(Circ_omega_CRMs_300.omega_db),abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','^','SizeData',120);
+scatter(abs(Circ_omega_CRMs_300.omega_db),abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','v','SizeData',120);
+scatter(abs(Circ_omega_CRMs_305.omega_db),abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','^','SizeData',170);
+scatter(abs(Circ_omega_CRMs_305.omega_db),abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','v','SizeData',170);
+scatter(abs(CircSF295.omega_db),abs(CircSF295.omega_up),[],colGCM,'filled','o','SizeData',70)
+scatter(abs(CircSF300.omega_db),abs(CircSF300.omega_up),[],colGCM,'filled','o','SizeData',120)
+scatter(abs(CircSF305.omega_db),abs(CircSF305.omega_up),[],colGCM,'filled','o','SizeData',170)
+line([15,45,60],[15,45,60],'Color','k','LineWidth',1)
+ylabel('omega up (hPa/day)')
+xlabel('omega diabatic (hPa/day)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+%title('diabatic velocity and upward velocity')
+
+%% looking at normalized scatter plot of I vs omega_db
+%% doesn't seem to simplify much...
+%I_CRMs_a=Circ_omega_CRMs_295.I./Circ_omega_CRMs_295.I
+%I_CRMs_b=Circ_omega_CRMs_300.I./Circ_omega_CRMs_295.I
+%I_CRMs_c=Circ_omega_CRMs_305.I./Circ_omega_CRMs_295.I
+%I_GCMs_c=CircSF305.I./CircSF295.I
+%I_GCMs_b=CircSF300.I./CircSF295.I
+%I_GCMs_a=CircSF295.I./CircSF295.I
+%Odb_CRMs_a=Circ_omega_CRMs_295.omega_db./Circ_omega_CRMs_295.omega_db
+%Odb_CRMs_b=Circ_omega_CRMs_300.omega_db./Circ_omega_CRMs_295.omega_db
+%Odb_CRMs_c=Circ_omega_CRMs_305.omega_db./Circ_omega_CRMs_295.omega_db
+%Odb_GCMs_a=CircSF295.omega_db./CircSF295.omega_db
+%Odb_GCMs_b=CircSF300.omega_db./CircSF295.omega_db
+%Odb_GCMs_c=CircSF305.omega_db./CircSF295.omega_db
+%figure
+%scatter(I_CRMs_a,Odb_CRMs_a,[],colCRM,'filled','^','SizeData',70);
+%hold on
+%scatter(I_CRMs_a,Odb_CRMs_a,[],colCRM,'filled','v','SizeData',70);
+%scatter(I_CRMs_b,Odb_CRMs_b,[],colCRM,'filled','^','SizeData',120);
+%scatter(I_CRMs_b,Odb_CRMs_b,[],colCRM,'filled','v','SizeData',120);
+%scatter(I_CRMs_c,Odb_CRMs_c,[],colCRM,'filled','^','SizeData',170);
+%scatter(I_CRMs_c,Odb_CRMs_c,[],colCRM,'filled','v','SizeData',170);
+%scatter(I_GCMs_a,Odb_GCMs_a,[],colGCM,'filled','o','SizeData',70);
+%scatter(I_GCMs_b,Odb_GCMs_b,[],colGCM,'filled','o','SizeData',120);
+%scatter(I_GCMs_c,Odb_GCMs_c,[],colGCM,'filled','o','SizeData',170);
+
+%---------------------
 % Relative humidity
 figure1=figure;
 subplot1=subplot(1,3,1,'Parent',figure1);
