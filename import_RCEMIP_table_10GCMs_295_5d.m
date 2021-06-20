@@ -5,15 +5,15 @@
 %
 
 %% Setup the Import Options and import the data
-opts = delimitedTextImportOptions("NumVariables", 6);
+opts = delimitedTextImportOptions("NumVariables", 10);
 
 % Specify range and delimiter
 opts.DataLines = [2, Inf];
 opts.Delimiter = " ";
 
 % Specify column names and types
-opts.VariableNames = ["model", "omega_db", "I", "omega_dn", "omega_up", "SF", "SST"];
-opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double"];
+opts.VariableNames = ["model", "omega_db", "I", "omega_dn", "omega_up", "SF", "SST", "omega_db2", "Qmn", "sig_mn"];
+opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 
 % Specify file level properties
 opts.ExtraColumnsRule = "ignore";

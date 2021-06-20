@@ -11,7 +11,7 @@ opts.DataLines = [4, Inf];
 opts.Delimiter = " ";
 
 % Specify column names and types
-opts.VariableNames = ["model", "omega_db", "I", "omega_up", "omega_dn", "SF", "Qmn", "sig_mn"];
+opts.VariableNames = ["model", "omega_db", "I", "omega_dn", "omega_up", "SF", "Qmn", "sig_mn"];
 opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double"];
 
 % Specify file level properties
