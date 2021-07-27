@@ -7,9 +7,13 @@
 %
 % trying to learn how to use 'structures' in matlab!!
 %
+% these scripts need to be called for this to work: 
+%	openRCEprofiles
+%	create_RCEMIP_colors
+%
 % calls the function lapser_diff.m
 %
-% levi silvers                                4-15-21
+% levi silvers                                          july 2021
 %-----------------------------------------------------------------------
 
 source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
@@ -30,26 +34,42 @@ source_m8c='~/data/RCEMIP/mn_profiles/GEOS-GCM_large305-profiles.nc';
 source_m9a='~/data/RCEMIP/mn_profiles/ICON-GCM_large295-profiles.nc';
 source_m9b='~/data/RCEMIP/mn_profiles/ICON-GCM_large300-profiles.nc';
 source_m9c='~/data/RCEMIP/mn_profiles/ICON-GCM_large305-profiles.nc';
+source_m10a='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large295-profiles.nc';
+source_m10b='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large300-profiles.nc';
+source_m10c='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large305-profiles.nc';
+source_m11a='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large295-profiles.nc';
+source_m11b='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large300-profiles.nc';
+source_m11c='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large305-profiles.nc';
 source_m12a='~/data/RCEMIP/mn_profiles/IPSL-CM6_large295-profiles.nc';
 source_m12b='~/data/RCEMIP/mn_profiles/IPSL-CM6_large300-profiles.nc';
 source_m12c='~/data/RCEMIP/mn_profiles/IPSL-CM6_large305-profiles.nc';
 source_m16a='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large295-profiles.nc';
 source_m16b='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large300-profiles.nc';
 source_m16c='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large305-profiles.nc';
+source_m17a='~/data/RCEMIP/mn_profiles/SAM-CRM_large295-profiles.nc';
+source_m17b='~/data/RCEMIP/mn_profiles/SAM-CRM_large300-profiles.nc';
+source_m17c='~/data/RCEMIP/mn_profiles/SAM-CRM_large305-profiles.nc';
+source_m19a='~/data/RCEMIP/mn_profiles/SCALE_large295-profiles.nc';
+source_m19b='~/data/RCEMIP/mn_profiles/SCALE_large300-profiles.nc';
+source_m19c='~/data/RCEMIP/mn_profiles/SCALE_large305-profiles.nc';
 source_m20a='~/data/RCEMIP/mn_profiles/SP-CAM_large295-profiles.nc';
 source_m20b='~/data/RCEMIP/mn_profiles/SP-CAM_large300-profiles.nc';
 source_m20c='~/data/RCEMIP/mn_profiles/SP-CAM_large305-profiles.nc';
 source_m21a='~/data/RCEMIP/mn_profiles/SPX-CAM_large295-profiles.nc';
 source_m21b='~/data/RCEMIP/mn_profiles/SPX-CAM_large300-profiles.nc';
 source_m21c='~/data/RCEMIP/mn_profiles/SPX-CAM_large305-profiles.nc';
+%source_m22a='~/data/RCEMIP/mn_profiles/UCLA-CRM_large295-profiles.nc';
+%source_m22b='~/data/RCEMIP/mn_profiles/UCLA-CRM_large300-profiles.nc';
+%source_m22c='~/data/RCEMIP/mn_profiles/UCLA-CRM_large305-profiles.nc';
 source_m23a='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large295-profiles.nc';
 source_m23b='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large300-profiles.nc';
 source_m23c='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large305-profiles.nc';
 
 mindex=11;
-modelnum=[1 2 4 6 8 9 12 16 20 21 23];
+% GCMs
+%modelnum=[1 2 4 6 8 9 12 16 20 21 23];
+modelnum=[1 2 4 6 8 9 12 16 21 20 23];
 for mi=1:mindex;
-  %indexst=int2str(mi)
   indexm =modelnum(mi)
   source=['source_m' num2str(indexm) 'a']; % SST of 295K
   rh(mi).first  = ncread(eval(source),'hur_avg');
@@ -75,16 +95,60 @@ end
 
 % there is a code for a figure of the lapse rate profiles within 
 % lapser_diff.m; default is to have figure commented out...
-mindex=11;
+%mindex=16;
 for mi=1:mindex;
   % A -> 295K; B -> 300K; C -> 305K
   string=[Table295K.Model(modelnum(mi)) 'SST=295K'];
-  [A(mi).gam,A(mi).mgam,A(mi).diffgam]=lapser_diff(temp(mi).first,pres(mi).first,string);
-  string=[Table300K.Model(modelnum(mi)) 'SST=300K'];
-  [B(mi).gam,B(mi).mgam,B(mi).diffgam]=lapser_diff(temp(mi).second,pres(mi).second,string);
+  [A(mi).gam,A(mi).mgam,A(mi).diffgam,A(mi).gam_prof,A(mi).mgam_prof]=lapser_diff(temp(mi).first,pres(mi).first,string);
+  string=[Table300K.Model(modelnum(mi)) 'SST=300K']
+  size(pres(mi).second)
+  [B(mi).gam,B(mi).mgam,B(mi).diffgam,B(mi).gam_prof,B(mi).mgam_prof]=lapser_diff(temp(mi).second,pres(mi).second,string);
+  B(mi).press=pres(mi).second;
   string=[Table305K.Model(modelnum(mi)) 'SST=305K'];
-  [C(mi).gam,C(mi).mgam,C(mi).diffgam]=lapser_diff(temp(mi).third,pres(mi).third,string);
+  [C(mi).gam,C(mi).mgam,C(mi).diffgam,C(mi).gam_prof,C(mi).mgam_prof]=lapser_diff(temp(mi).third,pres(mi).third,string);
 end
+
+% CRMs
+mindex=4; % UCLA has an issue with the pressure values 
+%modelnum=[10 11 17 19];
+modelnum=[17 19 10 11];
+for mi=1:mindex;
+  indexm =modelnum(mi)
+  source=['source_m' num2str(indexm) 'a']; % SST of 295K
+  rh(mi).first  = ncread(eval(source),'hur_avg');
+  pres(mi).first   = ncread(eval(source),'pa_avg');
+  temp(mi).first   = ncread(eval(source),'ta_avg');
+  zg(mi).first    = ncread(eval(source),'z_avg');
+  cldfr(mi).first = ncread(eval(source),'cldfrac_avg');
+  source=['source_m' num2str(indexm) 'b']; % SST of 300K
+  rh(mi).second = ncread(eval(source),'hur_avg');
+  pres(mi).second   = ncread(eval(source),'pa_avg');
+  temp(mi).second   = ncread(eval(source),'ta_avg');
+  zg(mi).second    = ncread(eval(source),'z_avg');
+  cldfr(mi).second = ncread(eval(source),'cldfrac_avg');
+  source=['source_m' num2str(indexm) 'c']; % SST of 305K
+  rh(mi).third = ncread(eval(source),'hur_avg');
+  pres(mi).third   = ncread(eval(source),'pa_avg');
+  temp(mi).third   = ncread(eval(source),'ta_avg');
+  zg(mi).third    = ncread(eval(source),'z_avg');
+  cldfr(mi).third = ncread(eval(source),'cldfrac_avg');
+end
+for mi=1:mindex;
+  % A -> 295K; B -> 300K; C -> 305K
+  string=[Table295K.Model(modelnum(mi)) 'SST=295K'];
+  [A_CRM(mi).gam,A_CRM(mi).mgam,A_CRM(mi).diffgam,A_CRM(mi).gam_prof,A_CRM(mi).mgam_prof]=lapser_diff(temp(mi).first,pres(mi).first,string);
+  A_CRM(mi).press=pres(mi).first;
+  string=[Table300K.Model(modelnum(mi)) 'SST=300K']
+  size(pres(mi).second)
+  [B_CRM(mi).gam,B_CRM(mi).mgam,B_CRM(mi).diffgam,B_CRM(mi).gam_prof,B_CRM(mi).mgam_prof]=lapser_diff(temp(mi).second,pres(mi).second,string);
+  B_CRM(mi).press=pres(mi).second;
+  string=[Table305K.Model(modelnum(mi)) 'SST=305K'];
+  [C_CRM(mi).gam,C_CRM(mi).mgam,C_CRM(mi).diffgam,C_CRM(mi).gam_prof,C_CRM(mi).mgam_prof]=lapser_diff(temp(mi).third,pres(mi).third,string);
+  C_CRM(mi).press=pres(mi).third;
+end
+
+% analysis below is for GCMs so the mindex is set back to 11
+mindex=11;
 
 gam_scatter=zeros(33,1);
 mgam_scatter_A=zeros(1,11);
@@ -94,7 +158,7 @@ dgam_scatter=zeros(1,11)-9.8;
 
 yax=linspace(1,11,11);
 
-for mi=1:mindex;
+for mi=1:mindex
   mgam_scatter_A(mi)=A(mi).mgam;
   mgam_scatter_B(mi)=B(mi).mgam;
   mgam_scatter_C(mi)=C(mi).mgam;

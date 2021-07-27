@@ -1,4 +1,4 @@
-function [mn_gam,mn_mgam,diff_gam]=lapser_diff(ttmp,ptmp,modelnum)
+function [mn_gam,mn_mgam,diff_gam,gam,mgam]=lapser_diff(ttmp,ptmp,modelnum)
 
 % physical constants:
 % these are also defined in create_RCEMIP_colors.m but I don't want 
@@ -75,9 +75,12 @@ mn_mgam  = gamm_part/(plevs(1)-plevs(p2));
 
 diff_gam=mn_gam-mn_mgam;
 
+gam=gamma;
+mgam=gamma_m;
+
 %figure
-%plot(ptmp,gamma_m)
-%plot(ptmp,gamma)
+%%plot(ptmp,gamma_m)
+%%plot(ptmp,gamma)
 %plot(gamma,ptmp)
 %set(gca,'Ydir','reverse')
 %ylabel('pressure (hPa)')
