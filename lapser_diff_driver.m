@@ -100,12 +100,14 @@ for mi=1:mindex;
   % A -> 295K; B -> 300K; C -> 305K
   string=[Table295K.Model(modelnum(mi)) 'SST=295K'];
   [A(mi).gam,A(mi).mgam,A(mi).diffgam,A(mi).gam_prof,A(mi).mgam_prof]=lapser_diff(temp(mi).first,pres(mi).first,string);
+  A(mi).press=pres(mi).first;
   string=[Table300K.Model(modelnum(mi)) 'SST=300K']
   size(pres(mi).second)
   [B(mi).gam,B(mi).mgam,B(mi).diffgam,B(mi).gam_prof,B(mi).mgam_prof]=lapser_diff(temp(mi).second,pres(mi).second,string);
   B(mi).press=pres(mi).second;
   string=[Table305K.Model(modelnum(mi)) 'SST=305K'];
   [C(mi).gam,C(mi).mgam,C(mi).diffgam,C(mi).gam_prof,C(mi).mgam_prof]=lapser_diff(temp(mi).third,pres(mi).third,string);
+  C(mi).press=pres(mi).third;
 end
 
 % CRMs

@@ -99,6 +99,7 @@ sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
 % plot lapse rates 
 % for CRMs..
 figure
+subplot(1,2,1)
 plot(B_CRM(1).mgam_prof,B_CRM(1).press,'Color',colCRM4(1,:),'LineWidth',2)
 set(gca,'Ydir','reverse')
 ylabel('pressure (hPa)')
@@ -117,7 +118,8 @@ plot(B_CRM(4).mgam_prof,B_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
 plot(B_CRM(4).gam_prof,B_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
 
 % and for GCMs
-figure
+%figure
+subplot(1,2,2)
 plot(B(1).mgam_prof,B(1).press,'Color',colGCMfull(1,:),'LineWidth',2)
 set(gca,'Ydir','reverse')
 ylabel('pressure (hPa)')
@@ -147,6 +149,112 @@ plot(B(10).mgam_prof,B(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
 plot(B(10).gam_prof,B(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
 plot(B(11).mgam_prof,B(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
 plot(B(11).gam_prof,B(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
+
+figure
+subplot(1,2,1)
+plot(A_CRM(1).mgam_prof,A_CRM(1).press,'Color',colCRM4(1,:),'LineWidth',2)
+set(gca,'Ydir','reverse')
+ylabel('pressure (hPa)')
+xlabel('Lapse Rate')
+set(gca,'FontWeight','bold')
+ylim([100,1000])
+xlim([-10.,0.0])
+hold on
+plot(A_CRM(1).gam_prof,A_CRM(1).press,'Color',colCRM4(1,:),'LineWidth',2)
+%line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(1),Circ_omega_CRMs_300.I(1),Circ_omega_CRMs_305.I(1)],'Color',colCRM(1,:),'LineWidth',2)
+plot(A_CRM(2).mgam_prof,A_CRM(2).press,'Color',colCRM4(2,:),'LineWidth',2)
+plot(A_CRM(2).gam_prof,A_CRM(2).press,'Color',colCRM4(2,:),'LineWidth',2)
+plot(A_CRM(3).mgam_prof,A_CRM(3).press,'Color',colCRM4(3,:),'LineWidth',2)
+plot(A_CRM(3).gam_prof,A_CRM(3).press,'Color',colCRM4(3,:),'LineWidth',2)
+plot(A_CRM(4).mgam_prof,A_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
+plot(A_CRM(4).gam_prof,A_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
+
+% and for GCMs
+%figure
+subplot(1,2,2)
+plot(A(1).mgam_prof,A(1).press,'Color',colGCMfull(1,:),'LineWidth',2)
+set(gca,'Ydir','reverse')
+ylabel('pressure (hPa)')
+xlabel('Lapse Rate')
+set(gca,'FontWeight','bold')
+ylim([100,1000])
+xlim([-10.,0.0])
+hold on
+plot(A(1).gam_prof,A(1).press,'Color',colGCMfull(1,:),'LineWidth',2)
+plot(A(2).mgam_prof,A(2).press,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(A(2).gam_prof,A(2).press,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(A(3).mgam_prof,A(3).press,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(A(3).gam_prof,A(3).press,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(A(4).mgam_prof,A(4).press,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(A(4).gam_prof,A(4).press,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(A(5).mgam_prof,A(5).press,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(A(5).gam_prof,A(5).press,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(A(6).mgam_prof,A(6).press,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(A(6).gam_prof,A(6).press,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(A(7).mgam_prof,A(7).press,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(A(7).gam_prof,A(7).press,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(A(8).mgam_prof,A(8).press,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(A(8).gam_prof,A(8).press,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(A(9).mgam_prof,A(9).press,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(A(9).gam_prof,A(9).press,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(A(10).mgam_prof,A(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(A(10).gam_prof,A(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(A(11).mgam_prof,A(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
+plot(A(11).gam_prof,A(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
+sgtitle('Moist and Actual Adiabat for 295K ','FontSize',16,'FontWeight','bold')
+
+figure
+subplot(1,2,1)
+plot(C_CRM(1).mgam_prof,C_CRM(1).press,'Color',colCRM4(1,:),'LineWidth',2)
+set(gca,'Ydir','reverse')
+ylabel('pressure (hPa)')
+xlabel('Lapse Rate')
+set(gca,'FontWeight','bold')
+ylim([100,1000])
+xlim([-10.,0.0])
+hold on
+plot(C_CRM(1).gam_prof,C_CRM(1).press,'Color',colCRM4(1,:),'LineWidth',2)
+%line([sst_5a(1),sst_5b(1),sst_5c(1)],[Circ_omega_CRMs_295.I(1),Circ_omega_CRMs_300.I(1),Circ_omega_CRMs_305.I(1)],'Color',colCRM(1,:),'LineWidth',2)
+plot(C_CRM(2).mgam_prof,C_CRM(2).press,'Color',colCRM4(2,:),'LineWidth',2)
+plot(C_CRM(2).gam_prof,C_CRM(2).press,'Color',colCRM4(2,:),'LineWidth',2)
+plot(C_CRM(3).mgam_prof,C_CRM(3).press,'Color',colCRM4(3,:),'LineWidth',2)
+plot(C_CRM(3).gam_prof,C_CRM(3).press,'Color',colCRM4(3,:),'LineWidth',2)
+plot(C_CRM(4).mgam_prof,C_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
+plot(C_CRM(4).gam_prof,C_CRM(4).press,'Color',colCRM4(4,:),'LineWidth',2)
+
+% and for GCMs
+%figure
+subplot(1,2,2)
+plot(C(1).mgam_prof,C(1).press,'Color',colGCMfull(1,:),'LineWidth',2)
+set(gca,'Ydir','reverse')
+ylabel('pressure (hPa)')
+xlabel('Lapse Rate')
+set(gca,'FontWeight','bold')
+ylim([100,1000])
+xlim([-10.,0.0])
+hold on
+plot(C(1).gam_prof,C(1).press,'Color',colGCMfull(1,:),'LineWidth',2)
+plot(C(2).mgam_prof,C(2).press,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(C(2).gam_prof,C(2).press,'Color',colGCMfull(2,:),'LineWidth',2)
+plot(C(3).mgam_prof,C(3).press,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(C(3).gam_prof,C(3).press,'Color',colGCMfull(3,:),'LineWidth',2)
+plot(C(4).mgam_prof,C(4).press,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(C(4).gam_prof,C(4).press,'Color',colGCMfull(4,:),'LineWidth',2)
+plot(C(5).mgam_prof,C(5).press,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(C(5).gam_prof,C(5).press,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(C(6).mgam_prof,C(6).press,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(C(6).gam_prof,C(6).press,'Color',colGCMfull(6,:),'LineWidth',2)
+plot(C(7).mgam_prof,C(7).press,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(C(7).gam_prof,C(7).press,'Color',colGCMfull(7,:),'LineWidth',2)
+plot(C(8).mgam_prof,C(8).press,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(C(8).gam_prof,C(8).press,'Color',colGCMfull(8,:),'LineWidth',2)
+plot(C(9).mgam_prof,C(9).press,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(C(9).gam_prof,C(9).press,'Color',colGCMfull(9,:),'LineWidth',2)
+plot(C(10).mgam_prof,C(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(C(10).gam_prof,C(10).press,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(C(11).mgam_prof,C(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
+plot(C(11).gam_prof,C(11).press,'Color',colGCMfull(11,:),'LineWidth',2)
+sgtitle('Moist and Cctual Cdiabat for 305K ','FontSize',16,'FontWeight','bold')
 %----------------------------------------------------------------------------
 
 %% compute anomalies relative to 300K
@@ -219,6 +327,43 @@ set(gca,'FontWeight','bold')
 set(gca,'FontSize',14)
 title('Radiative Heating and Static Stability')
 
+%---------------------------------------------------
+% plot static stability vs. omega down
+figure
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn,abs(CircSF295.omega_dn),[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn,abs(CircSF300.omega_dn),[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn,abs(CircSF305.omega_dn),[],colGCM,'filled','o','SizeData',170)
+ylabel('Mean Downward Omega (hPa/day)')
+xlabel('Static Stability (K/hPa)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+title('Pressure Velocity and Static Stability')
+%---------------------------------------------------
+figure
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn,abs(CircSF295.omega_db),[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn,abs(CircSF300.omega_db),[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn,abs(CircSF305.omega_db),[],colGCM,'filled','o','SizeData',170)
+ylabel('Mean Diabatic Omega (hPa/day)')
+xlabel('Static Stability (K/hPa)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+title('Pressure Velocity and Static Stability')
+%---------------------------------------------------
+
 % below is a scatter plot of Qmn vs sig_mn showing anomalies relative to sigma_mn
 figure
 scatter(Circ_omega_CRMs_295.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',70);
@@ -253,6 +398,23 @@ xlabel('Static Stability (K/hPa)')
 set(gca,'FontWeight','bold')
 set(gca,'FontSize',14)
 title('Radiative Heating and Static Stability')
+
+figure
+scatter(Circ_omega_CRMs_295.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(Circ_omega_CRMs_295.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_295.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_300.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_300.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_305.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn-Circ_omega_CRMs_295.sig_mn,Circ_omega_CRMs_305.Qmn-Circ_omega_CRMs_295.Qmn,[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn-CircSF295.sig_mn,CircSF295.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn-CircSF295.sig_mn,CircSF300.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn-CircSF295.sig_mn,CircSF305.Qmn-CircSF295.Qmn,[],colGCM,'filled','o','SizeData',170)
+ylabel('Net Radiative Cooling (K/day)')
+xlabel('Static Stability (K/hPa)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+title('Radiative Heating and Static Stability Anomalies')
 
 figure
 scatter(abs(Circ_omega_CRMs_295.omega_up),abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','^','SizeData',70);
