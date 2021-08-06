@@ -95,6 +95,92 @@ set(gca,'FontSize',14)
 ylim([0 150])
 sgtitle('Overturning Circulation at 500 hPa','FontSize',16,'FontWeight','bold')
 
+%-------------------------------------------------------------------
+
+figure
+subplot(1,3,1)
+scatter(sst_10a,CircSF295.omega_db,[],colGCM,'filled','o','SizeData',70);
+hold on
+scatter(sst_5a,Circ_omega_CRMs_295.omega_db,[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,Circ_omega_CRMs_295.omega_db,[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,CircSF300.omega_db,[],colGCM,'filled','o','SizeData',120);
+scatter(sst_5b,Circ_omega_CRMs_300.omega_db,[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,Circ_omega_CRMs_300.omega_db,[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,CircSF305.omega_db,[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,Circ_omega_CRMs_305.omega_db,[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,Circ_omega_CRMs_305.omega_db,[],colCRM,'filled','v','SizeData',170);
+
+%-------------------------------
+
+% diabatic velocity vs SST.  
+figure
+subplot(1,3,1)
+scatter(sst_10a,CircSF295.omega_db,[],colGCM,'filled','o','SizeData',70);
+hold on
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,CircSF300.omega_db,[],colGCM,'filled','o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,CircSF305.omega_db,[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','v','SizeData',170);
+xlabel('SST (K)')
+ylabel('diabatic velocity (hPa/d)')
+
+subplot(1,3,2)
+scatter(sst_10a,abs(CircSF295.omega_up),[],colGCM,'filled','o','SizeData',70);
+hold on
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,abs(CircSF300.omega_up),[],colGCM,'filled','o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,abs(CircSF305.omega_up),[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','v','SizeData',170);
+xlabel('SST (K)')
+ylabel('w-up (hPa/d)')
+
+subplot(1,3,3)
+scatter(sst_10a,CircSF295.omega_dn,[],colGCM,'filled','o','SizeData',70);
+hold on
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,CircSF300.omega_dn,[],colGCM,'filled','o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,CircSF305.omega_dn,[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'filled','v','SizeData',170);
+xlabel('SST (K)')
+ylabel('w-dn (hPa/d)')
+
+
+%----------------------------------------------------------------------------
+
+% create a figure that plots precipitable water
+sst_full_295=zeros(34,1)+295;
+sst_full_300=zeros(34,1)+300;
+sst_full_305=zeros(34,1)+305;
+
+figure
+%scatter(sst_full_295,Table295K.PW,[],colGCM,'filled','o','SizeData',70);
+scatter(sst_full_295,Table295K.PW,'filled','o','SizeData',70);
+hold on
+scatter(sst_full_300,Table300K.PW,'filled','o','SizeData',70);
+scatter(sst_full_305,Table305K.PW,'filled','o','SizeData',70);
+%scatter(sst_5a,Circ_omega_CRMs_295.I,[],colCRM,'filled','^','SizeData',70);
+%scatter(sst_5a,Circ_omega_CRMs_295.I,[],colCRM,'filled','v','SizeData',70);
+%scatter(sst_10b,CircSF300.I,[],colGCM,'filled','o','SizeData',120);
+%scatter(sst_5b,Circ_omega_CRMs_300.I,[],colCRM,'filled','^','SizeData',120);
+%scatter(sst_5b,Circ_omega_CRMs_300.I,[],colCRM,'filled','v','SizeData',120);
+%scatter(sst_10c,CircSF305.I,[],colGCM,'filled','o','SizeData',170);
+%scatter(sst_5c,Circ_omega_CRMs_305.I,[],colCRM,'filled','^','SizeData',170);
+%scatter(sst_5c,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170);
+xlim([294 306])
+
+
 %----------------------------------------------------------------------------
 % plot lapse rates 
 % for CRMs..
@@ -327,6 +413,24 @@ set(gca,'FontWeight','bold')
 set(gca,'FontSize',14)
 title('Radiative Heating and Static Stability')
 
+%---------------------------------------------------
+% plot static stability vs. omega up
+figure
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','^','SizeData',70);
+hold on
+scatter(Circ_omega_CRMs_295.sig_mn,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'filled','v','SizeData',70);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','^','SizeData',120);
+scatter(Circ_omega_CRMs_300.sig_mn,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'filled','v','SizeData',120);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','^','SizeData',170);
+scatter(Circ_omega_CRMs_305.sig_mn,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'filled','v','SizeData',170);
+scatter(CircSF295.sig_mn,abs(CircSF295.omega_up),[],colGCM,'filled','o','SizeData',70)
+scatter(CircSF300.sig_mn,abs(CircSF300.omega_up),[],colGCM,'filled','o','SizeData',120)
+scatter(CircSF305.sig_mn,abs(CircSF305.omega_up),[],colGCM,'filled','o','SizeData',170)
+ylabel('Mean Upward Omega (hPa/day)')
+xlabel('Static Stability (K/hPa)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+title('Pressure Velocity and Static Stability')
 %---------------------------------------------------
 % plot static stability vs. omega down
 figure
