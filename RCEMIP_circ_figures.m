@@ -5,6 +5,18 @@
 % levi silvers                                      july 2021
 %------------------------------------------------------------------
 
+mnvelocity = linspace(0,150,150);
+sf=0.8;
+%I_up_a=abs(mnvelocity.*(sf-2));
+I_up_a=abs(mnvelocity./(sf));
+%I_dn_a=abs(mnvelocity.*((2-sf)/(1-sf)));
+I_dn_a=abs(mnvelocity./(1-sf));
+sf=0.5;
+I_up_b=abs(mnvelocity./(sf));
+I_dn_b=abs(mnvelocity./(1-sf));
+%I_up_b=abs(mnvelocity.*(sf-2));
+%I_dn_b=abs(mnvelocity.*((2-sf)/(1-sf)));
+
 figure
 subplot(1,3,1)
 scatter(sst_10a,CircSF295.I,[],colGCM,'filled','o','SizeData',70);
@@ -44,9 +56,13 @@ ylim([0 150])
 %title('Large-Scale Overturning Circulation')
 
 subplot(1,3,2)
+plot(mnvelocity,I_up_a,'k','LineWidth',3)
 %scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','v','SizeData',70)
-scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
 hold on
+plot(mnvelocity,I_up_b,'k','LineWidth',2)
+plot(mnvelocity,I_dn_a,'k','LineWidth',3)
+plot(mnvelocity,I_dn_b,'k','LineWidth',2)
+scatter(CircSF295.omega_dn,CircSF295.I,[],colGCM,'filled','o','SizeData',70)
 scatter(CircSF300.omega_dn,CircSF300.I,[],colGCM,'filled','o','SizeData',120)
 scatter(CircSF305.omega_dn,CircSF305.I,[],colGCM,'filled','o','SizeData',170)
 scatter(abs(CircSF295.omega_up),CircSF295.I,[],colGCM,'filled','o','SizeData',70)
@@ -111,6 +127,109 @@ scatter(sst_5c,Circ_omega_CRMs_305.omega_db,[],colCRM,'filled','^','SizeData',17
 scatter(sst_5c,Circ_omega_CRMs_305.omega_db,[],colCRM,'filled','v','SizeData',170);
 
 %-------------------------------
+figure
+scatter(sst_10a,CircSF295.omega_db,[],colGCM,'filled','o','SizeData',70);
+hold on
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_db),[],colCRM,'filled','v','SizeData',70);
+scatter(sst_10b,CircSF300.omega_db,[],colGCM,'filled','o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_db),[],colCRM,'filled','v','SizeData',120);
+scatter(sst_10c,CircSF305.omega_db,[],colGCM,'filled','o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_db),[],colCRM,'filled','v','SizeData',170);
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(1)),abs(CircSF300.omega_db(1)),abs(CircSF305.omega_db(1))],'Color',colGCM(1,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(2)),abs(CircSF300.omega_db(2)),abs(CircSF305.omega_db(2))],'Color',colGCM(2,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(3)),abs(CircSF300.omega_db(3)),abs(CircSF305.omega_db(3))],'Color',colGCM(3,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(4)),abs(CircSF300.omega_db(4)),abs(CircSF305.omega_db(4))],'Color',colGCM(4,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(5)),abs(CircSF300.omega_db(5)),abs(CircSF305.omega_db(5))],'Color',colGCM(5,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(6)),abs(CircSF300.omega_db(6)),abs(CircSF305.omega_db(6))],'Color',colGCM(6,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(7)),abs(CircSF300.omega_db(7)),abs(CircSF305.omega_db(7))],'Color',colGCM(7,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(8)),abs(CircSF300.omega_db(8)),abs(CircSF305.omega_db(8))],'Color',colGCM(8,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(9)),abs(CircSF300.omega_db(9)),abs(CircSF305.omega_db(9))],'Color',colGCM(9,:),'LineWidth',3)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_db(10)),abs(CircSF300.omega_db(10)),abs(CircSF305.omega_db(10))],'Color',colGCM(10,:),'LineWidth',3)
+%
+xlabel('SST (K)')
+%ylabel('diabatic velocity (hPa/d)')
+scatter(sst_10a,abs(CircSF295.omega_up),[],colGCM,'o','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_up),[],colCRM,'v','SizeData',70);
+scatter(sst_10b,abs(CircSF300.omega_up),[],colGCM,'o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_up),[],colCRM,'v','SizeData',120);
+scatter(sst_10c,abs(CircSF305.omega_up),[],colGCM,'o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_up),[],colCRM,'v','SizeData',170);
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(1)),abs(CircSF300.omega_up(1)),abs(CircSF305.omega_up(1))],'Color',colGCM(1,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(2)),abs(CircSF300.omega_up(2)),abs(CircSF305.omega_up(2))],'Color',colGCM(2,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(3)),abs(CircSF300.omega_up(3)),abs(CircSF305.omega_up(3))],'Color',colGCM(3,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(4)),abs(CircSF300.omega_up(4)),abs(CircSF305.omega_up(4))],'Color',colGCM(4,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(5)),abs(CircSF300.omega_up(5)),abs(CircSF305.omega_up(5))],'Color',colGCM(5,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(6)),abs(CircSF300.omega_up(6)),abs(CircSF305.omega_up(6))],'Color',colGCM(6,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(7)),abs(CircSF300.omega_up(7)),abs(CircSF305.omega_up(7))],'Color',colGCM(7,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(8)),abs(CircSF300.omega_up(8)),abs(CircSF305.omega_up(8))],'Color',colGCM(8,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(9)),abs(CircSF300.omega_up(9)),abs(CircSF305.omega_up(9))],'Color',colGCM(9,:),'LineWidth',1)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_up(10)),abs(CircSF300.omega_up(10)),abs(CircSF305.omega_up(10))],'Color',colGCM(10,:),'LineWidth',1)
+%
+scatter(sst_10a,abs(CircSF295.omega_up),[],colGCM,'o','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'^','SizeData',70);
+scatter(sst_5a,abs(Circ_omega_CRMs_295.omega_dn),[],colCRM,'v','SizeData',70);
+scatter(sst_10b,CircSF300.omega_dn,[],colGCM,'o','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'^','SizeData',120);
+scatter(sst_5b,abs(Circ_omega_CRMs_300.omega_dn),[],colCRM,'v','SizeData',120);
+scatter(sst_10c,CircSF305.omega_dn,[],colGCM,'o','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'^','SizeData',170);
+scatter(sst_5c,abs(Circ_omega_CRMs_305.omega_dn),[],colCRM,'v','SizeData',170);
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(1)),abs(CircSF300.omega_dn(1)),abs(CircSF305.omega_dn(1))],'Color',colGCM(1,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(2)),abs(CircSF300.omega_dn(2)),abs(CircSF305.omega_dn(2))],'Color',colGCM(2,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(3)),abs(CircSF300.omega_dn(3)),abs(CircSF305.omega_dn(3))],'Color',colGCM(3,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(4)),abs(CircSF300.omega_dn(4)),abs(CircSF305.omega_dn(4))],'Color',colGCM(4,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(5)),abs(CircSF300.omega_dn(5)),abs(CircSF305.omega_dn(5))],'Color',colGCM(5,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(6)),abs(CircSF300.omega_dn(6)),abs(CircSF305.omega_dn(6))],'Color',colGCM(6,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(7)),abs(CircSF300.omega_dn(7)),abs(CircSF305.omega_dn(7))],'Color',colGCM(7,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(8)),abs(CircSF300.omega_dn(8)),abs(CircSF305.omega_dn(8))],'Color',colGCM(8,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(9)),abs(CircSF300.omega_dn(9)),abs(CircSF305.omega_dn(9))],'Color',colGCM(9,:),'LineWidth',2)
+line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(10)),abs(CircSF300.omega_dn(10)),abs(CircSF305.omega_dn(10))],'Color',colGCM(10,:),'LineWidth',2)
+%
+
+%mindex=10;
+%for mi=1:mindex;
+%  slope1(mi)=(abs(CircSF300.omega_dn(mi))-abs(CircSF295.omega_dn(mi)))/5.
+%  slope2(mi)=(abs(CircSF305.omega_dn(mi))-abs(CircSF300.omega_dn(mi)))/5.
+%end
+slope1_omegadn=(CircSF300.omega_dn-CircSF295.omega_dn)/5;
+slope2_omegadn=(CircSF305.omega_dn-CircSF300.omega_dn)/5;
+slope1_omegaup=(CircSF300.omega_up-CircSF295.omega_up)/5;
+slope2_omegaup=(CircSF305.omega_up-CircSF300.omega_up)/5;
+slope1_omegadb=(CircSF300.omega_db-CircSF295.omega_db)/5;
+slope2_omegadb=(CircSF305.omega_db-CircSF300.omega_db)/5;
+
+slope1_crm_omegadn=(-Circ_omega_CRMs_300.omega_dn+Circ_omega_CRMs_295.omega_dn)/5;
+slope2_crm_omegadn=(-Circ_omega_CRMs_305.omega_dn+Circ_omega_CRMs_300.omega_dn)/5;
+slope1_crm_omegaup=(-Circ_omega_CRMs_300.omega_up+Circ_omega_CRMs_295.omega_up)/5;
+slope2_crm_omegaup=(-Circ_omega_CRMs_305.omega_up+Circ_omega_CRMs_300.omega_up)/5;
+slope1_crm_omegadb=(-Circ_omega_CRMs_300.omega_db+Circ_omega_CRMs_295.omega_db)/5;
+slope2_crm_omegadb=(-Circ_omega_CRMs_305.omega_db+Circ_omega_CRMs_300.omega_db)/5;
+
+slope1_tot_omegadn=[slope1_omegadn' slope1_crm_omegadn'];
+slope2_tot_omegadn=[slope2_omegadn' slope2_crm_omegadn'];
+slope1_tot_omegaup=[slope1_omegaup' slope1_crm_omegaup'];
+slope2_tot_omegaup=[slope2_omegaup' slope2_crm_omegaup'];
+slope1_tot_omegadb=[slope1_omegadb' slope1_crm_omegadb'];
+slope2_tot_omegadb=[slope2_omegadb' slope2_crm_omegadb'];
+
+modelnumber=linspace(1,15,15);
+figure
+plot(modelnumber,slope1_tot_omegadn,'--b')
+hold on
+plot(modelnumber,slope1_tot_omegadb,'--k')
+plot(modelnumber,slope1_tot_omegaup,'--r')
+plot(modelnumber,slope2_tot_omegadn,'b')
+%hold on
+plot(modelnumber,slope2_tot_omegadb,'k')
+plot(modelnumber,slope2_tot_omegaup,'r')
+
+
 
 % diabatic velocity vs SST.  
 figure
@@ -180,6 +299,61 @@ scatter(sst_full_305,Table305K.PW,'filled','o','SizeData',70);
 %scatter(sst_5c,Circ_omega_CRMs_305.I,[],colCRM,'filled','v','SizeData',170);
 xlim([294 306])
 
+
+% plots with colors from Wing et al., 2020
+figure
+scatter(sst_full_295,Table295K.PW,[],col34,'filled','o','SizeData',70);
+hold on
+scatter(sst_full_300,Table300K.PW,[],col34,'filled','o','SizeData',70);
+scatter(sst_full_305,Table305K.PW,[],col34,'filled','o','SizeData',70);
+xlabel('SST (K)')
+ylabel('Precipitable Water')
+xlim([294 306])
+
+figure
+scatter(Table295K.Precip,Table295K.PW,[],col34,'filled','o','SizeData',70);
+hold on
+scatter(Table300K.Precip,Table300K.PW,[],col34,'filled','o','SizeData',120);
+scatter(Table305K.Precip,Table305K.PW,[],col34,'filled','o','SizeData',170);
+xlabel('Precip ')
+ylabel('Precipitable Water')
+
+
+
+
+figure
+scatter(DelPrecip1,DelPW1,[],col34,'filled','o','SizeData',120);
+hold on
+scatter(DelPrecip2,DelPW2,[],col34,'filled','o','SizeData',170);
+xlabel('Del Precip %/K ')
+ylabel('Del PW')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+
+% see Stephens et al., 1990
+tsfc=linspace(290,310,20)
+p1=0.1
+p2=0.064;  
+pwater=108.2.*(p1).*exp(p2.*(tsfc-288.));
+p1b=0.2
+pwater_b=108.2.*(p1b).*exp(p2.*(tsfc-288.));
+p1c=0.15
+pwater_c=108.2.*(p1c).*exp(p2.*(tsfc-288.));
+
+figure 
+plot(tsfc,pwater,'k')
+hold on
+plot(tsfc,pwater_b,'k')
+plot(tsfc,pwater_c,'k')
+scatter(sst_full_295,Table295K.PW,[],col34,'filled','o','SizeData',70);
+scatter(sst_full_300,Table300K.PW,[],col34,'filled','o','SizeData',120);
+scatter(sst_full_305,Table305K.PW,[],col34,'filled','o','SizeData',150);
+xlim([294 306])
+ylim([0 100])
+xlabel('SST K ')
+ylabel('PW (kg/m2)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
 
 %----------------------------------------------------------------------------
 % plot lapse rates 
