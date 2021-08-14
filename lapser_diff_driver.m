@@ -178,6 +178,24 @@ for mi=1:mindex
   gscat_C(mi)=gam_scatter_C(mi)-scat_C(mi);
 end
 
+for mi=1:mindex
+  rh_ll(mi).first=rh(mi).first(1)
+  rh_ll(mi).second=rh(mi).second(1)
+  rh_ll(mi).third=rh(mi).third(1)
+  temp_ll(mi).first=temp(mi).first(1)
+  temp_ll(mi).second=temp(mi).second(1)
+  temp_ll(mi).third=temp(mi).third(1)
+end
+
+dimsize=size(rh(5).first);
+lasti=dimsize(1);
+rh_ll(5).first=rh(5).first(lasti)
+rh_ll(5).second=rh(5).second(lasti)
+rh_ll(5).third=rh(5).third(lasti)
+temp_ll(5).first=temp(5).first(lasti)
+temp_ll(5).second=temp(5).second(lasti)
+temp_ll(5).third=temp(5).third(lasti)
+
 figure
 scatter(mgam_scatter_A,yax,[],col,'filled','o','SizeData',70)
 hold on
