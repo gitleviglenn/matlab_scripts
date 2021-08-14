@@ -192,11 +192,12 @@ line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(9)),abs(CircSF30
 line([sst_10a(1),sst_10b(1),sst_10c(1)],[abs(CircSF295.omega_dn(10)),abs(CircSF300.omega_dn(10)),abs(CircSF305.omega_dn(10))],'Color',colGCM(10,:),'LineWidth',2)
 %
 
-%mindex=10;
-%for mi=1:mindex;
-%  slope1(mi)=(abs(CircSF300.omega_dn(mi))-abs(CircSF295.omega_dn(mi)))/5.
-%  slope2(mi)=(abs(CircSF305.omega_dn(mi))-abs(CircSF300.omega_dn(mi)))/5.
-%end
+
+% 
+% Plot the slopes of the mean upward, downward, and diabatic omega:
+%
+slope1_I=(CircSF300.I-CircSF295.I)/5;
+slope2_I=(CircSF305.I-CircSF300.I)/5;
 slope1_omegadn=(CircSF300.omega_dn-CircSF295.omega_dn)/5;
 slope2_omegadn=(CircSF305.omega_dn-CircSF300.omega_dn)/5;
 slope1_omegaup=(CircSF300.omega_up-CircSF295.omega_up)/5;
@@ -204,6 +205,8 @@ slope2_omegaup=(CircSF305.omega_up-CircSF300.omega_up)/5;
 slope1_omegadb=(CircSF300.omega_db-CircSF295.omega_db)/5;
 slope2_omegadb=(CircSF305.omega_db-CircSF300.omega_db)/5;
 
+slope1_crm_I=(-Circ_omega_CRMs_300.I+Circ_omega_CRMs_295.I)/5;
+slope2_crm_I=(-Circ_omega_CRMs_305.I+Circ_omega_CRMs_300.I)/5;
 slope1_crm_omegadn=(-Circ_omega_CRMs_300.omega_dn+Circ_omega_CRMs_295.omega_dn)/5;
 slope2_crm_omegadn=(-Circ_omega_CRMs_305.omega_dn+Circ_omega_CRMs_300.omega_dn)/5;
 slope1_crm_omegaup=(-Circ_omega_CRMs_300.omega_up+Circ_omega_CRMs_295.omega_up)/5;
@@ -211,6 +214,9 @@ slope2_crm_omegaup=(-Circ_omega_CRMs_305.omega_up+Circ_omega_CRMs_300.omega_up)/
 slope1_crm_omegadb=(-Circ_omega_CRMs_300.omega_db+Circ_omega_CRMs_295.omega_db)/5;
 slope2_crm_omegadb=(-Circ_omega_CRMs_305.omega_db+Circ_omega_CRMs_300.omega_db)/5;
 
+% this just concatinates the results from the CRMs to the GCMs
+slope1_tot_I=[slope1_I' -slope1_crm_I'];
+slope2_tot_I=[slope2_I' -slope2_crm_I'];
 slope1_tot_omegadn=[slope1_omegadn' slope1_crm_omegadn'];
 slope2_tot_omegadn=[slope2_omegadn' slope2_crm_omegadn'];
 slope1_tot_omegaup=[slope1_omegaup' slope1_crm_omegaup'];
@@ -220,16 +226,20 @@ slope2_tot_omegadb=[slope2_omegadb' slope2_crm_omegadb'];
 
 modelnumber=linspace(1,15,15);
 figure
-plot(modelnumber,slope1_tot_omegadn,'--b')
+plot(modelnumber,-slope1_tot_I,'--g','LineWidth',2)
 hold on
-plot(modelnumber,slope1_tot_omegadb,'--k')
-plot(modelnumber,slope1_tot_omegaup,'--r')
-plot(modelnumber,slope2_tot_omegadn,'b')
-%hold on
-plot(modelnumber,slope2_tot_omegadb,'k')
-plot(modelnumber,slope2_tot_omegaup,'r')
-
-
+plot(modelnumber,-slope2_tot_I,'g','LineWidth',2)
+plot(modelnumber,slope1_tot_omegadn,'--b','LineWidth',2)
+plot(modelnumber,slope1_tot_omegadb,'--k','LineWidth',2)
+plot(modelnumber,slope1_tot_omegaup,'--r','LineWidth',2)
+plot(modelnumber,slope2_tot_omegadn,'b','LineWidth',2)
+plot(modelnumber,slope2_tot_omegadb,'k','LineWidth',2)
+plot(modelnumber,slope2_tot_omegaup,'r','LineWidth',2)
+xlim([1 15])
+xlabel('model index')
+ylabel('slope (hPa/d K)')
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
 
 % diabatic velocity vs SST.  
 figure
@@ -283,6 +293,25 @@ sst_full_295=zeros(34,1)+295;
 sst_full_300=zeros(34,1)+300;
 sst_full_305=zeros(34,1)+305;
 
+Cycle1=Table295K.Precip./Table295K.PW
+Cycle2=Table300K.Precip./Table300K.PW
+Cycle3=Table305K.Precip./Table305K.PW
+
+specnum=[1 2 4 6 8 9 10 11 12 16 17 19 20 21 22 23];
+
+figure
+scatter(sst_full_295(specnum),Cycle1(specnum),[],col34(specnum,:),'filled','o','SizeData',170)
+hold on
+%scatter(sst_full_300,Cycle2,[],col34,'filled','o','SizeData',170)
+%scatter(sst_full_305,Cycle3,[],col34,'filled','o','SizeData',170)
+scatter(sst_full_300(specnum),Cycle2(specnum),[],col34(specnum,:),'filled','o','SizeData',170)
+scatter(sst_full_305(specnum),Cycle3(specnum),[],col34(specnum,:),'filled','o','SizeData',170)
+xlabel('SST (K)')
+ylabel('Water vapor cycling rate (day^-1)')
+xlim([294 306])
+set(gca,'FontWeight','bold')
+set(gca,'FontSize',14)
+
 figure
 %scatter(sst_full_295,Table295K.PW,[],colGCM,'filled','o','SizeData',70);
 scatter(sst_full_295,Table295K.PW,'filled','o','SizeData',70);
@@ -318,9 +347,7 @@ scatter(Table305K.Precip,Table305K.PW,[],col34,'filled','o','SizeData',170);
 xlabel('Precip ')
 ylabel('Precipitable Water')
 
-
-
-
+% Fractional ch of Precipitation vs. Fractional ch of PW
 figure
 scatter(DelPrecip1,DelPW1,[],col34,'filled','o','SizeData',120);
 hold on
