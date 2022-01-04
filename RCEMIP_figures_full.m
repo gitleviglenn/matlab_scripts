@@ -182,53 +182,53 @@ fig.FontWeight = 'bold';
 xlabel('sensible heat flux')
 ylabel('latent heat flux')
 
-% scatter of Intensity vs omega_db
-figure
-scatter(mnomeg8ms295K.omega_db,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
-fig=gca;
-hold on
-scatter(mnomeg8ms300K.omega_db,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
-scatter(mnomeg8ms305K.omega_db,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
-fig.FontSize = 14;
-fig.FontWeight = 'bold';
-xlabel('Diabatic Omega hPa/day')
-ylabel('Circulation Intensity hPa/day')
+%% scatter of Intensity vs omega_db
+%figure
+%scatter(mnomeg8ms295K.omega_db,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+%fig=gca;
+%hold on
+%scatter(mnomeg8ms300K.omega_db,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+%scatter(mnomeg8ms305K.omega_db,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+%fig.FontSize = 14;
+%fig.FontWeight = 'bold';
+%xlabel('Diabatic Omega hPa/day')
+%ylabel('Circulation Intensity hPa/day')
+%
+%% scatter of Intensity vs omega_d
+%figure
+%scatter(mnomeg8ms295K.omega_d,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+%fig=gca;
+%hold on
+%scatter(mnomeg8ms300K.omega_d,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+%scatter(mnomeg8ms305K.omega_d,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+%fig.FontSize = 14;
+%fig.FontWeight = 'bold';
+%xlabel('Subsiding Omega hPa/day')
+%ylabel('Circulation Intensity hPa/day')
 
-% scatter of Intensity vs omega_d
-figure
-scatter(mnomeg8ms295K.omega_d,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
-fig=gca;
-hold on
-scatter(mnomeg8ms300K.omega_d,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
-scatter(mnomeg8ms305K.omega_d,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
-fig.FontSize = 14;
-fig.FontWeight = 'bold';
-xlabel('Subsiding Omega hPa/day')
-ylabel('Circulation Intensity hPa/day')
+%% scatter of Intensity vs omega_d
+%figure
+%scatter(mnomeg8ms295K.omega_u,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+%fig=gca;
+%hold on
+%scatter(mnomeg8ms300K.omega_u,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+%scatter(mnomeg8ms305K.omega_u,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+%fig.FontSize = 14;
+%fig.FontWeight = 'bold';
+%xlabel('Ascending Omega hPa/day')
+%ylabel('Circulation Intensity hPa/day')
 
-% scatter of Intensity vs omega_d
-figure
-scatter(mnomeg8ms295K.omega_u,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
-fig=gca;
-hold on
-scatter(mnomeg8ms300K.omega_u,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
-scatter(mnomeg8ms305K.omega_u,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
-fig.FontSize = 14;
-fig.FontWeight = 'bold';
-xlabel('Ascending Omega hPa/day')
-ylabel('Circulation Intensity hPa/day')
-
-% scatter of Intensity vs omega_d
-figure
-scatter(mnomeg8ms295K.SF,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
-fig=gca;
-hold on
-scatter(mnomeg8ms300K.SF,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
-scatter(mnomeg8ms305K.SF,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
-fig.FontSize = 14;
-fig.FontWeight = 'bold';
-xlabel('Subsidence Fraction')
-ylabel('Circulation Intensity hPa/day')
+%% scatter of Intensity vs omega_d
+%figure
+%scatter(mnomeg8ms295K.SF,mnomeg8ms295K.CircI,[],col8,'filled','o','SizeData',70)
+%fig=gca;
+%hold on
+%scatter(mnomeg8ms300K.SF,mnomeg8ms300K.CircI,[],col8,'filled','o','SizeData',120)
+%scatter(mnomeg8ms305K.SF,mnomeg8ms305K.CircI,[],col8,'filled','o','SizeData',170)
+%fig.FontSize = 14;
+%fig.FontWeight = 'bold';
+%xlabel('Subsidence Fraction')
+%ylabel('Circulation Intensity hPa/day')
 
 % SHF vs. SST
 figure
@@ -582,64 +582,43 @@ set(gca,'FontSize',14)
 %scatter(I_GCMs_b,Odb_GCMs_b,[],colGCM,'filled','o','SizeData',120);
 %scatter(I_GCMs_c,Odb_GCMs_c,[],colGCM,'filled','o','SizeData',170);
 
-%---------------------
+%-------------------------------------------------------------------
+% near Final Figure
+%-------------------------------------------------------------------
 % Relative humidity
+% this is the old 6 panel RH figure which includes a legend. 
+
 figure1=figure;
-subplot1=subplot(1,3,1,'Parent',figure1);
+subplot1=subplot(2,3,1,'Parent',figure1);
 hold(subplot1,'on');
-plot(rh(1).first,temp(1).first,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+for mi=1:10
+  plot(rh(mnum_gcm(mi)).first,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end 
 set(subplot1,'Ydir','reverse')
-%hold on
-set(subplot1,'FontWeight','bold')
-plot(rh(2).first,temp(2).first,'Parent',subplot1,'Color',colGCMfull(2,:),'LineWidth',2)
-plot(rh(3).first,temp(3).first,'Parent',subplot1,'Color',colGCMfull(3,:),'LineWidth',2)
-plot(rh(4).first,temp(4).first,'Parent',subplot1,'Color',colGCMfull(4,:),'LineWidth',2)
-plot(rh(5).first,temp(5).first,'Parent',subplot1,'Color',colGCMfull(5,:),'LineWidth',2)
-plot(rh(6).first,temp(6).first,'Parent',subplot1,'Color',colGCMfull(6,:),'LineWidth',2)
-plot(rh(7).first,temp(7).first,'Parent',subplot1,'Color',colGCMfull(7,:),'LineWidth',2)
-plot(rh(8).first,temp(8).first,'Parent',subplot1,'Color',colGCMfull(8,:),'LineWidth',2)
-plot(rh(9).first,temp(9).first,'Parent',subplot1,'Color',colGCMfull(9,:),'LineWidth',2)
-plot(rh(10).first,temp(10).first,'Parent',subplot1,'Color',colGCMfull(10,:),'LineWidth',2)
-plot(rh(11).first,temp(11).first,'Parent',subplot1,'Color',colGCMfull(11,:),'LineWidth',2)
 set(subplot1,'FontWeight','bold')
 ylim(subplot1,[200 305])
 xlim(subplot1,[1 100])
 
-subplot2=subplot(1,3,2,'Parent',figure1)
-plot(rh(1).second,temp(1).second,'Parent',subplot2,'Color',colGCMfull(1,:),'LineWidth',2)
+subplot2=subplot(2,3,2,'Parent',figure1)
 hold(subplot2,'on');
+for mi=1:10
+  plot(rh(mnum_gcm(mi)).second,temp(mnum_gcm(mi)).second,'Parent',subplot2,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
 set(subplot2,'Ydir','reverse')
-plot(rh(2).second,temp(2).second,'Parent',subplot2,'Color',colGCMfull(2,:),'LineWidth',2)
-plot(rh(3).second,temp(3).second,'Parent',subplot2,'Color',colGCMfull(3,:),'LineWidth',2)
-plot(rh(4).second,temp(4).second,'Parent',subplot2,'Color',colGCMfull(4,:),'LineWidth',2)
-plot(rh(5).second,temp(5).second,'Parent',subplot2,'Color',colGCMfull(5,:),'LineWidth',2)
-plot(rh(6).second,temp(6).second,'Parent',subplot2,'Color',colGCMfull(6,:),'LineWidth',2)
-plot(rh(7).second,temp(7).second,'Parent',subplot2,'Color',colGCMfull(7,:),'LineWidth',2)
-plot(rh(8).second,temp(8).second,'Parent',subplot2,'Color',colGCMfull(8,:),'LineWidth',2)
-plot(rh(9).second,temp(9).second,'Parent',subplot2,'Color',colGCMfull(9,:),'LineWidth',2)
-plot(rh(10).second,temp(10).second,'Parent',subplot2,'Color',colGCMfull(10,:),'LineWidth',2)
-plot(rh(11).second,temp(11).second,'Parent',subplot2,'Color',colGCMfull(11,:),'LineWidth',2)
-axis(subplot2,'ij');
+%axis(subplot2,'ij');
 set(subplot2,'FontWeight','bold');
 ylim(subplot2,[200 305]);
 xlim(subplot2,[1 100]);
 box(subplot2,'off');
 
-subplot3=subplot(1,3,3,'Parent',figure1);
+gcm_str=["CAM5" "CAM6" "CNRM" "ECHAM6" "GEOS" "ICON-GCM" "SAM0-UNICON" "SP-CAM" "SPX-CAM" "UKMO-GA7.1"]
+
+subplot3=subplot(2,3,3,'Parent',figure1);
 hold(subplot3,'on');
-plot(rh(1).third,temp(1).third,'DisplayName','CAM5','Parent',subplot3,'Color',colGCMfull(1,:),'LineWidth',2)
+for mi=1:10
+  plot(rh(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'DisplayName',gcm_str(mi),'Parent',subplot3,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
 set(subplot3,'Ydir','reverse')
-plot(rh(2).third,temp(2).third,'DisplayName','CAM6','Parent',subplot3,'Color',colGCMfull(2,:),'LineWidth',2)
-plot(rh(3).third,temp(3).third,'DisplayName','CNRM','Parent',subplot3,'Color',colGCMfull(3,:),'LineWidth',2)
-plot(rh(4).third,temp(4).third,'DisplayName','ECHAM6','Parent',subplot3,'Color',colGCMfull(4,:),'LineWidth',2)
-plot(rh(5).third,temp(5).third,'DisplayName','GEOS','Parent',subplot3,'Color',colGCMfull(5,:),'LineWidth',2)
-plot(rh(6).third,temp(6).third,'DisplayName','ICON','Parent',subplot3,'Color',colGCMfull(6,:),'LineWidth',2)
-plot(rh(7).third,temp(7).third,'DisplayName','IPSL','Parent',subplot3,'Color',colGCMfull(7,:),'LineWidth',2)
-plot(rh(8).third,temp(8).third,'DisplayName','SAM0-UNICON','Parent',subplot3,'Color',colGCMfull(8,:),'LineWidth',2)
-plot(rh(9).third,temp(9).third,'DisplayName','SP-CAM','Parent',subplot3,'Color',colGCMfull(9,:),'LineWidth',2)
-plot(rh(10).third,temp(10).third,'DisplayName','SPX-CAM','Parent',subplot3,'Color',colGCMfull(10,:),'LineWidth',2)
-plot(rh(11).third,temp(11).third,'DisplayName','UKMO-GA7.1','Parent',subplot3,'Color',colGCMfull(11,:),'LineWidth',2)
-axis(subplot3,'ij');
 set(subplot3,'FontWeight','bold');
 ylim(subplot3,[200 305]);
 xlim(subplot3,[1 100]);
@@ -649,9 +628,350 @@ title(subplot1,'SST=295K')
 title(subplot2,'SST=300K')
 title(subplot3,'SST=305K')
 ylabel(subplot1,'Temperature K')
-xlabel(subplot1,'Relative Humidity %')
-xlabel(subplot2,'Relative Humidity %')
-xlabel(subplot3,'Relative Humidity %')
+%xlabel(subplot1,'Relative Humidity %')
+%xlabel(subplot2,'Relative Humidity %')
+%xlabel(subplot3,'Relative Humidity %')
+
+subplot4=subplot(2,3,4,'Parent',figure1);
+hold(subplot4,'on');
+for mi=1:11
+  plot(rh(mnum_crm(mi)).first,temp(mnum_crm(mi)).first,'Parent',subplot4,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot4,'Ydir','reverse')
+set(subplot4,'FontWeight','bold')
+ylim(subplot4,[200 305])
+xlim(subplot4,[1 100])
+
+subplot5=subplot(2,3,5,'Parent',figure1);
+hold(subplot5,'on');
+for mi=1:11
+  plot(rh(mnum_crm(mi)).second,temp(mnum_crm(mi)).second,'Parent',subplot5,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot5,'Ydir','reverse')
+set(subplot5,'FontWeight','bold')
+ylim(subplot5,[200 305])
+xlim(subplot5,[1 100])
+
+subplot6=subplot(2,3,6,'Parent',figure1);
+hold(subplot6,'on');
+for mi=1:11
+  plot(rh(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Parent',subplot6,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot6,'Ydir','reverse')
+set(subplot6,'FontWeight','bold')
+ylim(subplot6,[200 305])
+xlim(subplot6,[1 100])
+ylabel(subplot4,'Temperature K')
+xlabel(subplot4,'Relative Humidity %')
+xlabel(subplot5,'Relative Humidity %')
+xlabel(subplot6,'Relative Humidity %')
+
+% create legend for GCMs
+figure2=figure
+%subplot1=subplot(2,1,1,'Parent',figure2);
+%hold(subplot1,'on');
+hold on
+x=1:10;
+y=NaN;
+for mi=1:10
+  plot(rh(mnum_gcm(1)).third,temp(mnum_gcm(1)).third,'DisplayName',gcm_str(mi),'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+  %plot(x,y.*x,'DisplayName',gcm_str(mi),'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
+%set(gcf,'Position',[0,0,1024,1024]);
+legend_handle = legend('Orientation','vertical');
+%set(gcf,'Position',(get(legend_handle,'Position')...
+%.*[0,0,1,1].*get(gcf,'Position')));
+%set(legend_handle,'Position',[0,0,1,1]);
+%set(gcf,'Position',get(gcf,'Position')+[500,400,0,0]);
+set(gca,legend,'show');
+set(gca,box,'off');
+
+legend1=legend(figure2,'show');
+box(legend1,'off');
+
+% Precipitation Efficiency following Romps, 2014:  PE .gte. 1-RH
+figure1=figure;
+subplot1=subplot(2,3,1,'Parent',figure1);
+hold(subplot1,'on');
+for mi=1:10
+  plot(1.-0.01.*rh(mnum_gcm(mi)).first,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
+set(subplot1,'Ydir','reverse')
+set(subplot1,'FontWeight','bold')
+ylim(subplot1,[200 305])
+xlim(subplot1,[0 1])
+
+subplot2=subplot(2,3,2,'Parent',figure1)
+hold(subplot2,'on');
+for mi=1:10
+  plot(1.-0.01.*rh(mnum_gcm(mi)).second,temp(mnum_gcm(mi)).second,'Parent',subplot2,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
+set(subplot2,'Ydir','reverse')
+%axis(subplot2,'ij');
+set(subplot2,'FontWeight','bold');
+ylim(subplot2,[200 305]);
+xlim(subplot2,[0 1]);
+box(subplot2,'off');
+
+gcm_str=["CAM5" "CAM6" "CNRM" "ECHAM6" "GEOS" "ICON-GCM" "SAM0-UNICON" "SP-CAM" "SPX-CAM" "UKMO-GA7.1"]
+
+subplot3=subplot(2,3,3,'Parent',figure1);
+hold(subplot3,'on');
+for mi=1:10
+  %plot(1.-0.01.*rh(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'DisplayName',gcm_str(mi),'Parent',subplot3,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+  plot(1.-0.01.*rh(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'Parent',subplot3,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
+set(subplot3,'Ydir','reverse')
+set(subplot3,'FontWeight','bold');
+ylim(subplot3,[200 305]);
+xlim(subplot3,[0 1]);
+title(subplot1,'SST=295K')
+title(subplot2,'SST=300K')
+title(subplot3,'SST=305K')
+ylabel(subplot1,'Temperature K')
+
+subplot4=subplot(2,3,4,'Parent',figure1);
+hold(subplot4,'on');
+for mi=1:11
+  plot(1.-0.01.*rh(mnum_crm(mi)).first,temp(mnum_crm(mi)).first,'Parent',subplot4,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot4,'Ydir','reverse')
+set(subplot4,'FontWeight','bold')
+ylim(subplot4,[200 305])
+xlim(subplot4,[0 1])
+
+subplot5=subplot(2,3,5,'Parent',figure1);
+hold(subplot5,'on');
+for mi=1:11
+  plot(1.-0.01.*rh(mnum_crm(mi)).second,temp(mnum_crm(mi)).second,'Parent',subplot5,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot5,'Ydir','reverse')
+set(subplot5,'FontWeight','bold')
+ylim(subplot5,[200 305])
+xlim(subplot5,[0 1])
+
+subplot6=subplot(2,3,6,'Parent',figure1);
+hold(subplot6,'on');
+for mi=1:11
+  plot(1.-0.01.*rh(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Parent',subplot6,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(subplot6,'Ydir','reverse')
+set(subplot6,'FontWeight','bold')
+ylim(subplot6,[200 305])
+xlim(subplot6,[0 1])
+ylabel(subplot4,'Temperature K')
+xlabel(subplot4,'Precip Efficiency Constraint')
+xlabel(subplot5,'Precip Efficiency Constraint')
+xlabel(subplot6,'Precip Efficiency Constraint')
+sgtitle('Lower Bound Precip Efficiency, Romps 2014')
+
+%------------------------------------------------------
+% change of relative humidity with warming RH
+%------------------------------------------------------
+% plot(rh(mnum_gcm(mi)).first,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+figure2=figure;
+subplot1=subplot(1,2,1,'Parent',figure2);
+hold(subplot1,'on');
+for mi=1:10
+  %plot((rh(mnum_gcm(mi)).second-rh(mnum_gcm(mi)).first)./5,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+  plot((rh(mnum_gcm(mi)).third-rh(mnum_gcm(mi)).first)./10,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end 
+set(subplot1,'Ydir','reverse')
+set(subplot1,'FontWeight','bold')
+ylim(subplot1,[230 295])
+xlim(subplot1,[-10 10])
+subplot2=subplot(1,2,2,'Parent',figure2);
+hold(subplot2,'on');
+for mi=1:11
+%  plot(rh(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Parent',subplot6,'Color',col34(crm_num(mi),:),'LineWidth',2)
+  %plot((rh(mnum_crm(mi)).second-rh(mnum_crm(mi)).first)./5,temp(mnum_crm(mi)).first,'Parent',subplot2,'Color',col34(crm_num(mi),:),'LineWidth',2)
+  plot((rh(mnum_crm(mi)).third-rh(mnum_crm(mi)).first)./10,temp(mnum_crm(mi)).first,'Parent',subplot2,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end 
+set(subplot2,'Ydir','reverse')
+set(subplot2,'FontWeight','bold')
+ylim(subplot2,[230 295])
+xlim(subplot2,[-10 10])
+
+
+% details about my indexing nightmare: 
+% is the call to model numbers above correct?  
+% these variables have been reindexed so their indices are different than in col34:
+% rh.first, pres.first,temp.first,zg.first,cldfr.first, and also for second, and third
+% the indexing maps back to col34 if one uses modelnum(mnum_gcm) and modelnum(mnum_crm)
+% so as an example, 
+% rh(mi).first where mi goes from 1:22 refer to these index numbers from col34: 
+% modelnum      =[1 2 4 6 8 9 10 11 12 13 16 17 19 20 21 22 23 24 25 26 27 28];
+
+% call the lapser_wv.m script...
+% calculate the fractional detrainment rate
+for mi=1:22
+  [gam_dtdz(mi).first,gam_wv(mi).first,delta_frac(mi).first]=lapser_wv(295.,temp(mi).first,zg(mi).first,rh(mi).first,modelnum(mi));
+  [gam_dtdz(mi).second,gam_wv(mi).second,delta_frac(mi).second]=lapser_wv(295.,temp(mi).second,zg(mi).second,rh(mi).second,modelnum(mi));
+  [gam_dtdz(mi).third,gam_wv(mi).third,delta_frac(mi).third]=lapser_wv(295.,temp(mi).third,zg(mi).third,rh(mi).third,modelnum(mi));
+end
+
+%-------------------------------------------------------------------
+% near Final Figure
+%-------------------------------------------------------------------
+% Relative humidity, delta frac (fractional detrainment), and wv lapse rate
+
+%CRMs
+% approaching Final figures....
+% plot relative humidity, fractional detrainment as derived by Romps, 2014, and the wv
+% lapse rate for CRMs.
+%
+%lowbound=fi(290);
+lowbound=295;
+figure
+subplot(1,3,1)
+hold on
+%hold(subplot,'on');
+for mi=1:11
+  plot(0.01.*rh(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end
+set(gca,'Ydir','reverse')
+ylabel('Temp (K)')
+ylim([200 lowbound])
+xlim([0 1])
+xlabel('RH')
+set(gca,'FontWeight','bold')
+
+subplot(1,3,2)
+hold on
+for mi=1:11
+  plot(delta_frac(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end 
+set(gca,'Ydir','reverse')
+ylabel('Temp (K)')
+ylim([200 lowbound])
+xlim([-2 0])
+xlabel('fract detrainment, (1/m)')
+set(gca,'FontWeight','bold')
+
+subplot(1,3,3)
+hold on
+for mi=1:11
+  %plot(1./gam_wv(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Color',col34(crm_num(mi),:),'LineWidth',2)
+  plot(gam_wv(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Color',col34(crm_num(mi),:),'LineWidth',2)
+end 
+set(gca,'Ydir','reverse')
+ylim([200 lowbound])
+xlim([-1.5 0])
+ylabel('Temp(K)')
+xlabel('wv lapse rate, (1/m)')
+set(gca,'FontWeight','bold')
+sgtitle('Sources and sinks of RH in CRMs at 305K','FontSize',16,'FontWeight','bold')
+
+%GCMs at 295K
+% plot relative humidity, fractional detrainment as derived by Romps, 2014, and the wv
+% lapse rate for GCMs.
+%
+figure
+subplot(1,3,1)
+hold on
+for mi=1:10
+  plot(0.01.*rh(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end
+set(gca,'Ydir','reverse')
+ylabel('Temp (K)')
+ylim([200 lowbound])
+xlim([0 1])
+xlabel('RH')
+%title(modelnum)
+set(gca,'FontWeight','bold')
+
+%figure
+subplot(1,3,2)
+hold on
+for mi=1:10
+  plot(delta_frac(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end 
+set(gca,'Ydir','reverse')
+%ylabel('Temp (K)')
+ylim([200 lowbound])
+xlim([-2 0])
+xlabel('fract detrainment (1/m)')
+set(gca,'FontWeight','bold')
+
+subplot(1,3,3)
+hold on
+for mi=1:10
+  %plot(1./gam_wv(mnum_crm(mi)).third,temp(mnum_crm(mi)).third,'Color',col34(crm_num(mi),:),'LineWidth',2)
+  plot(gam_wv(mnum_gcm(mi)).third,temp(mnum_gcm(mi)).third,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+end 
+set(gca,'Ydir','reverse')
+ylim([200 lowbound])
+xlim([-1.5 0])
+%ylabel('Temp(K)')
+xlabel('wv lapse rate, (1/m)')
+set(gca,'FontWeight','bold')
+sgtitle('Sources and sinks of RH in GCMs at 305K','FontSize',16,'FontWeight','bold')
+
+
+
+%=====================================================================================
+% how much is the RH changing for particular models?  
+figure1=figure;
+subplot1=subplot(1,3,1,'Parent',figure1);
+hold(subplot1,'on');
+plot(rh(1).first,temp(1).first,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+set(subplot1,'Ydir','reverse')
+plot(rh(1).second,temp(1).second,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+plot(rh(1).third,temp(1).third,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+ylim(subplot1,[190 305]);
+
+subplot2=subplot(1,3,2,'Parent',figure1);
+hold(subplot2,'on');
+plot(rh(10).first,temp(10).first,'Parent',subplot2,'Color',colGCMfull(10,:),'LineWidth',2)
+set(subplot2,'Ydir','reverse')
+plot(rh(10).second,temp(10).second,'Parent',subplot2,'Color',colGCMfull(10,:),'LineWidth',2)
+plot(rh(10).third,temp(10).third,'Parent',subplot2,'Color',colGCMfull(10,:),'LineWidth',2)
+ylim(subplot2,[190 305]);
+
+subplot3=subplot(1,3,3,'Parent',figure1);
+hold(subplot3,'on');
+plot(rh(5).first,temp(5).first,'Parent',subplot3,'Color',colGCMfull(5,:),'LineWidth',2)
+set(subplot3,'Ydir','reverse')
+plot(rh(5).second,temp(5).second,'Parent',subplot3,'Color',colGCMfull(5,:),'LineWidth',2)
+plot(rh(5).third,temp(5).third,'Parent',subplot3,'Color',colGCMfull(5,:),'LineWidth',2)
+ylim(subplot3,[190 305]);
+
+% how much is RH changing with warming? 
+% plot(rh(mnum_gcm(mi)).first,temp(mnum_gcm(mi)).first,'Parent',subplot1,'Color',col34(gcm_num(mi),:),'LineWidth',2)
+figure1=figure;
+subplot1=subplot(1,2,1,'Parent',figure1);
+hold(subplot1,'on');
+plot((rh(1).second-rh(1).first)./5,temp(1).first,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+set(subplot1,'Ydir','reverse')
+plot((rh(2).second-rh(2).first)./5,temp(2).first,'Parent',subplot1,'Color',colGCMfull(2,:),'LineWidth',2)
+plot((rh(3).second-rh(3).first)./5,temp(3).first,'Parent',subplot1,'Color',colGCMfull(3,:),'LineWidth',2)
+plot((rh(4).second-rh(4).first)./5,temp(4).first,'Parent',subplot1,'Color',colGCMfull(4,:),'LineWidth',2)
+plot((rh(5).second-rh(5).first)./5,temp(5).first,'Parent',subplot1,'Color',colGCMfull(5,:),'LineWidth',2)
+plot((rh(6).second-rh(6).first)./5,temp(6).first,'Parent',subplot1,'Color',colGCMfull(6,:),'LineWidth',2)
+plot((rh(7).second-rh(7).first)./5,temp(7).first,'Parent',subplot1,'Color',colGCMfull(7,:),'LineWidth',2)
+plot((rh(8).second-rh(8).first)./5,temp(8).first,'Parent',subplot1,'Color',colGCMfull(8,:),'LineWidth',2)
+plot((rh(9).second-rh(9).first)./5,temp(9).first,'Parent',subplot1,'Color',colGCMfull(9,:),'LineWidth',2)
+plot((rh(10).second-rh(10).first)./5,temp(10).first,'Parent',subplot1,'Color',colGCMfull(10,:),'LineWidth',2)
+plot((rh(11).second-rh(11).first)./5,temp(11).first,'Parent',subplot1,'Color',colGCMfull(11,:),'LineWidth',2)
+ylim(subplot1,[220 300]);
+xlim(subplot1,[-10 10]);
+
+subplot1=subplot(1,2,2,'Parent',figure1);
+hold(subplot1,'on');
+plot((rh(1).third-rh(1).second)./5,temp(1).second,'Parent',subplot1,'Color',colGCMfull(1,:),'LineWidth',2)
+set(subplot1,'Ydir','reverse')
+plot((rh(2).third-rh(2).second)./5,temp(2).second,'Parent',subplot1,'Color',colGCMfull(2,:),'LineWidth',2)
+plot((rh(3).third-rh(3).second)./5,temp(3).second,'Parent',subplot1,'Color',colGCMfull(3,:),'LineWidth',2)
+plot((rh(4).third-rh(4).second)./5,temp(4).second,'Parent',subplot1,'Color',colGCMfull(4,:),'LineWidth',2)
+plot((rh(5).third-rh(5).second)./5,temp(5).second,'Parent',subplot1,'Color',colGCMfull(5,:),'LineWidth',2)
+plot((rh(6).third-rh(6).second)./5,temp(6).second,'Parent',subplot1,'Color',colGCMfull(6,:),'LineWidth',2)
+plot((rh(7).third-rh(7).second)./5,temp(7).second,'Parent',subplot1,'Color',colGCMfull(7,:),'LineWidth',2)
+plot((rh(8).third-rh(8).second)./5,temp(8).second,'Parent',subplot1,'Color',colGCMfull(8,:),'LineWidth',2)
+plot((rh(9).third-rh(9).second)./5,temp(9).second,'Parent',subplot1,'Color',colGCMfull(9,:),'LineWidth',2)
+plot((rh(10).third-rh(10).second)./5,temp(10).second,'Parent',subplot1,'Color',colGCMfull(10,:),'LineWidth',2)
+plot((rh(11).third-rh(11).second)./5,temp(11).second,'Parent',subplot1,'Color',colGCMfull(11,:),'LineWidth',2)
+ylim(subplot1,[220 305]);
+xlim(subplot1,[-10 10]);
 
 
 %-------------------------------------------------------------------------------------------------------

@@ -6,7 +6,14 @@
 % physical constants are defined in the create_RCEMIP_colors.m
 % script
 %
-% levi silvers                         june 2021
+% when adding new models, the data needs to be imported via one of 
+% the calls to the 'import' routines.  
+% Then the mindex needs to be increased, and the 
+% appropriate number needs to be added to 'modelnum' from the list of
+% string labelled e.g. source_m27c
+
+%
+% levi silvers                         september 2021
 %-----------------------------------------------------------
 
 % call the script that defines the rgb colors to use
@@ -71,9 +78,9 @@ import_RCEMIP_table_10GCMs_305_5d
 %import_RCEMIP_table_5CRMs_L295
 %import_RCEMIP_table_5CRMs_L300
 %import_RCEMIP_table_5CRMs_L305
-import_RCEMIP_table_5CRMs_295_5d
-import_RCEMIP_table_5CRMs_300_5d
-import_RCEMIP_table_5CRMs_305_5d
+import_RCEMIP_table_11CRMs_295_5d
+import_RCEMIP_table_11CRMs_300_5d
+import_RCEMIP_table_11CRMs_305_5d
 
 SF295  =CircSF295.SF;
 odn295 =CircSF295.omega_dn;
@@ -87,40 +94,94 @@ scaleI305=(1./(1-SF305)).*odn305;
 % the subsidence fraction
 
 %---------------------------------------------------------------------------------------
-
+%CAM5                 col34 #1
 source_m1a='~/data/RCEMIP/mn_profiles/CAM5-GCM_large295-profiles.nc';
 source_m1b='~/data/RCEMIP/mn_profiles/CAM5-GCM_large300-profiles.nc';
 source_m1c='~/data/RCEMIP/mn_profiles/CAM5-GCM_large305-profiles.nc';
+%CAM6                 col34 #2
 source_m2a='~/data/RCEMIP/mn_profiles/CAM6-GCM_large295-profiles.nc';
 source_m2b='~/data/RCEMIP/mn_profiles/CAM6-GCM_large300-profiles.nc';
 source_m2c='~/data/RCEMIP/mn_profiles/CAM6-GCM_large305-profiles.nc';
-source_m6a='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large295-profiles.nc';
-source_m6b='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large300-profiles.nc';
-source_m6c='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large305-profiles.nc';
+%CNRM                 col34 #4
 source_m4a='~/data/RCEMIP/mn_profiles/CNRM-CM6_large295-profiles.nc';
 source_m4b='~/data/RCEMIP/mn_profiles/CNRM-CM6_large300-profiles.nc';
 source_m4c='~/data/RCEMIP/mn_profiles/CNRM-CM6_large305-profiles.nc';
+%ECHAM                col34 #6
+source_m6a='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large295-profiles.nc';
+source_m6b='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large300-profiles.nc';
+source_m6c='~/data/RCEMIP/mn_profiles/ECHAM6-GCM_large305-profiles.nc';
+%GEOS                 col34 #8
 source_m8a='~/data/RCEMIP/mn_profiles/GEOS-GCM_large295-profiles.nc';
 source_m8b='~/data/RCEMIP/mn_profiles/GEOS-GCM_large300-profiles.nc';
 source_m8c='~/data/RCEMIP/mn_profiles/GEOS-GCM_large305-profiles.nc';
+%ICON-GCM             col34 #9
 source_m9a='~/data/RCEMIP/mn_profiles/ICON-GCM_large295-profiles.nc';
 source_m9b='~/data/RCEMIP/mn_profiles/ICON-GCM_large300-profiles.nc';
 source_m9c='~/data/RCEMIP/mn_profiles/ICON-GCM_large305-profiles.nc';
+%ICON-LEM-CRM         col34 #10
+source_m10a='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large295-profiles.nc';
+source_m10b='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large300-profiles.nc';
+source_m10c='~/data/RCEMIP/mn_profiles/ICON-LEM-CRM_large305-profiles.nc';
+%ICON-NWP-CRM         col34 #11
+source_m11a='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large295-profiles.nc';
+source_m11b='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large300-profiles.nc';
+source_m11c='~/data/RCEMIP/mn_profiles/ICON-NWP-CRM_large305-profiles.nc';
+%IPSL                 col34 #12
 source_m12a='~/data/RCEMIP/mn_profiles/IPSL-CM6_large295-profiles.nc';
 source_m12b='~/data/RCEMIP/mn_profiles/IPSL-CM6_large300-profiles.nc';
 source_m12c='~/data/RCEMIP/mn_profiles/IPSL-CM6_large305-profiles.nc';
+%MESONH               col34 #13
+source_m13a='~/data/RCEMIP/mn_profiles/MESONH_large295-profiles.nc';
+source_m13b='~/data/RCEMIP/mn_profiles/MESONH_large300-profiles.nc';
+source_m13c='~/data/RCEMIP/mn_profiles/MESONH_large305-profiles.nc';
+%SAM0-UNICON          col34 #16
 source_m16a='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large295-profiles.nc';
 source_m16b='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large300-profiles.nc';
 source_m16c='~/data/RCEMIP/mn_profiles/SAM0-UNICON_large305-profiles.nc';
+%SAM-CRM              col34 #17
+source_m17a='~/data/RCEMIP/mn_profiles/SAM-CRM_large295-profiles.nc';
+source_m17b='~/data/RCEMIP/mn_profiles/SAM-CRM_large300-profiles.nc';
+source_m17c='~/data/RCEMIP/mn_profiles/SAM-CRM_large305-profiles.nc';
+%SCALE                col34 #19
+source_m19a='~/data/RCEMIP/mn_profiles/SCALE_large295-profiles.nc';
+source_m19b='~/data/RCEMIP/mn_profiles/SCALE_large300-profiles.nc';
+source_m19c='~/data/RCEMIP/mn_profiles/SCALE_large305-profiles.nc';
+%SP-CAM               col34 #20
 source_m20a='~/data/RCEMIP/mn_profiles/SP-CAM_large295-profiles.nc';
 source_m20b='~/data/RCEMIP/mn_profiles/SP-CAM_large300-profiles.nc';
 source_m20c='~/data/RCEMIP/mn_profiles/SP-CAM_large305-profiles.nc';
+%SPX-CAM              col34 #21
 source_m21a='~/data/RCEMIP/mn_profiles/SPX-CAM_large295-profiles.nc';
 source_m21b='~/data/RCEMIP/mn_profiles/SPX-CAM_large300-profiles.nc';
 source_m21c='~/data/RCEMIP/mn_profiles/SPX-CAM_large305-profiles.nc';
+%UCLA-CRM             col34 #22
+source_m22a='~/data/RCEMIP/mn_profiles/UCLA-CRM_large295-profiles.nc';
+source_m22b='~/data/RCEMIP/mn_profiles/UCLA-CRM_large300-profiles.nc';
+source_m22c='~/data/RCEMIP/mn_profiles/UCLA-CRM_large305-profiles.nc';
+%UKMO-GA7             col34 #23
 source_m23a='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large295-profiles.nc';
 source_m23b='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large300-profiles.nc';
 source_m23c='~/data/RCEMIP/mn_profiles/UKMO-GA7.1_large305-profiles.nc';
+%UKMO-CASIM           col34 #24
+source_m24a='~/data/RCEMIP/mn_profiles/UKMO-CASIM_large295-profiles.nc';
+source_m24b='~/data/RCEMIP/mn_profiles/UKMO-CASIM_large300-profiles.nc';
+source_m24c='~/data/RCEMIP/mn_profiles/UKMO-CASIM_large305-profiles.nc';
+%UKMO-RA1-T           col34 #25
+source_m25a='~/data/RCEMIP/mn_profiles/UKMO-RA1-T_large295-profiles.nc';
+source_m25b='~/data/RCEMIP/mn_profiles/UKMO-RA1-T_large300-profiles.nc';
+source_m25c='~/data/RCEMIP/mn_profiles/UKMO-RA1-T_large305-profiles.nc';
+%UKMO-RA1-T-nocloud   col34 #26
+source_m26a='~/data/RCEMIP/mn_profiles/UKMO-RA1-T-nocloud_large295-profiles.nc';
+source_m26b='~/data/RCEMIP/mn_profiles/UKMO-RA1-T-nocloud_large300-profiles.nc';
+source_m26c='~/data/RCEMIP/mn_profiles/UKMO-RA1-T-nocloud_large305-profiles.nc';
+%WRF-COL-CRM          col34 #27
+source_m27a='~/data/RCEMIP/mn_profiles/WRF-COL-CRM_large295-profiles.nc';
+source_m27b='~/data/RCEMIP/mn_profiles/WRF-COL-CRM_large300-profiles.nc';
+source_m27c='~/data/RCEMIP/mn_profiles/WRF-COL-CRM_large305-profiles.nc';
+%WRF-CRM              col34 #28
+source_m28a='~/data/RCEMIP/mn_profiles/WRF-CRM_large295-profiles.nc';
+source_m28b='~/data/RCEMIP/mn_profiles/WRF-CRM_large300-profiles.nc';
+source_m28c='~/data/RCEMIP/mn_profiles/WRF-CRM_large305-profiles.nc';
 
 % 5 variables; 3 SSTs; 11 models...
 %vararray=["pa_avg","hur_avg","cldfrac_avg","z_avg","ta_avg"];
@@ -147,10 +208,24 @@ ta.m1a   =ncread(source_m1a,'ta_avg');
 %z.m1(3)    =ncread(source_m1c,'z_avg');
 %ta.m1(3)   =ncread(source_m1c,'ta_avg');
 
-mindex=11;
-modelnum=[1 2 4 6 8 9 12 16 20 21 23];
+% when adding new models, the mindex needs to be increased, and the 
+% appropriate number needs to be added to 'modelnum' from the list of
+% string labelled e.g. source_m27c
+
+mindex=22;
+
+%% indexing arrays moved to 'create_RCEMIP_colors.m'
+%% match modelnum with col34
+%modelnum      =[1 2 4 6 8 9 10 11 12 13 16 17 19 20 21 22 23 24 25 26 27 28]; % index numbers for col34 that are used in my study
+%% modelnum(mnum_gcm) --> matches indices of gcms with colors in col34
+%mnum_gcm     =[1 2 3 4 5 6 11 14 15 17]; % index numbers of modelnum for GCMs so modelnum(mnum_gcm)
+%mnum_gcm_cs  =[1 2 3 5 11 14 15 17]; % index numbers of modelnum for GCMs so modelnum(mnum_gcm)
+%% modelnum(mnum_crm) --> matches indices of crms with colors in col34
+%mnum_crm     =[12 13 7 8 16 22 10 21 18 19 20]; % index numbers of modelnum for CRMs
+%% the two WRF CRMs do not have clear sky fluxes
+%mnum_crm_cs  =[12 13 7 8 16 10 18 19 20]; % index numbers of modelnum for CRMs
+
 for mi=1:mindex;
-  %indexst=int2str(mi)
   indexm =modelnum(mi)
   source=['source_m' num2str(indexm) 'a']; % SST of 295K
   rh(mi).first  = ncread(eval(source),'hur_avg');
@@ -171,6 +246,8 @@ for mi=1:mindex;
   zg(mi).third    = ncread(eval(source),'z_avg');
   cldfr(mi).third = ncread(eval(source),'cldfrac_avg');
 end
+
+% paster here hasn't been updated in months...
 
 ta.m1b   =ncread(source_m1b,'ta_avg');
 ta.m1c   =ncread(source_m1c,'ta_avg');
@@ -298,53 +375,6 @@ hur.m23c  =ncread(source_m23c,'hur_avg');
 %denom   = zeros(m,n);
 %rho     = zeros(m,n);
 
-%zindex=m-1;
-%lasti=m;
-%rho=100.*ptmp./(Rd*ttmp); % kg/m3
-%% compute the lapse rate (K/km)
-%for zi=2:zindex;
-%  gamma(zi)=-1000.*grav*rho(zi)*((ttmp(zi+1)-ttmp(zi-1))/(100.*ptmp(zi+1)-100.*ptmp(zi-1)));
-%end
-%%% if TOM is at index 1
-%%gamma(1)=gamma(2);
-%%gamma(lasti)=-grav*rho(lasti)*((ttmp(lasti)-tsfc))/(ptmp(lasti)-psfc)));
-%%% else
-%gamma(lasti)=gamma(lasti-1);
-%gamma(1)=-1000.*grav*rho(1)*((ttmp(1)-tsfc)/(100.*(ptmp(1)-psfc)));
-%% end if
-%
-%% saturation vapor pressure (should be in Pa)
-%for zi=1:lasti
-%  estar(zi)   = 611*exp((latheat/Rv)*(1/273-1/ttmp(zi))); % Pa
-%  qstar(zi)   = epsilon*estar(zi)/(100.*ptmp(zi));
-%%end 
-%% moist adiabatic lapse rate (K/km)
-%%for zi=1:lasti
-%  numer(zi)     = -(grav/cpd)*(1+(latheat*qstar(zi)/(Rd*ttmp(zi))));
-%  denom(zi)     = (1+(qstar(zi)*latheat^2)/(cpd*Rv*ttmp(zi)^2));
-%end 
-%gamma_m   = 1000.*numer./denom;
-
-%% check if ptmp is between 300 and 700 hPa.
-%% starts at surface for zi=1; integrate from 700hPa up to 300hPa 
-%gam_part=0.;
-%gamm_part=0.;
-%index=1;
-%for zi=1:lasti-1;
-%  pressure=ptmp(zi);
-%  if (pressure <= 700.) && (pressure >= 300.);
-%    plevs(index)=pressure;
-%    %pressure;
-%    delp=ptmp(zi)-ptmp(zi+1);
-%    gam_part=gam_part+gamma(zi)*delp;  % seems like these should be divided by grav?
-%    gamm_part=gamm_part+gamma_m(zi)*delp;
-%    index=index+1;
-%  end
-%end
-%[p1,p2]=size(plevs);
-%%pdepth=plevs(1)-plevs(p2);
-%mmean_gamma   = gam_part/(plevs(1)-plevs(p2))% divide by vert distance over which summation made
-%mmean_gamma_m = gamm_part/(plevs(1)-plevs(p2))% divide by vert distance over which summation made
 
 %
 hrmin_m1a=min(hur.m1a(5:16))
@@ -405,9 +435,9 @@ sst_c=[305 305 305 305 305 305 305 305 305 305 305];
 sst_10a=[295 295 295 295 295 295 295 295 295 295];
 sst_10b=[300 300 300 300 300 300 300 300 300 300];
 sst_10c=[305 305 305 305 305 305 305 305 305 305];
-sst_5a=[295 295 295 295 295];
-sst_5b=[300 300 300 300 300];
-sst_5c=[305 305 305 305 305];
+sst_5a=[295 295 295 295 295 295 295 295 295 295 295];
+sst_5b=[300 300 300 300 300 300 300 300 300 300 300];
+sst_5c=[305 305 305 305 305 305 305 305 305 305 305];
 %
 %% grab the particular models we want:
 hrmin_a=[hrmin_m1a hrmin_m2a hrmin_m4a hrmin_m6a hrmin_m8a hrmin_m9a hrmin_m12a hrmin_m16a hrmin_m20a hrmin_m21a hrmin_m23a];

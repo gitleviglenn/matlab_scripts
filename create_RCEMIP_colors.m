@@ -82,38 +82,82 @@ colGCMfull(10,:)  =SPCAM;  % SPXCAM       % 60
 colGCMfull(11,:) =UKMO; % UKMO
 
 
-cSAM      =[0.67843137254902, 0.286274509803922, 0.290196078431373];  % SAM CRM       
-cSCALE    =[0.105882352941176, 0.619607843137255, 0.466666666666667]; % SCALE-CRM
-cICON_LEM =[0.741176470588235, 0.619607843137255, 0.223529411764706]; % ICON-LEM-CRM
-cICON_NWP =[0.549019607843137, 0.427450980392157, 0.192156862745098]; % ICON-NWP-CRM
-cUCLA     =[1, 0.929411764705882, 0.435294117647059]; % UCLS CRM 
+cSAM             =[0.67843137254902, 0.286274509803922, 0.290196078431373];  % SAM CRM       
+cSCALE           =[0.105882352941176, 0.619607843137255, 0.466666666666667]; % SCALE-CRM
+cICON_LEM        =[0.741176470588235, 0.619607843137255, 0.223529411764706]; % ICON-LEM-CRM
+cICON_NWP        =[0.549019607843137, 0.427450980392157, 0.192156862745098]; % ICON-NWP-CRM
+cUCLA            =[1, 0.929411764705882, 0.435294117647059]; % UCLS CRM 
+cDAM             =[0.4, 0.76078431372549, 0.647058823529412]; % DAM
+cWRFCRM          =[0.32156862745098, 0.329411764705882, 0.63921568627451]; % WRF-CRM
+cWRFCOLCRM       =[0.223529411764706, 0.231372549019608, 0.474509803921569]; % WRF-COL-CRM
+cUKMOCASIM       =[0.647058823529412, 0.317647058823529, 0.580392156862745]; % UKMO-CASIM
+cUKMORA1T        =[0.807843137254902, 0.427450980392157, 0.741176470588235];
+cUKMORA1Tnocloud =[0.890196078431372, 0.466666666666667, 0.76078431372549];
+cFV3             =[0.737254901960784, 0.741176470588235, 0.133333333333333];
+cSAMGCRM         =[0.517647058823529, 0.235294117647059, 0.223529411764706];
+cMPAS            =[0.501960784313725, 0.694117647058824, 0.827450980392157];
+cNICAM           =[1, 1, 0.2]; 
+cWRF_GCM_cps6    =[0.854901960784314, 0.854901960784314, 0.92156862745098];
+cWRF_GCM_cps4    =[0.737254901960784, 0.741176470588235, 0.862745098039216];
+cWRF_GCM_cps3    =[0.619607843137255, 0.603921568627451, 0.784313725490196];
+cWRF_GCM_cps2    =[0.458823529411765, 0.419607843137255, 0.694117647058824];
+cWRF_GCM_cps1    =[0.611764705882353, 0.619607843137255, 0.870588235294118];
+cWRF_GCM_cps0    =[0.419607843137255, 0.431372549019608, 0.811764705882353];
+cCM1             =[0.192156862745098, 0.509803921568627, 0.741176470588235];
+cMESONH          =[0.901960784313726, 0.333333333333333, 0.0509803921568627];
+
 
 colCRM(1,:)  =cSAM;
 colCRM(2,:)  =cSCALE;
 colCRM(3,:)  =cICON_LEM;
 colCRM(4,:)  =cICON_NWP;
 colCRM(5,:)  =cUCLA;
+colCRM(6,:)  =cWRFCRM;
+colCRM(7,:)  =cMESONH;
+colCRM(8,:)  =cWRFCOLCRM;
+colCRM(9,:)  =cUKMOCASIM;
+colCRM(10,:) =cUKMORA1T;
+colCRM(11,:) =cUKMORA1Tnocloud;
+
+colortest(1,:)  =cUCLA;
+colortest(2,:)  =cUCLA;
+colortest(3,:)  =cICON_LEM;
+colortest(4,:)  =cUCLA;
+colortest(5,:)  =cUCLA;
+colortest(6,:)  =cWRFCRM;
+colortest(7,:)  =cMESONH;
+
 
 colCRM4(1,:)  =cSAM;
 colCRM4(2,:)  =cSCALE;
 colCRM4(3,:)  =cICON_LEM;
 colCRM4(4,:)  =cICON_NWP;
 
+% match modelnum with col34
+modelnum      =[1 2 4 6 8 9 10 11 12 13 16 17 19 20 21 22 23 24 25 26 27 28]; % index numbers for col34 that are used in my study
+% modelnum(mnum_gcm) --> matches indices of gcms with colors in col34
+mnum_gcm     =[1 2 3 4 5 6 11 14 15 17]; % index numbers of modelnum for GCMs so modelnum(mnum_gcm)
+mnum_gcm_cs  =[1 2 3 5 11 14 15 17]; % index numbers of modelnum for GCMs so modelnum(mnum_gcm)
+% modelnum(mnum_crm) --> matches indices of crms with colors in col34
+mnum_crm     =[12 13 7 8 16 22 10 21 18 19 20]; % index numbers of modelnum for CRMs
+% the two WRF CRMs do not have clear sky fluxes
+mnum_crm_cs  =[12 13 7 8 16 10 18 19 20]; % index numbers of modelnum for CRMs
+
 col34(1,:)   = CAM5;  % CAM5         
 col34(2,:)   = CAM6;  % CAM6         
-col34(3,:)   = BLACK;  % CM1         
+col34(3,:)   = cCM1;  % CM1         
 col34(4,:)   = CNRM;  % CNRM         
-col34(5,:)   = BLACK;  % DAM         
+col34(5,:)   = cDAM;  % DAM         
 col34(6,:)   = ECHAM;  % ECHAM6         
-col34(7,:)   = BLACK;  % FV3         
+col34(7,:)   = cFV3;  % FV3         
 col34(8,:)   = GEOS;  % GEOS-GCM         
 col34(9,:)   = ICON;  % ICON-GCM
 col34(10,:)  = cICON_LEM;  % ICON-LEM-CRM
 col34(11,:)  = cICON_NWP;  % ICON-NWP-CRM
 col34(12,:)  = BLACK;  % IPSL-CM6
-col34(13,:)  = BLACK;  % MESONH
-col34(14,:)  = BLACK;  % MPAS
-col34(15,:)  = BLACK;  % NICAM
+col34(13,:)  = cMESONH;  % MESONH
+col34(14,:)  = cMPAS;  % MPAS
+col34(15,:)  = cNICAM;  % NICAM
 col34(16,:)  = SAM0_UNI;  % SAM0-UNICON
 col34(17,:)  = cSAM;  % SAM-CRM
 col34(18,:)  = BLACK;  % SAM-GCRM
@@ -122,17 +166,17 @@ col34(20,:)  = SPCAM;  % SP-CAM
 col34(21,:)  = SPXCAM;  % SPX-CAM
 col34(22,:)  = cUCLA;  % UCLA-CRM
 col34(23,:)  = UKMO;  % UKMO-GA7.1
-col34(24,:)  = BLACK;  % UKMO-CASIM 
-col34(25,:)  = BLACK;  % UKMO-RA1-T
-col34(26,:)  = BLACK;  % UKMO-RA1-T-nocloud
-col34(27,:)  = BLACK;  % WRF-COL-CRM
-col34(28,:)  = BLACK;  % WRF-CRM
-col34(29,:)  = BLACK;  % WRF-GCM-cps0
-col34(30,:)  = BLACK;  % WRF-GCM-cps1
-col34(31,:)  = BLACK;  % WRF-GCM-cps2
-col34(32,:)  = BLACK;  % WRF-GCM-cps3
-col34(33,:)  = BLACK;  % WRF-GCM-cps4
-col34(34,:)  = BLACK;  % WRF-GCM-cps5
+col34(24,:)  = cUKMOCASIM;  % UKMO-CASIM 
+col34(25,:)  = cUKMORA1T;  % UKMO-RA1-T
+col34(26,:)  = cUKMORA1Tnocloud;  % UKMO-RA1-T-nocloud
+col34(27,:)  = cWRFCOLCRM;  % WRF-COL-CRM
+col34(28,:)  = cWRFCRM;  % WRF-CRM
+col34(29,:)  = cWRF_GCM_cps0;  % WRF-GCM-cps0
+col34(30,:)  = cWRF_GCM_cps1;  % WRF-GCM-cps1
+col34(31,:)  = cWRF_GCM_cps2;  % WRF-GCM-cps2
+col34(32,:)  = cWRF_GCM_cps3;  % WRF-GCM-cps3
+col34(33,:)  = cWRF_GCM_cps4;  % WRF-GCM-cps4
+col34(34,:)  = cWRF_GCM_cps6;  % WRF-GCM-cps5
 
 col(1,:)  =c1;  % CAM5         % 67
 col(2,:)  =c2;  % CAM6         % 19
