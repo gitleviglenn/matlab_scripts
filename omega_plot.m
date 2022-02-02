@@ -4,21 +4,11 @@
 % levi silvers                               jan 2022
 %--------------------------------------------------------
 
-omega_lon_sch=omega_lon(lon1:lon2,:);
+%omega_lon_sch=omega_lon(lon1:lon2,:);
 
 walker             =[0.984313725490196, 0.501960784313725, 0.447058823529412];  
 hadley             =[0.807843137254902, 0.427450980392157, 0.741176470588235];
 totalc             =[0.549019607843137, 0.427450980392157, 0.192156862745098];  
-
-%function cont_map_modis(field_in,vlat,vlon,contsin,caxisin)
-%load coast 
-%figure;
-%axesm('MapProjection','hammer','origin',[0,0])               
-%framem 
-
-%load coast
-%axesm('MapProjection','hammer','origin',[0,0])
-%framem
 
 cmap_blue=[255,255,255;                                      
 197,255,255;                                                 
@@ -30,16 +20,6 @@ cmap_blue=[255,255,255;
 0,0,110;
 0,0,55;
 0,0,0];
-%cmap_orang=[255,255,255;                                    
-%255,255,197;                                                
-%255,255,138;
-%255,211,82;
-%255,153,27;
-%226,96,0;
-%168,41,0;
-%111,0,0;
-%56,0,0;
-%0,0,0];
 cmap_dirtorange=[255,255,255;
 255,255,200;
 255,240,175;
@@ -50,23 +30,11 @@ cmap_dirtorange=[255,255,255;
 205,165,50;
 185,133,25;
 165,91,10];
-%cmap_blueorange=[10,41,255;
-%10,100,255;
-%27,153,255;
-%138,255,255;
-%225,255,255;
-%255,255,225;
-%255,255,138;
-%255,153,27;
-%255,100,10;
-%255,41,10];
 cmap_blueorange=[10,50,255;
 10,100,255;
 10,150,255;
 27,200,255;
 138,250,255;
-%225,255,255; % these are very light
-%255,255,225;
 255,250,138;
 255,200,27;
 255,150,10;
@@ -77,12 +45,80 @@ cmap=cmap_blueorange/256;
 %plotm(latitude,longtude,'k')
 %gridm
 
-
 %conts=[-80,-70,-60,-50,-40,-30,-20,-10,0,10,20,30,40,50,60,70,80]; % hPa/day
 conts=[-80,-65,-50,-35,-20,-5,5,20,35,50,65,80]; % hPa/day
 
+%------------------------------------------
+% define various parameters 
+%------------------------------------------
+% grab the regional WC used in Schwendike et al., 2014
+% in CESM, 30:51 correspond to +5, -35
+%
+% grab the area (5N:35S) of interest
+lat1=30;
+lat2=51;
+% grab a more traditional definition of tropics: 
+lat_tr1=33;
+lat_tr2=64;
+% grab the area (110E:160E) of interest for the regional HC
+lon1=45;
+lon2=65;
+
 load coastlines
 Lthick=1;
+
+%------------------------------------------
+% solve the poisson equation at several timesteps
+%------------------------------------------
+clear omega_lon_t;
+clear omega_lat_t;
+clear omega_tot_t;
+
+%timelevel=12; % --> timelevel is used in poisson.m
+timelevelend=42; % should grab values from 3months each year for 3 years
+specialindex=1;
+%for timeindex=6:12:timelevelend
+for timeindex=1:12:timelevelend
+  timelevel = timeindex;
+  poisson % calls the poisson solver
+  omega_lon_t(:,:,specialindex)=omega_wc;
+  omega_lat_t(:,:,specialindex)=omega_hc;
+  omega_tot_t(:,:,specialindex)=omega_total;
+  %
+  timelevel=timelevel+1;
+  specialindex=specialindex+1;
+  poisson % calls the poisson solver
+  omega_lon_t(:,:,specialindex)=omega_wc;
+  omega_lat_t(:,:,specialindex)=omega_hc;
+  omega_tot_t(:,:,specialindex)=omega_total;
+  %
+  timelevel=timelevel+1;
+  specialindex=specialindex+1;
+  poisson % calls the poisson solver
+  omega_lon_t(:,:,specialindex)=omega_wc;
+  omega_lat_t(:,:,specialindex)=omega_hc;
+  omega_tot_t(:,:,specialindex)=omega_total;
+  %timelevel=timelevel+12
+  %timelevel=timelevel+1
+  specialindex=specialindex+1;
+end
+%------------------------------------------
+% compute time averages
+omega_tot_678=squeeze(mean(omega_tot_t,3));
+omega_lon_678=squeeze(mean(omega_lon_t,3));
+omega_lat_678=squeeze(mean(omega_lat_t,3));
+
+% compute zonal and meridional means of the psi-method results:
+omega_lon_678_mm=squeeze(mean(omega_lon_678,2));
+omega_lat_678_mm=squeeze(mean(omega_lat_678,1));
+
+%------------------------------------------
+%------------------------------------------
+
+omega_tot_zm=squeeze(mean(omega_tot_t,1));
+omega_tot_zm_tm=squeeze(mean(omega_tot_zm,2));
+
+% shift the longitudes so that the Pacific is central in figures
 longitude=longtude-177.5;
 
 figure
@@ -179,83 +215,6 @@ h3.BinWidth = bwide;
 %%h3.NumBins = numberb;
 %xlim([xlim1 80])
 
-%------------------------------------------
-% grab the regional WC used in Schwendike et al., 2014
-% in CESM, 30:51 correspond to +5, -35
-%
-% grab the area (5N:35S) of interest
-lat1=30;
-lat2=51;
-% grab a more traditional definition of tropics: 
-lat_tr1=33;
-lat_tr2=64;
-% grab the area (110E:160E) of interest for the regional HC
-lon1=45;
-lon2=65;
-%------------------------------------------
-
-%------------------------------------------
-% solve the poisson equation at several timesteps
-%------------------------------------------
-% Schwendike et al. 2014 look at DJF and JJA, that could be a good starting point
-
-clear omega_lon_t;
-clear omega_lat_t;
-clear omega_tot_t;
-
-% solve the poisson equation at several timesteps
-%timelevel=12; % --> timelevel is used in poisson.m
-timelevelend=42; % should grab values from 3months each year for 3 years
-specialindex=1;
-%for timeindex=1:12:timelevelend
-%  timelevel=timeindex
-%  timelevel=timelevel+1
-%  timelevel=timelevel+1
-%%  specialindex=specialindex+1
-%  %
-%  %timelevel=timeindex+1
-%%  specialindex=specialindex+1
-%  %  
-%  %timelevel=timeindex+2
-%%  specialindex=specialindex+1
-%end
-for timeindex=6:12:timelevelend
-  timelevel = timeindex;
-  poisson % calls the poisson solver
-  omega_lon_t(:,:,specialindex)=omega_wc;
-  omega_lat_t(:,:,specialindex)=omega_hc;
-  omega_tot_t(:,:,specialindex)=omega_total;
-  %
-  timelevel=timelevel+1;
-  specialindex=specialindex+1;
-  poisson % calls the poisson solver
-  omega_lon_t(:,:,specialindex)=omega_wc;
-  omega_lat_t(:,:,specialindex)=omega_hc;
-  omega_tot_t(:,:,specialindex)=omega_total;
-  %
-  timelevel=timelevel+1;
-  specialindex=specialindex+1;
-  poisson % calls the poisson solver
-  omega_lon_t(:,:,specialindex)=omega_wc;
-  omega_lat_t(:,:,specialindex)=omega_hc;
-  omega_tot_t(:,:,specialindex)=omega_total;
-  %timelevel=timelevel+12
-  %timelevel=timelevel+1
-  specialindex=specialindex+1;
-end
-%------------------------------------------
-%------------------------------------------
-% compute time averages
-omega_tot_678=squeeze(mean(omega_tot_t,3));
-omega_lon_678=squeeze(mean(omega_lon_t,3));
-omega_lat_678=squeeze(mean(omega_lat_t,3));
-
-% compute zonal and meridional means of the psi-method results:
-omega_lon_678_mm=squeeze(mean(omega_lon_678,2));
-omega_lat_678_mm=squeeze(mean(omega_lat_678,1));
-
-%------------------------------------------
-
 % grab selected areas from the fields calculated in poisson.m:
 clear omega_tot_sch_trop;
 clear omega_lon_sch_trop;
@@ -330,7 +289,7 @@ figure
 subplot(2,1,1)
 plot(latitude,omega_tot_zm_tm,'color',hadley);
 hold on
-plot(latitude,omega_lat_678_zm,'color',hadley,'LineWidth',1.5);
+plot(latitude,omega_lat_678_mm,'color',hadley,'LineWidth',1.5);
 ylabel('hPa/day')
 xlabel('latitude')
 title('Hadley Circulations')
@@ -351,6 +310,105 @@ sgtitle('Comparison of Traditional and Psi-method')
 % velocity over particular domains 
 
 % histograms on limited area domain: 
+%numberb=100;
+xlim1=-80;
+xlim2=80;
+bwide=3; % this is the width of the bins..
+figure
+subplot(3,1,1)
+h1=histogram(omega_tot_sch_trop);
+title('total Circulation')
+h1.Normalization = 'probability';
+h1.BinWidth = bwide;
+title('total Circulation')
+ylim([0 0.12])
+xlim([xlim1 xlim2])
+subplot(3,1,2)
+h2=histogram(omega_lon_sch_trop);
+title('longitudinal contribution: local WC')
+h2.Normalization = 'probability';
+h2.BinWidth = bwide;
+ylim([0 0.12])
+xlim([xlim1 xlim2])
+subplot(3,1,3)
+h3=histogram(omega_lat_sch_trop);
+title('latitudinal contribution: local HC')
+h3.Normalization = 'probability';
+h3.BinWidth = bwide;
+ylim([0 0.12])
+xlim([xlim1 xlim2])
+
+% normalize... calculate the area under the curve: bwide*h1.Values
+%h1pdf=(h1.Values)./sum(h1.Values);
+bwide=2;
+omegax1=-120;
+omegax2=100;
+xaxis=omegax1:bwide:omegax2;
+xax=omegax1:bwide:omegax2-bwide;
+xaxismp=xax+bwide/2;
+figure
+o1=histogram(omega_tot_sch_trop,xaxis);
+%o1.Normalization = 'probability';
+o1.BinWidth = bwide;
+o1vals=o1.Values;
+tarea=sum(o1vals.*bwide);
+o1valsN=o1vals./tarea;
+bar(xaxismp,o1valsN); 
+%plot(xaxis,o1 / (o1vals*bwide))
+%hold on;
+
+o2=histogram(omega_lon_sch_trop,xaxis);
+o2.BinWidth = bwide;
+o2vals=o2.Values;
+tareao2 = sum(o2vals.*bwide);
+
+o3=histogram(omega_lat_sch_trop,xaxis);
+o3.BinWidth = bwide;
+o3vals=o3.Values;
+tareao3 = sum(o3vals.*bwide);
+
+tareao2o3 = tareao2+tareao3;
+o2valsN   = o2vals./tareao2o3;
+o3valsN   = o3vals./tareao2o3;
+
+figure
+bar(xaxismp,o1valsN); 
+hold on;
+bar(xaxismp,o3valsN); 
+bar(xaxismp,o2valsN); 
+
+
+plot(h1pdf)
+
+figure
+subplot(3,1,1)
+plot(h1pdf)
+title('total Circulation')
+h1and2=sum(h1.Values)+sum(h2.Values);
+subplot(3,1,2)
+h2pdf=(h2.Values)./h1and2;
+plot(h2pdf)
+title('longitudinal contribution: local WC')
+subplot(3,1,3)
+h3pdf=(h3.Values)./h1and2;
+plot(h3pdf)
+title('latitudinal contribution: local HC')
+
+sgtitle('Regional WC: 5N to 35S')
+
+%--------------------------------
+
+% This was my original way of normalizing... probably wrong 
+% for the decomposed omega fields.
+
+% I think the correct way to normalize is to devide each value
+% not by the sum of the histogram, but by the total area of the
+% histogram.  So the size of the bins matters.  
+
+% it could be that the function 'trapz' is helpful in this regard, 
+% but since I will have a constant value for binwidth we probably 
+% don't need the 'tropz' function.  
+
 numberb=100;
 xlim1=-80;
 xlim2=80;
